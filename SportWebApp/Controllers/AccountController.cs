@@ -28,8 +28,8 @@ namespace SportWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new() { Email = model.Email, UserName = model.Email, Name = model.Name, UserSurname = model.UserSurname };
-                UserProfile profile = new UserProfile { ApplicationUser = user };
+                ApplicationUser user = new() { Email = model.Email, UserName = model.Email};
+                UserProfile profile = new UserProfile { Name = model.Name, UserSurname = model.UserSurname, ApplicationUser = user };
               
                 db.UserProfiles.AddRange(profile);
 
@@ -40,11 +40,10 @@ namespace SportWebApp.Controllers
                 Exercise exercise = new Exercise { ApplicationUser = user };
 
                 db.Exercises.AddRange(exercise);
-                // добавляем пользователя
+                
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
-                {
-                    // установка куки
+                {                    
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -58,7 +57,6 @@ namespace SportWebApp.Controllers
             }
             return View(model);
         }
-
 
         /* Авторизация (3 метода) */
         [HttpGet]
