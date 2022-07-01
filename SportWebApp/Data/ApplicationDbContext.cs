@@ -35,7 +35,11 @@ namespace SportWebApp.Data
                 .WithOne(c => c.ApplicationUser)
                 .HasForeignKey<Training>(c => c.ApplicationUserId);
 
-           
+            modelBuilder.Entity<ApplicationUser>()
+             .HasOne<UserAvatar>(u => u.UserAvatar)
+             .WithOne(c => c.ApplicationUser)
+             .HasForeignKey<UserAvatar>(c => c.ApplicationUserId);
+
 
             modelBuilder.Entity<ApplicationUser>().ToTable("User");
         }
@@ -44,6 +48,7 @@ namespace SportWebApp.Data
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Training> Trainings { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<UserAvatar> UserAvatars { get; set; }
 
     }
 }

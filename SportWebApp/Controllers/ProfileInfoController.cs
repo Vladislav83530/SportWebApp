@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SportWebApp.Data;
 using SportWebApp.Models;
+using SportWebApp.ViewModels;
 using System.Security.Claims;
 
 namespace SportWebApp.Controllers
@@ -10,9 +10,11 @@ namespace SportWebApp.Controllers
     public class ProfileInfoController : Controller
     {
         private readonly ApplicationDbContext db;
-        public ProfileInfoController(ApplicationDbContext context)
+        IWebHostEnvironment _appEnvironment;
+        public ProfileInfoController(ApplicationDbContext context, IWebHostEnvironment appEnvironment)
         {
             db = context;
+            _appEnvironment = appEnvironment;
         }
 
         [HttpGet]
@@ -20,11 +22,16 @@ namespace SportWebApp.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID); 
-
+            UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
+            UserAvatar? curuseravatar = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
+            ProfileInfoViewModel profileinfo = new ProfileInfoViewModel
+            {
+                UserProfile = curuser,
+                UserAvatar = curuseravatar
+            };
             if (curuser != null)
             {
-                return View(curuser);
+                return View(profileinfo);
             }
             return NotFound();
         }
@@ -32,24 +39,85 @@ namespace SportWebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> EditInfo()
         {
-            //if (id != null)
-            //{
             ClaimsPrincipal currentUser = this.User;
             var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
+            UserAvatar? curuseravatar = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
+            ProfileInfoViewModel profileinfo = new ProfileInfoViewModel
+            {
+                UserProfile = curuser,
+                UserAvatar = curuseravatar
+            };
+            if (curuser != null)
+                return View(curuser);
 
+            return NotFound();
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserProfile profile)
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
             if (curuser != null)
             {
-
-
-
-                return View(curuser);
+                curuser.Name = profile.Name;
+                curuser.UserSurname = profile.UserSurname;
+                curuser.Gender = profile.Gender;
+                curuser.Country = profile.Country;
+                curuser.Birthday = profile.Birthday;
+                curuser.Age = profile.Age;
+                curuser.Weight = profile.Weight;
+                curuser.Height = profile.Height;
             }
-           // }
-            return NotFound();
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> EditImageGet()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
+            UserAvatar? curuseravatar = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
+            ProfileInfoViewModel profileinfo = new ProfileInfoViewModel
+            {
+                UserProfile = curuser,
+                UserAvatar = curuseravatar
+            };
+            if (curuser != null)
+                return View(curuser);
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditAvatar(IFormFile uploadedFile)
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            UserAvatar? curuser = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
+            if (uploadedFile != null && curuser != null)
+            {
+                string path = "/Files/" + currentUserID + ".jpg";
+
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+                UserAvatar file = new UserAvatar { Name = currentUserID, Path = path, ApplicationUserId = currentUserID };
+                db.UserAvatars.Remove(curuser);
+                db.UserAvatars.Add(file);
+
+                await db.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
         }
 
     }

@@ -23,8 +23,8 @@ namespace SportWebApp.Models
     }
     public enum Gender
     {
-        Male,
-        Female,
-        Other
+        Чоловіча,
+        Жіноча,
+        Інше
     }
 }

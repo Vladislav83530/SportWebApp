@@ -16,7 +16,7 @@ namespace SportWebApp.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            db=context;
+            db = context;
         }
         [HttpGet]
         public IActionResult Register()
@@ -28,9 +28,9 @@ namespace SportWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new() { Email = model.Email, UserName = model.Email};
+                ApplicationUser user = new() { Email = model.Email, UserName = model.Email };
                 UserProfile profile = new UserProfile { Name = model.Name, UserSurname = model.UserSurname, ApplicationUser = user };
-              
+
                 db.UserProfiles.AddRange(profile);
 
                 Training training = new Training { ApplicationUser = user };
@@ -40,10 +40,14 @@ namespace SportWebApp.Controllers
                 Exercise exercise = new Exercise { ApplicationUser = user };
 
                 db.Exercises.AddRange(exercise);
-                
+
+                UserAvatar avatar = new UserAvatar { ApplicationUser = user, Name = "download", Path = "/Files/2709_R0lVIE5JQyA2MDctNDM.jpg" };
+
+                db.UserAvatars.AddRange(avatar);
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
-                {                    
+                {
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }

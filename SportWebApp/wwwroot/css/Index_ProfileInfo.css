@@ -1,0 +1,28 @@
+﻿.container_avatar {
+    position: relative;
+    width: 100%;
+}
+
+    .container_avatar img {
+        width: 100%;
+        height: auto;
+    }
+
+    .container_avatar .avatar_btn {
+        position: absolute;
+        top: 70%;
+        left: 56%;
+        transform: translate(40%, 40%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #555;
+        color: white;
+        font-size: 12px;
+        padding: 10px 13px;
+        border: none;
+        cursor: pointer;
+        border-radius: 100%;
+    }
+
+        .container_avatar .avatar_btn:hover {
+            background-color: black;
+        }
