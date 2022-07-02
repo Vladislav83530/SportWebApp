@@ -12,12 +12,12 @@
 		<div class="container py-5">
 			<div class="row">
 				<div class="col-lg-4">
-					<div class="card mb-4">
+					<div class="card mb-4 card_profile">
 						<div class="card-body text-center">
 							<div class="container_avatar">
 								@if (Model.UserAvatar.Path != null)
 								{
-									<img src="@Model.UserAvatar.Path" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; height: 160px;" />
+									<img src="@Model.UserAvatar.Path" alt="avatar" class="rounded-circle img-fluid avatar_img" style='width: 150px; height: 160px;'/>
 									<!-- Button trigger modal avatar-->
 									<button type="button" class="btn btn-primary avatar_btn" data-toggle="modal" data-target="#EditAvatarModal">
 										✎
@@ -29,8 +29,8 @@
 							<p class="text-muted mb-4">@Model.UserProfile.Country</p>
 							<div class="d-flex justify-content-center mb-2">
 								<!-- Button trigger modal info-->
-								<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#EditModal">
-									Редагувати
+								<button type="button" class="btn btn-dark edit_btn" data-toggle="modal" data-target="#EditModal">
+									Edit
 								</button>
 
 								<!-- Modal edit avatar -->
@@ -39,7 +39,7 @@
 										<div class="modal-content">
 											<form asp-action="EditAvatar" asp-controller="ProfileInfo" method="post" enctype="multipart/form-data">
 												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Оновити зображення профілю</h5>
+													<h5 class="modal-title" id="exampleModalLabel">Update profile picture</h5>
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 														<span aria-hidden="true">&times;</span>
 													</button>
@@ -48,8 +48,8 @@
 													<input type="file" name="uploadedFile" class="form-control" />
 												</div>
 												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
-													<button type="submit" class="btn btn-primary">Зберегти</button>
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+													<button type="submit" class="btn btn-primary">Save</button>
 												</div>
 											</form>
 										</div>
@@ -62,7 +62,7 @@
 										<div class="modal-content">
 											<form asp-action="Edit" asp-controller="ProfileInfo" asp-route-id="@Model.UserProfile.Id">
 												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Персональна інформація</h5>
+													<h5 class="modal-title" id="exampleModalLabel">Personal information</h5>
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 														<span aria-hidden="true">&times;</span>
 													</button>
@@ -70,7 +70,7 @@
 												<div class="modal-body">
 													<div class="row">
 														<div class="col-sm-3">
-															<p class="mb-0">Ім'я</p>
+															<p class="mb-0">Name</p>
 														</div>
 														<div class="col-sm-9">
 															<input type="text" value="@Model.UserProfile.Name" name="Name" class="form-control" required />
@@ -79,7 +79,7 @@
 													<hr>
 													<div class="row">
 														<div class="col-sm-3">
-															<p class="mb-0">Прізвище</p>
+															<p class="mb-0">Surname</p>
 														</div>
 														<div class="col-sm-9">
 															<input type="text" value="@Model.UserProfile.UserSurname" name="UserSurname" class="form-control" required />
@@ -88,25 +88,25 @@
 													<hr>
 													<div class="row">
 														<div class="col-sm-3">
-															<p class="mb-0">Стать</p>
+															<p class="mb-0">Gender</p>
 														</div>
 														<div class="col-sm-9">
 															<div class="form-check">
-																<input class="form-check-input" name="Gender" value="Чоловіча" type="radio" id="flexCheckDefault">
+																<input class="form-check-input" name="Gender" value="Male" type="radio" id="flexCheckDefault">
 																<label class="form-check-label">
-																	Чоловіча
+																	Male
 																</label>
 															</div>
 															<div class="form-check">
-																<input class="form-check-input" name="Gender" type="radio" value="Жіноча" id="flexCheckDefault">
+																<input class="form-check-input" name="Gender" type="radio" value="Female" id="flexCheckDefault">
 																<label class="form-check-label">
-																	Жіноча
+																	Female
 																</label>
 															</div>
 															<div class="form-check">
-																<input class="form-check-input" name="Gender" type="radio" value="Інше" id="flexCheckDefault">
+																<input class="form-check-input" name="Gender" type="radio" value="Other" id="flexCheckDefault">
 																<label class="form-check-label">
-																	Інше
+																	Other
 																</label>
 															</div>
 														</div>
@@ -114,7 +114,7 @@
 													<hr>
 													<div class="row">
 														<div class="col-sm-3">
-															<p class="mb-0">Країна</p>
+															<p class="mb-0">Country</p>
 														</div>
 														<div class="col-sm-9">
 															<input type="text" value="@Model.UserProfile.Country" name="Country" class="form-control" required />
@@ -123,16 +123,16 @@
 													<hr>
 													<div class="row">
 														<div class="col-sm-3">
-															<p class="mb-0">Дата народження</p>
+															<p class="mb-0">Birthday</p>
 														</div>
 														<div class="col-sm-9">
-															<input type="text" value="@Model.UserProfile.Birthday" name="Birthday" class="form-control" required />
+															<input type="text" value="@Model.UserProfile.Birthday.ToString("d")" name="Birthday" class="form-control" required />
 														</div>
 													</div>
 													<hr>
 													<div class="row">
 														<div class="col-sm-3">
-															<p class="mb-0">Вік</p>
+															<p class="mb-0">Age</p>
 														</div>
 														<div class="col-sm-9">
 															<input type="text" value="@Model.UserProfile.Age" name="Age" class="form-control" required />
@@ -141,7 +141,7 @@
 													<hr>
 													<div class="row">
 														<div class="col-sm-3">
-															<p class="mb-0">Вага</p>
+															<p class="mb-0">Weight</p>
 														</div>
 														<div class="col-sm-9">
 															<input type="text" value="@Model.UserProfile.Weight" name="Weight" class="form-control" required />
@@ -150,7 +150,7 @@
 													<hr>
 													<div class="row">
 														<div class="col-sm-3">
-															<p class="mb-0">Зріст</p>
+															<p class="mb-0">Height</p>
 														</div>
 														<div class="col-sm-9">
 															<input type="text" value="@Model.UserProfile.Height" name="Height" class="form-control" required />
@@ -158,8 +158,8 @@
 													</div>
 												</div>
 												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
-													<button type="submit" class="btn btn-primary">Зберегти</button>
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+													<button type="submit" class="btn btn-primary">Save</button>
 												</div>
 											</form>
 										</div>
@@ -170,11 +170,11 @@
 					</div>
 				</div>
 				<div class="col-lg-8">
-					<div class="card mb-4">
+					<div class="card mb-4 card_profile">
 						<div class="card-body">
 							<div class="row">
 								<div class="col-sm-3">
-									<p class="mb-0">Повне ім'я</p>
+									<p class="mb-0">Full name</p>
 								</div>
 								<div class="col-sm-9">
 									<p class="text-muted mb-0">@Model.UserProfile.Name @Model.UserProfile.UserSurname</p>
@@ -183,7 +183,7 @@
 							<hr>
 							<div class="row">
 								<div class="col-sm-3">
-									<p class="mb-0">Стать</p>
+									<p class="mb-0">Gender</p>
 								</div>
 								<div class="col-sm-9">
 									<p class="text-muted mb-0">@Model.UserProfile.Gender</p>
@@ -192,7 +192,7 @@
 							<hr>
 							<div class="row">
 								<div class="col-sm-3">
-									<p class="mb-0">Країна</p>
+									<p class="mb-0">Country</p>
 								</div>
 								<div class="col-sm-9">
 									<p class="text-muted mb-0">@Model.UserProfile.Country</p>
@@ -201,16 +201,16 @@
 							<hr>
 							<div class="row">
 								<div class="col-sm-3">
-									<p class="mb-0">Дата народження</p>
+									<p class="mb-0">Birthday</p>
 								</div>
 								<div class="col-sm-9">
-									<p class="text-muted mb-0">@Model.UserProfile.Birthday</p>
+									<p class="text-muted mb-0">@Model.UserProfile.Birthday.ToString("D")</p>
 								</div>
 							</div>
 							<hr>
 							<div class="row">
 								<div class="col-sm-3">
-									<p class="mb-0">Вік</p>
+									<p class="mb-0">Age</p>
 								</div>
 								<div class="col-sm-9">
 									<p class="text-muted mb-0">@Model.UserProfile.Age</p>
@@ -219,7 +219,7 @@
 							<hr>
 							<div class="row">
 								<div class="col-sm-3">
-									<p class="mb-0">Вага</p>
+									<p class="mb-0">Weight</p>
 								</div>
 								<div class="col-sm-9">
 									<p class="text-muted mb-0">@Model.UserProfile.Weight</p>
@@ -228,7 +228,7 @@
 							<hr>
 							<div class="row">
 								<div class="col-sm-3">
-									<p class="mb-0">Зріст</p>
+									<p class="mb-0">Height</p>
 								</div>
 								<div class="col-sm-9">
 									<p class="text-muted mb-0">@Model.UserProfile.Height</p>

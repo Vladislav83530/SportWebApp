@@ -24,11 +24,10 @@ namespace SportWebApp.Data
                 .WithOne(c => c.ApplicationUser)
                 .HasForeignKey<UserProfile>(c => c.ApplicationUserId);
 
-
             modelBuilder.Entity<ApplicationUser>()
-               .HasOne<Exercise>(u => u.Exercise)
-               .WithOne(c => c.ApplicationUser)
-               .HasForeignKey<Exercise>(c => c.ApplicationUserId);
+                .HasMany<Exercise>(c => c.Exercises)
+                .WithOne(e => e.ApplicationUser)
+                .HasForeignKey(c=>c.ApplicationUserId);
 
             modelBuilder.Entity<ApplicationUser>()
                 .HasOne<Training>(u => u.Training)

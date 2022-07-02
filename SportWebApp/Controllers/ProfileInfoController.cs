@@ -20,8 +20,7 @@ namespace SportWebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string? currentUserID = GetCurUserId();
             UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
             UserAvatar? curuseravatar = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
             ProfileInfoViewModel profileinfo = new ProfileInfoViewModel
@@ -36,31 +35,27 @@ namespace SportWebApp.Controllers
             return NotFound();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EditInfo()
-        {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //[HttpGet]
+        //public async Task<IActionResult> EditInfo()
+        //{
+        //    string? currentUserID = GetCurUserId();
+        //    UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
+        //    UserAvatar? curuseravatar = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
+        //    ProfileInfoViewModel profileinfo = new ProfileInfoViewModel
+        //    {
+        //        UserProfile = curuser,
+        //        UserAvatar = curuseravatar
+        //    };
+        //    if (curuser != null)
+        //        return View(curuser);
 
-            UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
-            UserAvatar? curuseravatar = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
-            ProfileInfoViewModel profileinfo = new ProfileInfoViewModel
-            {
-                UserProfile = curuser,
-                UserAvatar = curuseravatar
-            };
-            if (curuser != null)
-                return View(curuser);
-
-            return NotFound();
-        }
+        //    return NotFound();
+        //}
 
         [HttpPost]
         public async Task<IActionResult> Edit(UserProfile profile)
         {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-
+            string? currentUserID = GetCurUserId();
             UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
             if (curuser != null)
             {
@@ -80,9 +75,7 @@ namespace SportWebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> EditImageGet()
         {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-
+            string? currentUserID = GetCurUserId();
             UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
             UserAvatar? curuseravatar = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
             ProfileInfoViewModel profileinfo = new ProfileInfoViewModel
@@ -99,9 +92,7 @@ namespace SportWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> EditAvatar(IFormFile uploadedFile)
         {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-
+            string? currentUserID = GetCurUserId();
             UserAvatar? curuser = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
             if (uploadedFile != null && curuser != null)
             {
@@ -120,5 +111,11 @@ namespace SportWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        public string? GetCurUserId()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return currentUserID;
+        }
     }
 }

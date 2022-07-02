@@ -14,6 +14,7 @@ namespace SportWebApp.Models
         public int Repetition { get; set; } 
         public double Weight { get; set; }
         public int ApproachCount { get; set; }
+        public string? MuscleGroup { get; set; }
 
 
         [ForeignKey("ApplicationUser")]

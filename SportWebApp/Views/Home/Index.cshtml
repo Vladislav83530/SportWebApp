@@ -8,11 +8,11 @@
     <p>@User.Identity.Name</p>
  
     <form method="post" asp-controller="Account" asp-action="Logout">
-        <input type="submit" value="Выход" />
+        <input type="submit" value="Log out" />
     </form>
 }
 else
 {
-    <a asp-controller="Account" asp-action="Login">Вход</a>
-    <a asp-controller="Account" asp-action="Register">Регистрация</a>
+    <a asp-controller="Account" asp-action="Login">Sign in</a>
+    <a asp-controller="Account" asp-action="Register">Sign up</a>
 }

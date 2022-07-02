@@ -16,6 +16,7 @@ namespace SportWebApp.Models
         public string? Notes { get; set; }  
         public Feeling Feeling { get; set; }
 
+        public string? MuscleGroup { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string? ApplicationUserId { get; set; }

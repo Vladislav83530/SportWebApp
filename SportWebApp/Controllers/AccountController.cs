@@ -29,20 +29,17 @@ namespace SportWebApp.Controllers
             if (ModelState.IsValid)
             {
                 ApplicationUser user = new() { Email = model.Email, UserName = model.Email };
-                UserProfile profile = new UserProfile { Name = model.Name, UserSurname = model.UserSurname, ApplicationUser = user };
 
+                UserProfile profile = new UserProfile { Name = model.Name, UserSurname = model.UserSurname, ApplicationUser = user };
                 db.UserProfiles.AddRange(profile);
 
                 Training training = new Training { ApplicationUser = user };
-
                 db.Trainings.AddRange(training);
 
                 Exercise exercise = new Exercise { ApplicationUser = user };
-
                 db.Exercises.AddRange(exercise);
 
                 UserAvatar avatar = new UserAvatar { ApplicationUser = user, Name = "download", Path = "/Files/2709_R0lVIE5JQyA2MDctNDM.jpg" };
-
                 db.UserAvatars.AddRange(avatar);
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -62,9 +59,8 @@ namespace SportWebApp.Controllers
             return View(model);
         }
 
-        /* Авторизация (3 метода) */
         [HttpGet]
-        public IActionResult Login(string returnUrl = null)
+        public IActionResult Login(string? returnUrl = null)
         {
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
@@ -101,7 +97,6 @@ namespace SportWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            // удаляем аутентификационные куки
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }

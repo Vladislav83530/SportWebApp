@@ -9,22 +9,22 @@ namespace SportWebApp.ViewModels
         public string? Email { get; set; }
 
         [Required]
-        [Display(Name = "Ім'я")]
+        [Display(Name = "Name")]
         public string? Name { get; set; }
 
         [Required]
-        [Display(Name = "Прізвище")]
+        [Display(Name = "Surname")]
         public string? UserSurname { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        [Display(Name = "Password")]
         public string? Password { get; set; }
 
         [Required]
-        [Compare("Password", ErrorMessage = "Паролі не збігаються")]
+        [Compare("Password", ErrorMessage = "Passwords are not remember")]
         [DataType(DataType.Password)]
-        [Display(Name = "Підтвердити пароль")]
+        [Display(Name = "Confirm password")]
         public string? PasswordConfirm { get; set; }
     }
 }
