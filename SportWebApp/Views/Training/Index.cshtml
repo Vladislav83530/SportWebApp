@@ -1,0 +1,253 @@
+﻿@model SportWebApp.ViewModels.TrainingViewModel
+@using System.Text.Json;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="~/css/Index_Training.css" />
+	<link rel="stylesheet" href="~/css/Index_Exercise.css" />
+</head>
+<body>
+	<section>
+		<div class="container py-5">
+			<div class="row">
+				<h2>Your training</h2>
+				<div class="col-lg-8">
+					<div class="accordion" id="accordionExample">
+						@{
+							int i = 0;
+						}
+						@if (Model.Trainings != null)
+						{
+							@foreach (var item in Model.Trainings)
+							{
+								<div style='margin-bottom: 25px; border-top: 1px solid #E0E0E0' class="accordion-item according_item">
+									@{
+										i++;
+										string heading = "heading" + i;
+										string collapsetarget = "#collapse" + i;
+										string collapsecontrols = "collapse" + i;
+									}
+									<h2 class="accordion-header" id="@heading">
+										<button class="accordion-button collapsed btn_exercise_text" type="button" data-bs-toggle="collapse" data-bs-target="@collapsetarget" aria-expanded="false" aria-controls="@collapsecontrols">
+											<img class="btn_exercise_img" src="img\dumbbell-icon-2586494.png">
+											@item.Name
+										</button>
+									</h2>
+									<div id="@collapsecontrols" class="accordion-collapse collapse" aria-labelledby="@heading" data-bs-parent="#accordionExample" style="">
+										<div class="accordion-body">
+											<div class="row">
+												<div class="col-md-6">
+													@if (item.ImageUrl == null)
+													{
+														<img src="https://via.placeholder.com/300">
+													}
+													else
+													{
+														<img src="@item.ImageUrl" style='width: 390px; height: 280px;'>
+													}
+												</div>
+												<div class="col-md-6 exercise_info">
+													<p><b>Name:</b> @item.Name</p>
+													<p><b>Muscle group:</b> @item.MuscleGroup</p>
+													<p><b>Date:</b> @item.Date.ToString("d")</p>
+													<p><b>Place:</b> @item.Place</p>
+													<p><b>Exercise:</b>@item.Exercises</p>
+													@{
+														if (item.Exercises != null)
+														{
+															List<Exercise>? exercises = new List<Exercise>();
+															exercises = JsonSerializer.Deserialize<List<Exercise>>(item.Exercises);
+														
+													
+													@foreach(var exercise in exercises)
+													{
+														<div class="row">
+															<div class="col-md-6">
+																<img src="@exercise.ImageUrl">
+															</div>
+															<div class="col-md-6">
+																<p><b>Name:</b>@exercise.Name</p>
+															</div>
+														</div>													
+													}
+													}}
+													<p><b>Duration:</b> @item.Duration.ToString("HH:mm")</p>
+													<p><b>Calories:</b> @item.Calories</p>
+													<p><b>Feeling:</b> @item.Feeling</p>
+													<p><b>Notes:</b> @item.Notes</p>
+													<div class="modal-footer">
+														<a asp-action="AddExercise" asp-controller="Training" asp-route-id="@item.Id" style='width: 140px;' type="button" type="button" class="btn btn-primary" >
+															Add Exercise
+														</a>
+														<a asp-action="EditTraining" asp-controller="Training" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-dark">
+															Edit
+														</a>
+														<a asp-action="DeleteTraining" asp-controller="Training" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-primary">
+															Delete
+														</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							}
+						}
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<!-- Button trigger modal create-->
+					<button type="button" class="btn btn-primary btn-lg btn_create" data-toggle="modal" data-target="#CreateTraining">
+						Create Training
+					</button>
+
+					<form method="get">
+						<div class="form-inline form-group">
+						<label class="control-label">Name: </label>
+						<input name="Name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
+
+						<label>Muscle Group: </label>
+						<input name="MuscleGroup" value="@Model.FilterViewModel.SelectedMuscleGroup" class="form-control" />
+
+						<label>Equipment: </label>
+						<input name="Equipment" value="@Model.FilterViewModel.SelectedEquipment" class="form-control" />
+						<button type="submit" class="btn btn-primary btn_filter btn-lg">
+						Filter
+						</button>
+						</div>
+						</form>
+					
+					<!-- Modal create exrcise -->
+					<div class="modal fade" id="CreateTraining" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<form asp-action="CreateTraining" asp-controller="Training" method="post">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Create training</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											<div class="col-sm-3">
+												<p class="mb-0">Name</p>
+											</div>
+											<div class="col-sm-9">
+												<input type="text" name="Name" class="form-control" placeholder="Enter name" />
+											</div>
+										</div>
+										<hr>
+										<div class="row">
+											<div class="col-sm-3">
+												<p class="mb-0">Date</p>
+											</div>
+											<div class="col-sm-9">
+												<input type="text" name="Date" placeholder="Enter date" class="form-control" />
+											</div>
+										</div>
+										<hr>
+										<div class="row">
+											<div class="col-sm-3">
+												<p class="mb-0">Muscle group</p>
+											</div>
+											<div class="col-sm-9">
+												<input type="text" name="MuscleGroup" class="form-control" placeholder="Enter muscle group" />
+											</div>
+										</div>
+										<hr>
+										<div class="row">
+											<div class="col-sm-3">
+												<p class="mb-0">Duration</p>
+											</div>
+											<div class="col-sm-9">
+												<input type="text" name="Duration" placeholder="Enter duration (HH:mm)" class="form-control" />
+											</div>
+										</div>
+										<hr>
+										<div class="row">
+											<div class="col-sm-3">
+												<p class="mb-0">Place</p>
+											</div>
+											<div class="col-sm-9">
+												<input type="text" name="Place" placeholder="Enter place" class="form-control" />
+											</div>
+										</div>								
+										<hr>
+										<div class="row">
+											<div class="col-sm-3">
+												<p class="mb-0">Calories</p>
+											</div>
+											<div class="col-sm-9">
+												<input type="number" name="Calories" class="form-control" placeholder="Enter calories" />
+											</div>
+										</div>
+										<hr>
+										<div class="row">
+											<div class="col-sm-3">
+												<p class="mb-0">Feeling</p>
+											</div>
+											<div class="col-sm-9">
+												<div class="form-check">
+													<input class="form-check-input" name="Feeling" value="Badly" type="radio" id="flexCheckDefault">
+													<label class="form-check-label">
+														Badly
+													</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" name="Feeling" type="radio" value="Normally" id="flexCheckDefault">
+													<label class="form-check-label">
+														Normally
+													</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" name="Feeling" type="radio" value="Soso" id="flexCheckDefault">
+													<label class="form-check-label">
+														So-so
+													</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" name="Feeling" type="radio" value="Perfectly" id="flexCheckDefault">
+													<label class="form-check-label">
+														Perfectly
+													</label>
+												</div>
+											</div>
+										</div>
+										<hr>
+										<div class="row">
+											<div class="col-sm-3">
+												<p class="mb-0">Notes</p>
+											</div>
+											<div class="col-sm-9">
+												<input type="text" name="Notes" class="form-control" placeholder="Enter notes" />
+											</div>
+										</div>
+										<hr>
+										<div class="row">
+											<div class="col-sm-3">
+												<p class="mb-0">Image</p>
+											</div>
+											<div class="col-sm-9">
+												<input type="text" name="ImageUrl" class="form-control" placeholder="Enter image URL" />
+											</div>
+										</div>
+										<br>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-primary">Save</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
+

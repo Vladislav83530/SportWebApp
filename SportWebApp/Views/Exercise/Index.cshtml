@@ -11,163 +11,90 @@
 	<section>
 		<div class="container py-5">
 			<div class="row">
-				<h3>Your exercise</h3>
+				<h2>Your exercise</h2>
 				<div class="col-lg-8">
 					<div class="accordion" id="accordionExample">
 						@{
 							int i = 0;
 						}
-						@foreach (var item in Model.Exercises)
+						@if (Model.Exercises != null)
 						{
-							<div style='margin-bottom: 25px; border-top: 1px solid #E0E0E0' class="accordion-item according_item">
-								@{
-									i++;
-									string heading = "heading" + i;
-									string collapsetarget = "#collapse" + i;
-									string collapsecontrols = "collapse" + i;
-								}
-								<h2 class="accordion-header" id="@heading">
-									<button class="accordion-button collapsed btn_exercise_text" type="button" data-bs-toggle="collapse" data-bs-target="@collapsetarget" aria-expanded="false" aria-controls="@collapsecontrols">
-										<img class="btn_exercise_img" src="img\dumbbell-icon-2586494.png">
-										@item.Name
-									</button>
-								</h2>
-								<div id="@collapsecontrols" class="accordion-collapse collapse" aria-labelledby="@heading" data-bs-parent="#accordionExample" style="">
-									<div class="accordion-body">
-										<div class="row">
-											<div class="col-md-6">
-												@if (item.ImageUrl == null)
-												{
-													<img src="https://via.placeholder.com/300">
-												}
-												else
-												{
-													<img src="@item.ImageUrl" style='width: 390px; height: 280px;'>
-												}
-											</div>
-											<div class="col-md-6 exercise_info">
-												<p><b>Name:</b> @item.Name</p>
-												<p><b>Muscle group:</b> @item.MuscleGroup</p>
-												<p><b>Descriptions:</b> @item.Description</p>
-												<p><b>Equipment:</b> @item.Equipment</p>
-												<p><b>Weight:</b> @item.Weight</p>
-												<p><b>Repetition:</b> @item.Repetition</p>
-												<p><b>Approach:</b> @item.ApproachCount</p>
-												<div class="modal-footer">
-													<!-- Button trigger modal edit-->
-												<button style="width: 140px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#EditExercise">
-														Edit
-													</button>
-
-													<!-- Modal create exrcise -->
-												<div class="modal fade" id="EditExercise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-														<div class="modal-dialog">
-															<div class="modal-content">
-																<form asp-action="EditExercise" asp-controller="Exercise" method="post">
-																	<div class="modal-header">
-																		<h5 class="modal-title" id="exampleModalLabel">Edit exercise</h5>
-																		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																			<span aria-hidden="true">&times;</span>
-																		</button>
-																	</div>
-																	<div class="modal-body">
-																		<div class="row">
-																			<div class="col-sm-3">
-																				<p class="mb-0">Name</p>
-																			</div>
-																			<div class="col-sm-9">
-																				<input type="text" name="Name" class="form-control" value="@item.Name" required/>
-																			</div>
-																		</div>
-																		<hr>
-																		<div class="row">
-																			<div class="col-sm-3">
-																				<p class="mb-0">Description</p>
-																			</div>
-																			<div class="col-sm-9">
-																				<input type="text" name="Description"  class="form-control" value="@item.Description" required />
-																			</div>
-																		</div>
-																		<hr>
-																		<div class="row">
-																			<div class="col-sm-3">
-																				<p class="mb-0">Muscle group</p>
-																			</div>
-																			<div class="col-sm-9">
-																				<input type="text" name="MuscleGroup"  class="form-control" value="@item.MuscleGroup" required/>
-																			</div>
-																		</div>
-																		<hr>
-																		<div class="row">
-																			<div class="col-sm-3">
-																				<p class="mb-0">Equipment</p>
-																			</div>
-																			<div class="col-sm-9">
-																				<input type="text" name="Equipment"  class="form-control" value="@item.Equipment" required/>
-																			</div>
-																		</div>
-																		<hr>
-																		<div class="row">
-																			<div class="col-sm-3">
-																				<p class="mb-0">Weight of equipment</p>
-																			</div>
-																			<div class="col-sm-9">
-																				<input type="number" name="Weight" class="form-control"  value="@item.Weight" required/>
-																			</div>
-																		</div>
-																		<hr>
-																		<div class="row">
-																			<div class="col-sm-3">
-																				<p class="mb-0">Repetition</p>
-																			</div>
-																			<div class="col-sm-9">
-																				<input type="number" name="Repetition" class="form-control"  value="@item.Repetition" required/>
-																			</div>
-																		</div>
-																		<hr>
-																		<div class="row">
-																			<div class="col-sm-3">
-																				<p class="mb-0">Approach</p>
-																			</div>
-																			<div class="col-sm-9">
-																				<input type="number" name="ApproachCount" class="form-control"  value="@item.ApproachCount" required/>
-																			</div>
-																		</div>
-																		<hr>
-																		<div class="row">
-																			<div class="col-sm-3">
-																				<p class="mb-0">Image</p>
-																			</div>
-																			<div class="col-sm-9">
-																				<input type="text" name="ImageUrl" class="form-control"  value="@item.ImageUrl" required/>
-																			</div>
-																		</div>
-																		<br>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																			<button type="submit" class="btn btn-primary">Save</button>
-																		</div>
-																	</div>
-																</form>
-															</div>
-														</div>
+							@foreach (var item in Model.Exercises)
+							{
+								<div style='margin-bottom: 25px; border-top: 1px solid #E0E0E0' class="accordion-item according_item">
+									@{
+										i++;
+										string heading = "heading" + i;
+										string collapsetarget = "#collapse" + i;
+										string collapsecontrols = "collapse" + i;
+									}
+									<h2 class="accordion-header" id="@heading">
+										<button class="accordion-button collapsed btn_exercise_text" type="button" data-bs-toggle="collapse" data-bs-target="@collapsetarget" aria-expanded="false" aria-controls="@collapsecontrols">
+											<img class="btn_exercise_img" src="img\dumbbell-icon-2586494.png">
+											@item.Name
+										</button>
+									</h2>
+									<div id="@collapsecontrols" class="accordion-collapse collapse" aria-labelledby="@heading" data-bs-parent="#accordionExample" style="">
+										<div class="accordion-body">
+											<div class="row">
+												<div class="col-md-6">
+													@if (item.ImageUrl == null)
+													{
+														<img src="https://via.placeholder.com/300">
+													}
+													else
+													{
+														<img src="@item.ImageUrl" style='width: 390px; height: 280px;'>
+													}
+												</div>
+												<div class="col-md-6 exercise_info">
+													<p><b>Name:</b> @item.Name</p>
+													<p><b>Muscle group:</b> @item.MuscleGroup</p>
+													<p><b>Descriptions:</b> @item.Description</p>
+													<p><b>Equipment:</b> @item.Equipment</p>
+													<p><b>Weight:</b> @item.Weight</p>
+													<p><b>Repetition:</b> @item.Repetition</p>
+													<p><b>Approach:</b> @item.ApproachCount</p>
+													<div class="modal-footer">
+														<!-- Button trigger modal edit-->
+												<a asp-action="EditExercise" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-dark">
+															Edit
+														</a>
+														<a asp-action="DeleteExercise" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-primary">
+															Delete
+														</a>
 													</div>
-													<button style='width: 140px' type="submit" class="btn btn-primary">Delete</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-
+							}
 						}
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<!-- Button trigger modal create-->
-					<button style="width: 200px;" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#CreateExercise">
+					<button type="button" class="btn btn-primary btn-lg btn_create" data-toggle="modal" data-target="#CreateExercise">
 						Create Exercise
 					</button>
+
+					<form method="get">
+						<div class="form-inline form-group">
+							<label class="control-label">Name: </label>
+							<input name="Name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
+
+							<label>Muscle Group: </label>
+							<input name="MuscleGroup" value="@Model.FilterViewModel.SelectedMuscleGroup" class="form-control" />
+
+							<label>Equipment: </label>
+							<input name="Equipment" value="@Model.FilterViewModel.SelectedEquipment" class="form-control" />
+							<button type="submit" class="btn btn-primary btn_filter btn-lg">
+								Filter
+							</button>
+						</div>
+					</form>
+
 					<!-- Modal create exrcise -->
 					<div class="modal fade" id="CreateExercise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog">

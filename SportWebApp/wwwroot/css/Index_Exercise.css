@@ -1,11 +1,22 @@
-﻿.btn_exercise_text{
+﻿.btn_exercise_text {
     font-size: 18px;
     font-weight: bold;
     font-style: italic;
 }
 
-.btn_exercise_img{
+.btn_exercise_img {
     width: 25px;
     height: 25px;
     margin-right: 10px;
+}
+
+.btn_filter {
+    margin-top: 10px;
+    width: 100%;
+    font-size: 18px;
+}
+
+.btn_create {
+    width: 50%;
+    margin-bottom: 10px;
 }

@@ -1,0 +1,116 @@
+﻿@model SportWebApp.ViewModels.TrainingViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="~/css/Index_Exercise.css" />
+</head>
+<body>
+	<section>
+		<div class="container py-5">
+			<div class="row">
+				<h2>Add exercise</h2>
+				<div class="col-lg-8">
+					<div class="accordion" id="accordionExample">
+						@{
+							int i = 0;
+						}
+						@if (Model.Exercises != null)
+						{
+							@foreach (var item in Model.Exercises)
+							{
+								<div style='margin-bottom: 25px; border-top: 1px solid #E0E0E0' class="accordion-item according_item">
+									@{
+										i++;
+										string heading = "heading" + i;
+										string collapsetarget = "#collapse" + i;
+										string collapsecontrols = "collapse" + i;
+									}
+									<h2 class="accordion-header" id="@heading">
+										<button class="accordion-button collapsed btn_exercise_text" type="button" data-bs-toggle="collapse" data-bs-target="@collapsetarget" aria-expanded="false" aria-controls="@collapsecontrols">
+											<img class="btn_exercise_img" src="/img/dumbbell-icon-2586494.png">
+											@item.Name
+										</button>
+									</h2>
+									<div id="@collapsecontrols" class="accordion-collapse collapse" aria-labelledby="@heading" data-bs-parent="#accordionExample" style="">
+										<div class="accordion-body">
+											<div class="row">
+												<div class="col-md-6">
+													@if (item.ImageUrl == null)
+													{
+														<img src="https://via.placeholder.com/300">
+													}
+													else
+													{
+														<img src="@item.ImageUrl" style='width: 390px; height: 280px;'>
+													}
+												</div>
+												<div class="col-md-6 exercise_info">
+													<p><b>Name:</b> @item.Name</p>
+													<p><b>Muscle group:</b> @item.MuscleGroup</p>
+													<p><b>Descriptions:</b> @item.Description</p>
+													<p><b>Equipment:</b> @item.Equipment</p>
+													<p><b>Weight:</b> @item.Weight</p>
+													<p><b>Repetition:</b> @item.Repetition</p>
+													<p><b>Approach:</b> @item.ApproachCount</p>
+													<div class="modal-footer">
+														<!-- Button trigger modal edit-->
+												<form asp-action="AddExercisePost" asp-controller="Training" asp-route-id="@Model.Training.Id">
+													<input type="text" name="Id" class="form-control" placeholder="Enter name" value="@Model.Training.Id" />
+															<input type="text" name="Id" class="form-control" placeholder="Enter name" value="@item.Id" />
+															<input type="text" name="Name" class="form-control" placeholder="Enter name" value="@item.Name" />
+															<input type="text" name="Description" class="form-control" placeholder="Enter description" value="@item.Description" required />
+															<input type="text" name="MuscleGroup" class="form-control" placeholder="Enter muscle group" value="@item.MuscleGroup" required />
+
+															<input type="text" name="Equipment" class="form-control" placeholder="Enter equipment" value="@item.Equipment" required />
+
+															<input type="number" name="Weight" class="form-control" placeholder="Enter weight of equipment" value="@item.Weight" required />
+
+															<input type="number" name="Repetition" class="form-control" placeholder="Enter repetition" value="@item.Repetition" required />
+
+															<input type="number" name="ApproachCount" class="form-control" value="@item.ApproachCount" required />
+
+															<input type="text" name="ImageUrl" class="form-control" laceholder="Enter count of approach" value="@item.ImageUrl" />
+															<button asp-action="AddExercisePost" asp-controller="Training"  style='width: 140px;' type="submit" class="btn btn-dark">
+																Add
+															</button>
+
+														</form>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							}
+						}
+					</div>
+				</div>
+				<div class="col-lg-4">
+
+
+					<form method="get">
+						<div class="form-inline form-group">
+							<label class="control-label">Name: </label>
+							<input name="Name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
+
+							<label>Muscle Group: </label>
+							<input name="MuscleGroup" value="@Model.FilterViewModel.SelectedMuscleGroup" class="form-control" />
+
+							<label>Equipment: </label>
+							<input name="Equipment" value="@Model.FilterViewModel.SelectedEquipment" class="form-control" />
+							<button type="submit" class="btn btn-primary btn_filter btn-lg">
+								Filter
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
+

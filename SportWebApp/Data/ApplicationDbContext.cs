@@ -3,7 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using SportWebApp.Models;
 
 namespace SportWebApp.Data
-{
+{        
+    /// <summary>
+    /// Application Database context
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -30,9 +33,10 @@ namespace SportWebApp.Data
                 .HasForeignKey(c=>c.ApplicationUserId);
 
             modelBuilder.Entity<ApplicationUser>()
-                .HasOne<Training>(u => u.Training)
-                .WithOne(c => c.ApplicationUser)
-                .HasForeignKey<Training>(c => c.ApplicationUserId);
+                .HasMany<Training>(c => c.Training)
+                .WithOne(e => e.ApplicationUser)
+                .HasForeignKey(c => c.ApplicationUserId);
+           
 
             modelBuilder.Entity<ApplicationUser>()
              .HasOne<UserAvatar>(u => u.UserAvatar)
@@ -42,12 +46,10 @@ namespace SportWebApp.Data
 
             modelBuilder.Entity<ApplicationUser>().ToTable("User");
         }
-
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Training> Trainings { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<UserAvatar> UserAvatars { get; set; }
-
     }
 }

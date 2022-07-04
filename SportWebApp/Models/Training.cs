@@ -15,8 +15,9 @@ namespace SportWebApp.Models
         public double Calories { get; set; }
         public string? Notes { get; set; }  
         public Feeling Feeling { get; set; }
-
         public string? MuscleGroup { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? Equipment { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string? ApplicationUserId { get; set; }

@@ -6,6 +6,9 @@ using SportWebApp.ViewModels;
 
 namespace SportWebApp.Controllers
 {
+    ///<summary>
+    ///Controller for registration and authorization
+    ///</summary>
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -18,11 +21,22 @@ namespace SportWebApp.Controllers
             _signInManager = signInManager;
             db = context;
         }
+
+        /// <summary>
+        /// Registaration get
+        /// </summary>
+        /// <returns>View for registration</returns>
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
+        /// <summary>
+        /// Registration post
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>View Home or registration view if user have error</returns>
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -33,10 +47,10 @@ namespace SportWebApp.Controllers
                 UserProfile profile = new UserProfile { Name = model.Name, UserSurname = model.UserSurname, ApplicationUser = user };
                 db.UserProfiles.AddRange(profile);
 
-                Training training = new Training { ApplicationUser = user };
+                Training training = new Training { ApplicationUser = user, Name = "Default", Equipment = "Default", MuscleGroup = "Default", Exercises ="[]"};
                 db.Trainings.AddRange(training);
 
-                Exercise exercise = new Exercise { ApplicationUser = user };
+                Exercise exercise = new Exercise { ApplicationUser = user, Name = "Default", Equipment = "Default", MuscleGroup = "Default" };
                 db.Exercises.AddRange(exercise);
 
                 UserAvatar avatar = new UserAvatar { ApplicationUser = user, Name = "download", Path = "/Files/2709_R0lVIE5JQyA2MDctNDM.jpg" };
@@ -59,12 +73,22 @@ namespace SportWebApp.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Authrization
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns>View for authorization</returns>
         [HttpGet]
         public IActionResult Login(string? returnUrl = null)
         {
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
+        /// <summary>
+        /// Authorization
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>View Home or authorization view if user have error</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -93,6 +117,10 @@ namespace SportWebApp.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Log out
+        /// </summary>
+        /// <returns>View Home</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()

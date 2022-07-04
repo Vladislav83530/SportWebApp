@@ -7,6 +7,9 @@ using System.Security.Claims;
 
 namespace SportWebApp.Controllers
 {
+    /// <summary>
+    /// Edit, Delete, Add Information for User Profile
+    /// </summary>
     public class ProfileInfoController : Controller
     {
         private readonly ApplicationDbContext db;
@@ -17,6 +20,10 @@ namespace SportWebApp.Controllers
             _appEnvironment = appEnvironment;
         }
 
+        /// <summary>
+        /// User Profile Page
+        /// </summary>
+        /// <returns>View with information about user</returns>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -35,23 +42,11 @@ namespace SportWebApp.Controllers
             return NotFound();
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> EditInfo()
-        //{
-        //    string? currentUserID = GetCurUserId();
-        //    UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
-        //    UserAvatar? curuseravatar = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
-        //    ProfileInfoViewModel profileinfo = new ProfileInfoViewModel
-        //    {
-        //        UserProfile = curuser,
-        //        UserAvatar = curuseravatar
-        //    };
-        //    if (curuser != null)
-        //        return View(curuser);
-
-        //    return NotFound();
-        //}
-
+        /// <summary>
+        /// Edit Information 
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns>View with edited information about user</returns>
         [HttpPost]
         public async Task<IActionResult> Edit(UserProfile profile)
         {
@@ -72,23 +67,11 @@ namespace SportWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EditImageGet()
-        {
-            string? currentUserID = GetCurUserId();
-            UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
-            UserAvatar? curuseravatar = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
-            ProfileInfoViewModel profileinfo = new ProfileInfoViewModel
-            {
-                UserProfile = curuser,
-                UserAvatar = curuseravatar
-            };
-            if (curuser != null)
-                return View(curuser);
-
-            return NotFound();
-        }
-
+        /// <summary>
+        /// Edit users avatar
+        /// </summary>
+        /// <param name="uploadedFile"></param>
+        /// <returns>View with edited users avatar</returns>
         [HttpPost]
         public async Task<IActionResult> EditAvatar(IFormFile uploadedFile)
         {
@@ -111,6 +94,10 @@ namespace SportWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Get current user id
+        /// </summary>
+        /// <returns>current user Id (string)</returns>
         public string? GetCurUserId()
         {
             ClaimsPrincipal currentUser = this.User;
