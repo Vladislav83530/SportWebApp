@@ -100,6 +100,7 @@ namespace SportWebApp.Controllers
 				await db.Trainings.AddRangeAsync(training);
 				await db.SaveChangesAsync();
 			}
+			TempData["AlertMessage"] = "Your training was created successfully!";
 			return RedirectToAction("Index");
 		}
 
@@ -143,8 +144,9 @@ namespace SportWebApp.Controllers
 				training.Notes = _training.Notes;
 				training.Feeling = _training.Feeling;
 				training.ImageUrl = _training.ImageUrl;
-			}
+			}			
 			await db.SaveChangesAsync();
+			TempData["AlertMessage"] = "Your training was edited successfully!";
 			return RedirectToAction("Index");
 		}
 
@@ -162,6 +164,7 @@ namespace SportWebApp.Controllers
 				if (training != null)
 					db.Trainings.Remove(training);
 				await db.SaveChangesAsync();
+				TempData["AlertMessage"] = "Your training was deleted successfully!";
 				return RedirectToAction("Index");
 			}
 			return NotFound();
@@ -240,9 +243,9 @@ namespace SportWebApp.Controllers
 			if (training.Exercises != null)
 			{
 				List<Exercise> exercisesList = JsonSerializer.Deserialize<List<Exercise>>(training.Exercises);
+				_exercise.Id = exercisesList.Count+1;
 				exercisesList.Add(_exercise);
-
-
+				
 				if (training != null)
 				{
 					string exercises = JsonSerializer.Serialize(exercisesList);
@@ -250,7 +253,39 @@ namespace SportWebApp.Controllers
 				}
 			}
 			await db.SaveChangesAsync();
+			TempData["AlertMessage"] = "Your exercise was added successfully!";
 			return RedirectToAction("Index");
+		}
+
+		/// <summary>
+		/// Delete exercise
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="idexer"></param>
+		/// <returns>View with deleted exercise in training</returns>
+		[HttpGet]
+		public async Task<IActionResult> DeleteExercise(int? id, int? idexer)
+        {
+			if (id != null && idexer != null)
+			{
+				Training? training = await db.Trainings.FirstOrDefaultAsync(x => x.Id == id);
+				if (training.Exercises != null)
+				{
+					List<Exercise> exercisesList = JsonSerializer.Deserialize<List<Exercise>>(training.Exercises);
+					Exercise exercise = exercisesList.FirstOrDefault(x=>x.Id == idexer);
+					exercisesList.Remove(exercise);
+
+					if (training != null)
+					{
+						string exercises = JsonSerializer.Serialize(exercisesList);
+						training.Exercises = exercises;
+					}
+				}
+				await db.SaveChangesAsync();
+				TempData["AlertMessage"] = "Your exercise was deleted successfully!";
+				return RedirectToAction("Index");
+			}
+			return NotFound();
 		}
 
 		/// <summary>

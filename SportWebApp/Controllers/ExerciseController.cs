@@ -94,6 +94,7 @@ namespace SportWebApp.Controllers
                 await db.Exercises.AddRangeAsync(exercise);
                 await db.SaveChangesAsync();
             }
+            TempData["AlertMessage"] = "Your exercise was created successfully!";
             return RedirectToAction("Index");
         }
 
@@ -110,6 +111,26 @@ namespace SportWebApp.Controllers
             {
                 Exercise? exercise = await db.Exercises.FirstOrDefaultAsync(x => x.Id == id);
                 if (exercise!=null)
+                {
+                    return View(exercise);
+                }
+            }
+            return NotFound();
+        }
+
+        /// <summary>
+        /// Edit Exercise Get (for training page)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> EditExerciseForTraining(int? id)
+        {
+            string? currentUserId = GetCurUserId();
+            if (currentUserId != null)
+            {
+                Exercise? exercise = await db.Exercises.FirstOrDefaultAsync(x => x.Id == id);
+                if (exercise != null)
                 {
                     return View(exercise);
                 }
@@ -138,7 +159,33 @@ namespace SportWebApp.Controllers
 
                 }
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");         
+                TempData["AlertMessage"] = "Your exercise was edited successfully!";
+                return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Edit Exercise Post (for training page)
+        /// </summary>
+        /// <param name="_exercise"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> EditExercisePostForTraining(Exercise _exercise)
+        {
+            Exercise? exercise = await db.Exercises.FirstOrDefaultAsync(x => x.Id == _exercise.Id);
+            if (exercise != null)
+            {
+                exercise.Description = _exercise.Description;
+                exercise.Equipment = _exercise.Equipment;
+                exercise.Weight = _exercise.Weight;
+                exercise.Repetition = _exercise.Repetition;
+                exercise.MuscleGroup = _exercise.MuscleGroup;
+                exercise.Name = _exercise.Name;
+                exercise.ImageUrl = _exercise.ImageUrl;
+
+            }
+            await db.SaveChangesAsync();
+            TempData["AlertMessage"] = "Your exercise was edited successfully. Now you can add this exercise to training!";
+            return RedirectToAction("Index", "Training");
         }
 
         /// <summary>
@@ -155,6 +202,7 @@ namespace SportWebApp.Controllers
                 if (exercise!=null)
                     db.Exercises.Remove(exercise);
                 await db.SaveChangesAsync();
+                TempData["AlertMessage"] = "Your exercise was deleted successfully!";
                 return RedirectToAction("Index");
             }
             return NotFound();

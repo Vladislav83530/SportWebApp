@@ -27,6 +27,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpc2VcRWRpdEV4ZXJjaXNlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/GitHub/SportWebApp/SportWebApp/Views/Exercise/EditExerciseForTraining.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpc2VcRWRpdEV4ZXJjaXNlRm9yVHJhaW5pbmcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/GitHub/SportWebApp/SportWebApp/Views/Exercise/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhlcmNpc2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

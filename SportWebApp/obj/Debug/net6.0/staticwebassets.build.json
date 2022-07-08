@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9SM4mhvztZQEte6Sb7YCh2ZhHY7nMkshzn5Khi1Ar7c=",
+  "Hash": "DnR6EVI1Kikf57Yl73g1fxv61Jdniw0ML3ZDCqNyb1g=",
   "Source": "SportWebApp",
   "BasePath": "_content/SportWebApp",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Index_ProfileInfo.css"
+    },
+    {
+      "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\css\\Index_Training.css",
+      "SourceId": "SportWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\",
+      "BasePath": "_content/SportWebApp",
+      "RelativePath": "css/Index_Training.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Index_Training.css"
     },
     {
       "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\css\\site.css",

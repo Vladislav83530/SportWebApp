@@ -55,30 +55,25 @@
 													<p><b>Weight:</b> @item.Weight</p>
 													<p><b>Repetition:</b> @item.Repetition</p>
 													<p><b>Approach:</b> @item.ApproachCount</p>
-													<div class="modal-footer">
-														<!-- Button trigger modal edit-->
-												<form asp-action="AddExercisePost" asp-controller="Training" asp-route-id="@Model.Training.Id">
-													<input type="text" name="Id" class="form-control" placeholder="Enter name" value="@Model.Training.Id" />
-															<input type="text" name="Id" class="form-control" placeholder="Enter name" value="@item.Id" />
-															<input type="text" name="Name" class="form-control" placeholder="Enter name" value="@item.Name" />
-															<input type="text" name="Description" class="form-control" placeholder="Enter description" value="@item.Description" required />
-															<input type="text" name="MuscleGroup" class="form-control" placeholder="Enter muscle group" value="@item.MuscleGroup" required />
-
-															<input type="text" name="Equipment" class="form-control" placeholder="Enter equipment" value="@item.Equipment" required />
-
-															<input type="number" name="Weight" class="form-control" placeholder="Enter weight of equipment" value="@item.Weight" required />
-
-															<input type="number" name="Repetition" class="form-control" placeholder="Enter repetition" value="@item.Repetition" required />
-
-															<input type="number" name="ApproachCount" class="form-control" value="@item.ApproachCount" required />
-
-															<input type="text" name="ImageUrl" class="form-control" laceholder="Enter count of approach" value="@item.ImageUrl" />
-															<button asp-action="AddExercisePost" asp-controller="Training"  style='width: 140px;' type="submit" class="btn btn-dark">
+													<div class="modal-footer">														
+														<form asp-action="AddExercisePost" asp-controller="Training" asp-route-id="@Model.Training.Id">
+															<input style="display: none" type="text" name="Id" clasTrs="form-control" placeholder="Enter name" value="@Model.Training.Id" />
+															<input style="display: none" type="text" name="Id" class="form-control" placeholder="Enter name" value="@item.Id" />
+															<input style="display: none" type="text" name="Name" class="form-control" placeholder="Enter name" value="@item.Name" />
+															<input style="display: none" type="text" name="Description" class="form-control" placeholder="Enter description" value="@item.Description" required />
+															<input style="display: none" type="text" name="MuscleGroup" class="form-control" placeholder="Enter muscle group" value="@item.MuscleGroup" required />
+															<input style="display: none" type="text" name="Equipment" class="form-control" placeholder="Enter equipment" value="@item.Equipment" required />
+															<input style="display: none" type="number" name="Weight" class="form-control" placeholder="Enter weight of equipment" value="@item.Weight" required />
+															<input style="display: none" type="number" name="Repetition" class="form-control" placeholder="Enter repetition" value="@item.Repetition" required />
+															<input style="display: none" type="number" name="ApproachCount" class="form-control" value="@item.ApproachCount" required />
+															<input style="display: none" type="text" name="ImageUrl" class="form-control" laceholder="Enter count of approach" value="@item.ImageUrl" />
+															<button  style='width: 140px;' type="submit" class="btn btn-dark">
 																Add
 															</button>
-
+															<a asp-action="EditExercisePoForTraining" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-dark">
+																Edit
+															</a>
 														</form>
-
 													</div>
 												</div>
 											</div>

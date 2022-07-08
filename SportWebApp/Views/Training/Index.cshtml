@@ -9,11 +9,18 @@
 	<link rel="stylesheet" href="~/css/Index_Exercise.css" />
 </head>
 <body>
+		<br>
+		@if (TempData["AlertMessage"] != null)
+	{
+		<div class="alert alert-success">
+			<strong>Success! </strong>@TempData["AlertMessage"]
+		</div>
+	}
 	<section>
 		<div class="container py-5">
 			<div class="row">
 				<h2>Your training</h2>
-				<div class="col-lg-8">
+				<div class="col-lg-9">
 					<div class="accordion" id="accordionExample">
 						@{
 							int i = 0;
@@ -38,56 +45,66 @@
 									<div id="@collapsecontrols" class="accordion-collapse collapse" aria-labelledby="@heading" data-bs-parent="#accordionExample" style="">
 										<div class="accordion-body">
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-5">
 													@if (item.ImageUrl == null)
 													{
 														<img src="https://via.placeholder.com/300">
 													}
 													else
 													{
-														<img src="@item.ImageUrl" style='width: 390px; height: 280px;'>
+														<img src="@item.ImageUrl" style='width: 365px; height: 240px;'>
 													}
+													<div class="modal-footer">
+														<a asp-action="AddExercise" asp-controller="Training" asp-route-id="@item.Id"  type="button" class="btn btn-primary btn_training">
+															Add Exercise
+														</a>
+														<a asp-action="EditTraining" asp-controller="Training" asp-route-id="@item.Id"  type="button" class="btn btn-primary btn_training">
+															Edit
+														</a>
+														<a asp-action="DeleteTraining" asp-controller="Training" asp-route-id="@item.Id"  type="button" class="btn btn-primary btn_training">
+															Delete
+														</a>
+													</div>
 												</div>
-												<div class="col-md-6 exercise_info">
+												<div class="col-md-7 exercise_info">
 													<p><b>Name:</b> @item.Name</p>
 													<p><b>Muscle group:</b> @item.MuscleGroup</p>
 													<p><b>Date:</b> @item.Date.ToString("d")</p>
 													<p><b>Place:</b> @item.Place</p>
-													<p><b>Exercise:</b>@item.Exercises</p>
+													<p><b>Duration:</b> @item.Duration.ToString("HH:mm")</p>					
+													<p class="exercise_p"><b>Exercise:</b></p>
 													@{
 														if (item.Exercises != null)
 														{
 															List<Exercise>? exercises = new List<Exercise>();
 															exercises = JsonSerializer.Deserialize<List<Exercise>>(item.Exercises);
-														
-													
-													@foreach(var exercise in exercises)
-													{
-														<div class="row">
-															<div class="col-md-6">
-																<img src="@exercise.ImageUrl">
-															</div>
-															<div class="col-md-6">
-																<p><b>Name:</b>@exercise.Name</p>
-															</div>
-														</div>													
+															@foreach (var exercise in exercises)
+															{
+																<div class="row">
+																	<div class="col-md-5">
+																		<img src="@exercise.ImageUrl" class="img_exrcise">
+																	</div>
+																	<div class="col-md-7 exercise_info">
+																		<p><b>Name:</b> @exercise.Name</p>		
+																		<p><b>Repetition:</b> @exercise.Repetition</p>
+																		<p><b>Approach:</b> @exercise.ApproachCount</p>
+																		<br>
+																	</div>
+																	<div class="modal-footer">	
+								
+																			<a asp-action="DeleteExercise" asp-controller="Training" asp-route-id="@item.Id" asp-route-idexer="@exercise.Id"  style='width: 140px;' type="button" class="btn btn-primary">
+																				Delete
+																			</a>
+																		
+																	</div>
+																</div>
+																<br>
+															}
+														}
 													}
-													}}
-													<p><b>Duration:</b> @item.Duration.ToString("HH:mm")</p>
 													<p><b>Calories:</b> @item.Calories</p>
 													<p><b>Feeling:</b> @item.Feeling</p>
-													<p><b>Notes:</b> @item.Notes</p>
-													<div class="modal-footer">
-														<a asp-action="AddExercise" asp-controller="Training" asp-route-id="@item.Id" style='width: 140px;' type="button" type="button" class="btn btn-primary" >
-															Add Exercise
-														</a>
-														<a asp-action="EditTraining" asp-controller="Training" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-dark">
-															Edit
-														</a>
-														<a asp-action="DeleteTraining" asp-controller="Training" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-primary">
-															Delete
-														</a>
-													</div>
+													<p><b>Notes:</b> @item.Notes</p>												
 												</div>
 											</div>
 										</div>
@@ -97,7 +114,7 @@
 						}
 					</div>
 				</div>
-				<div class="col-lg-4">
+				<div class="col-lg-3">
 					<!-- Button trigger modal create-->
 					<button type="button" class="btn btn-primary btn-lg btn_create" data-toggle="modal" data-target="#CreateTraining">
 						Create Training
@@ -105,20 +122,20 @@
 
 					<form method="get">
 						<div class="form-inline form-group">
-						<label class="control-label">Name: </label>
-						<input name="Name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
+							<label class="control-label">Name: </label>
+							<input name="Name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
 
-						<label>Muscle Group: </label>
-						<input name="MuscleGroup" value="@Model.FilterViewModel.SelectedMuscleGroup" class="form-control" />
+							<label>Muscle Group: </label>
+							<input name="MuscleGroup" value="@Model.FilterViewModel.SelectedMuscleGroup" class="form-control" />
 
-						<label>Equipment: </label>
-						<input name="Equipment" value="@Model.FilterViewModel.SelectedEquipment" class="form-control" />
-						<button type="submit" class="btn btn-primary btn_filter btn-lg">
-						Filter
-						</button>
+							<label>Equipment: </label>
+							<input name="Equipment" value="@Model.FilterViewModel.SelectedEquipment" class="form-control" />
+							<button type="submit" class="btn btn-primary btn_filter btn-lg">
+								Filter
+							</button>
 						</div>
-						</form>
-					
+					</form>
+
 					<!-- Modal create exrcise -->
 					<div class="modal fade" id="CreateTraining" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -174,7 +191,7 @@
 											<div class="col-sm-9">
 												<input type="text" name="Place" placeholder="Enter place" class="form-control" />
 											</div>
-										</div>								
+										</div>
 										<hr>
 										<div class="row">
 											<div class="col-sm-3">

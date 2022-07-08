@@ -16,7 +16,13 @@
     font-size: 18px;
 }
 
-.btn_create {
-    width: 50%;
-    margin-bottom: 10px;
+
+.img_exrcise{
+    width: 210px;
+    height: 135px;
+}
+
+.exercise_p{
+    font-size: 22px;
+    font-style: italic;
 }
