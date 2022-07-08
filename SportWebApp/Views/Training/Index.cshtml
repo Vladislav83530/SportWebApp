@@ -9,11 +9,14 @@
 	<link rel="stylesheet" href="~/css/Index_Exercise.css" />
 </head>
 <body>
-		<br>
-		@if (TempData["AlertMessage"] != null)
+	<br>
+	@if (TempData["AlertMessage"] != null)
 	{
-		<div class="alert alert-success">
-			<strong>Success! </strong>@TempData["AlertMessage"]
+		<div class="alert alert-success d-flex align-items-center">
+			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+			<div>
+				<strong>Success! </strong>@TempData["AlertMessage"]
+			</div>
 		</div>
 	}
 	<section>
@@ -48,11 +51,11 @@
 												<div class="col-md-5">
 													@if (item.ImageUrl == null)
 													{
-														<img src="https://via.placeholder.com/300">
+														<img src="https://via.placeholder.com/300" style='width: 100%;'>
 													}
 													else
 													{
-														<img src="@item.ImageUrl" style='width: 365px; height: 240px;'>
+														<img src="@item.ImageUrl" style='width: 100%; height: 240px;'>
 													}
 													<div class="modal-footer">
 														<a asp-action="AddExercise" asp-controller="Training" asp-route-id="@item.Id"  type="button" class="btn btn-primary btn_training">

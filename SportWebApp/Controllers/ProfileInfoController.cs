@@ -64,6 +64,7 @@ namespace SportWebApp.Controllers
                 curuser.Height = profile.Height;
             }
             await db.SaveChangesAsync();
+            TempData["AlertMessage"] = "Your profile info edited successfully!";
             return RedirectToAction("Index");
         }
 

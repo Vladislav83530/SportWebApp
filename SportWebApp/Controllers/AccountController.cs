@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SportWebApp.Data;
 using SportWebApp.Models;
+using SportWebApp.Services;
 using SportWebApp.ViewModels;
 
 namespace SportWebApp.Controllers
@@ -60,6 +61,9 @@ namespace SportWebApp.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
+                    EmailService emailService = new EmailService();
+                    await emailService.SendEmailAsync(model.Email);
+                    TempData["AlertMessage"] = "A letter has been sent to your mail. Please check your mail. (If there is no letter, check spam)";
                     return RedirectToAction("Index", "Home");
                 }
                 else

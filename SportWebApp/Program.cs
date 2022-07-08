@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SportWebApp.Data;
 using SportWebApp.Models;
+using SportWebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddTransient<EmailService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
