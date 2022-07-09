@@ -65,6 +65,7 @@ namespace SportWebApp.Controllers
 
 			TrainingViewModel trainingViewModel = new TrainingViewModel
 			{
+				Training = new Training(),
 				Trainings = trainings,
 				FilterViewModel = new FilterViewModel(name, muscleGroup, equipment)
 			};

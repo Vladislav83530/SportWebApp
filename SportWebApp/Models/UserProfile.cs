@@ -9,12 +9,12 @@ namespace SportWebApp.Models
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? UserSurname { get; set; }
+        public Gender Gender { get; set; }
+        public string? Country { get; set; }
+        public DateTime Birthday { get; set; }
         public int Age { get; set; }
         public double Height { get; set; }
         public double Weight { get; set; }
-        public string? Country { get; set; }
-        public DateTime Birthday { get; set; }
-        public Gender Gender { get; set; }
 
 
         [ForeignKey("ApplicationUser")]

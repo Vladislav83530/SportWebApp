@@ -58,13 +58,13 @@
 														<img src="@item.ImageUrl" style='width: 100%; height: 240px;'>
 													}
 													<div class="modal-footer">
-														<a asp-action="AddExercise" asp-controller="Training" asp-route-id="@item.Id"  type="button" class="btn btn-primary btn_training">
+														<a asp-action="AddExercise" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">
 															Add Exercise
 														</a>
-														<a asp-action="EditTraining" asp-controller="Training" asp-route-id="@item.Id"  type="button" class="btn btn-primary btn_training">
+														<a asp-action="EditTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">
 															Edit
 														</a>
-														<a asp-action="DeleteTraining" asp-controller="Training" asp-route-id="@item.Id"  type="button" class="btn btn-primary btn_training">
+														<a asp-action="DeleteTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">
 															Delete
 														</a>
 													</div>
@@ -74,40 +74,65 @@
 													<p><b>Muscle group:</b> @item.MuscleGroup</p>
 													<p><b>Date:</b> @item.Date.ToString("d")</p>
 													<p><b>Place:</b> @item.Place</p>
-													<p><b>Duration:</b> @item.Duration.ToString("HH:mm")</p>					
+													<p><b>Duration:</b> @item.Duration.ToString("HH:mm")</p>
+													<p><b>Calories:</b> @item.Calories</p>
+													<p><b>Feeling:</b> @item.Feeling</p>
+													<p><b>Notes:</b> @item.Notes</p>
+												</div>
+												<div class="row">
 													<p class="exercise_p"><b>Exercise:</b></p>
 													@{
 														if (item.Exercises != null)
 														{
 															List<Exercise>? exercises = new List<Exercise>();
 															exercises = JsonSerializer.Deserialize<List<Exercise>>(item.Exercises);
+															int index = 0;
 															@foreach (var exercise in exercises)
 															{
-																<div class="row">
-																	<div class="col-md-5">
-																		<img src="@exercise.ImageUrl" class="img_exrcise">
-																	</div>
-																	<div class="col-md-7 exercise_info">
-																		<p><b>Name:</b> @exercise.Name</p>		
-																		<p><b>Repetition:</b> @exercise.Repetition</p>
-																		<p><b>Approach:</b> @exercise.ApproachCount</p>
+																index++;
+																@if (index % 2 == 1)
+																{
+																	<div class="col-md-6 exercise_info exercise_right">
+																		<div class="row exercise_block ">
+																			<div class="col-md-5">
+																				<img src="@exercise.ImageUrl" class="img_exrcise">
+																			</div>
+																			<div class="col-md-7 exercise_info">
+																				<p><b>Name:</b> @exercise.Name</p>
+																				<p><b>Repetition:</b> @exercise.Repetition</p>
+																				<p><b>Approach:</b> @exercise.ApproachCount</p>
+																				<a asp-action="DeleteExercise" asp-controller="Training" asp-route-id="@item.Id" asp-route-idexer="@exercise.Id"  type="button" class="btn btn-primary btn-sm btn_del_exercise">
+																					Delete
+																				</a>
+																				<br>
+																			</div>
+																		</div>
 																		<br>
 																	</div>
-																	<div class="modal-footer">	
-								
-																			<a asp-action="DeleteExercise" asp-controller="Training" asp-route-id="@item.Id" asp-route-idexer="@exercise.Id"  style='width: 140px;' type="button" class="btn btn-primary">
-																				Delete
-																			</a>
-																		
+																}
+																else
+																{
+																	<div class="col-md-6 exercise_info">
+																		<div class="row exercise_block">
+																			<div class="col-md-5">
+																				<img src="@exercise.ImageUrl" class="img_exrcise">
+																			</div>
+																			<div class="col-md-7 exercise_info">
+																				<p><b>Name:</b> @exercise.Name</p>
+																				<p><b>Repetition:</b> @exercise.Repetition</p>
+																				<p><b>Approach:</b> @exercise.ApproachCount</p>
+																				<a asp-action="DeleteExercise" asp-controller="Training" asp-route-id="@item.Id" asp-route-idexer="@exercise.Id"  type="button" class="btn btn-primary btn-sm btn_del_exercise">
+																					Delete
+																				</a>
+																				<br>
+																			</div>
+																		</div>
+																		<br>
 																	</div>
-																</div>
-																<br>
-															}
-														}
+																}
+															  }
+														  }
 													}
-													<p><b>Calories:</b> @item.Calories</p>
-													<p><b>Feeling:</b> @item.Feeling</p>
-													<p><b>Notes:</b> @item.Notes</p>												
 												</div>
 											</div>
 										</div>
@@ -151,110 +176,69 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Name</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="text" name="Name" class="form-control" placeholder="Enter name" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Date</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="text" name="Date" placeholder="Enter date" class="form-control" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Muscle group</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="text" name="MuscleGroup" class="form-control" placeholder="Enter muscle group" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Duration</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="text" name="Duration" placeholder="Enter duration (HH:mm)" class="form-control" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Place</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="text" name="Place" placeholder="Enter place" class="form-control" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Calories</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="number" name="Calories" class="form-control" placeholder="Enter calories" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Feeling</p>
-											</div>
-											<div class="col-sm-9">
-												<div class="form-check">
-													<input class="form-check-input" name="Feeling" value="Badly" type="radio" id="flexCheckDefault">
-													<label class="form-check-label">
-														Badly
-													</label>
+										@foreach (var item_ in Model.Training.GetType().GetProperties())
+										{
+											@if (item_.Name == "Id" || item_.Name == "ApplicationUserId" || item_.Name == "ApplicationUser" || item_.Name == "Equipment" || item_.Name == "Exercises")
+												continue;
+											@if (item_.Name == "MuscleGroup")
+											{
+												<div class="row">
+													<div class="col-sm-3">
+														<p class="mb-0">Muscle Group</p>
+													</div>
+													<div class="col-sm-9">
+														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = "Enter Muscle Group", @class ="form-control", @required = "true"})
+													</div>
 												</div>
-												<div class="form-check">
-													<input class="form-check-input" name="Feeling" type="radio" value="Normally" id="flexCheckDefault">
-													<label class="form-check-label">
-														Normally
-													</label>
+												<hr>
+												continue;
+											}
+											<div class="row">
+												<div class="col-sm-3">
+													<p class="mb-0">@item_.Name</p>
 												</div>
-												<div class="form-check">
-													<input class="form-check-input" name="Feeling" type="radio" value="Soso" id="flexCheckDefault">
-													<label class="form-check-label">
-														So-so
-													</label>
+												<div class="col-sm-9">
+													@if (item_.Name == "Date")
+														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+													else if (item_.Name == "Duration")
+														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+													else if (item_.Name == "Calories")
+														@Html.TextBox(item_.Name, "", new { @type="number", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+													else if (item_.Name == "Feeling")
+													{
+														<div class="form-check">
+															<input class="form-check-input" name="Feeling" value="Badly" type="radio" id="flexCheckDefault">
+															<label class="form-check-label">
+																Badly
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" name="Feeling" type="radio" value="Normally" id="flexCheckDefault">
+															<label class="form-check-label">
+																Normally
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" name="Feeling" type="radio" value="Soso" id="flexCheckDefault">
+															<label class="form-check-label">
+																So-so
+															</label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" name="Feeling" type="radio" value="Perfectly" id="flexCheckDefault">
+															<label class="form-check-label">
+																Perfectly
+															</label>
+														</div>
+													}
+													else
+														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+
+
+													</div>
 												</div>
-												<div class="form-check">
-													<input class="form-check-input" name="Feeling" type="radio" value="Perfectly" id="flexCheckDefault">
-													<label class="form-check-label">
-														Perfectly
-													</label>
-												</div>
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Notes</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="text" name="Notes" class="form-control" placeholder="Enter notes" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Image</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="text" name="ImageUrl" class="form-control" placeholder="Enter image URL" />
-											</div>
-										</div>
-										<br>
+											<hr>
+										}
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 											<button type="submit" class="btn btn-primary">Save</button>
@@ -270,4 +254,3 @@
 	</section>
 </body>
 </html>
-

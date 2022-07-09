@@ -2,110 +2,67 @@
 <h3> Edit  exercise</h3>
 <form asp-action="EditTrainingPost" asp-controller="Training" method="post" asp-route-id="@Model.Id">
 	<div>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Name</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" name="Name" class="form-control" placeholder="Enter name" value="@Model.Name" />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Date</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" name="Date" placeholder="Enter date" class="form-control" value="@Model.Date.ToString("d")" />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Muscle group</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" name="MuscleGroup" class="form-control" placeholder="Enter muscle group" value="@Model.MuscleGroup" />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Duration</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" name="Duration" placeholder="Enter duration (HH:mm)" class="form-control" value="@Model.Duration.ToString("HH:mm")" />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Place</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" name="Place" placeholder="Enter place" class="form-control" value="@Model.Place" />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Calories</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="number" name="Calories" class="form-control" placeholder="Enter calories" value="@Model.Calories" />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Feeling</p>
-			</div>
-			<div class="col-sm-9">
-				<div class="form-check">
-					<input class="form-check-input" name="Feeling" value="Badly" type="radio" id="flexCheckDefault">
-					<label class="form-check-label">
-						Badly
-					</label>
+		@foreach (var item in Model.GetType().GetProperties())
+		{
+			@if (item.Name == "Id" || item.Name == "ApplicationUserId" || item.Name == "ApplicationUser" || item.Name == "Equipment" || item.Name == "Exercises")
+				continue;
+			@if (item.Name == "MuscleGroup")
+			{
+				<div class="row">
+					<div class="col-sm-3">
+						<p class="mb-0">Muscle Group</p>
+					</div>
+					<div class="col-sm-9">
+						@Html.TextBox(item.Name, $"{item.GetValue(Model)}", new { @type="text", @Placeholder = "Enter Nuscle Group", @class ="form-control", @required = "true"})
+					</div>
 				</div>
-				<div class="form-check">
-					<input class="form-check-input" name="Feeling" type="radio" value="Normally" id="flexCheckDefault">
-					<label class="form-check-label">
-						Normally
-					</label>
+				<hr>
+				continue;
+			}
+			<div class="row">
+				<div class="col-sm-3">
+					<p class="mb-0">@item.Name</p>
 				</div>
-				<div class="form-check">
-					<input class="form-check-input" name="Feeling" type="radio" value="Soso" id="flexCheckDefault">
-					<label class="form-check-label">
-						So-so
-					</label>
+				<div class="col-sm-9">
+					@if (item.Name == "Date")
+						@Html.TextBox(item.Name, Model.Date.ToString("d"), new { @type="text", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true"})
+					else if (item.Name == "Duration")
+						@Html.TextBox(item.Name, Model.Duration.ToString("HH:mm"), new { @type="text", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true"})
+					else if (item.Name == "Calories")
+						@Html.TextBox(item.Name, $"{item.GetValue(Model)}", new { @type="number", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true"})
+					else if (item.Name == "Feeling")
+					{
+						<div class="form-check">
+							<input class="form-check-input" name="Feeling" value="Badly" type="radio" id="flexCheckDefault">
+							<label class="form-check-label">
+								Badly
+							</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" name="Feeling" type="radio" value="Normally" id="flexCheckDefault">
+							<label class="form-check-label">
+								Normally
+							</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" name="Feeling" type="radio" value="Soso" id="flexCheckDefault">
+							<label class="form-check-label">
+								So-so
+							</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" name="Feeling" type="radio" value="Perfectly" id="flexCheckDefault">
+							<label class="form-check-label">
+								Perfectly
+							</label>
+						</div>
+					}
+					else
+						@Html.TextBox(item.Name, $"{item.GetValue(Model)}", new { @type="text", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true"})
+					</div>
 				</div>
-				<div class="form-check">
-					<input class="form-check-input" name="Feeling" type="radio" value="Perfectly" id="flexCheckDefault">
-					<label class="form-check-label">
-						Perfectly
-					</label>
-				</div>
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Notes</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" name="Notes" class="form-control" placeholder="Enter notes" value="@Model.Notes" />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Image</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" name="ImageUrl" class="form-control" placeholder="Enter image URL" value="@Model.ImageUrl" />
-			</div>
-		</div>
-		<br>
+			<hr>
+		}
 		<button type="submit" class="btn btn-primary">Save</button>
 	</div>
 </form>

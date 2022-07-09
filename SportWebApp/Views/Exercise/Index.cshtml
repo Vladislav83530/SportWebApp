@@ -117,78 +117,49 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Name</p>
+										@foreach (var item_ in Model.Exercise.GetType().GetProperties())
+										{
+											@if (item_.Name == "Id" || item_.Name == "ApplicationUserId" || item_.Name == "ApplicationUser")
+												continue;
+											@if (item_.Name == "MuscleGroup")
+											{
+												<div class="row">
+													<div class="col-sm-3">
+														<p class="mb-0">Muscle Group</p>
+													</div>
+													<div class="col-sm-9">
+														@Html.TextBox(item_.Name, $"", new { @type="text", @Placeholder = $"Enter Muscle group", @class = "form-control", @required = "true"})
+													</div>
+												</div>
+												<hr>
+												continue;
+											}
+											@if (item_.Name == "ApproachCount")
+											{
+												<div class="row">
+													<div class="col-sm-3">
+														<p class="mb-0">Approach</p>
+													</div>
+													<div class="col-sm-9">
+														@Html.TextBox(item_.Name, $"", new { @type="number", @Placeholder = $"Enter Muscle group", @class = "form-control", @required = "true"})
+													</div>
+												</div>
+												<hr>
+												continue;
+											}
+											<div class="row">
+												<div class="col-sm-3">
+													<p class="mb-0">@item_.Name</p>
+												</div>
+												<div class="col-sm-9">
+													@if (item_.Name == "Repetition"  || item_.Name == "Weight")
+														@Html.TextBox(item_.Name, "", new { @type="number", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})	
+													else
+														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true" })
+												</div>
 											</div>
-											<div class="col-sm-9">
-												<input type="text" name="Name" class="form-control" placeholder="Enter name" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Description</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="text" name="Description" placeholder="Enter description" class="form-control" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Muscle group</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="text" name="MuscleGroup" placeholder="Enter muscle" class="form-control" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Equipment</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="text" name="Equipment" placeholder="Enter equipment" class="form-control" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Weight of equipment</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="number" name="Weight" class="form-control" placeholder="Enter weight of equipment" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Repetition</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="number" name="Repetition" class="form-control" placeholder="Enter repetition" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Approach</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="number" name="ApproachCount" class="form-control" placeholder="Enter approach" />
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-sm-3">
-												<p class="mb-0">Image</p>
-											</div>
-											<div class="col-sm-9">
-												<input type="text" name="ImageUrl" class="form-control" placeholder="Enter image URL" />
-											</div>
-										</div>
-										<br>
+											<hr>
+										}						
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 											<button type="submit" class="btn btn-primary">Save</button>
@@ -204,4 +175,3 @@
 	</section>
 </body>
 </html>
-

@@ -12,7 +12,7 @@
 		<div class="container py-5">
 			<div class="row">
 				<h2>Add exercise</h2>
-				<div class="col-lg-8">
+				<div class="col-md-8">
 					<div class="accordion" id="accordionExample">
 						@{
 							int i = 0;
@@ -55,7 +55,7 @@
 													<p><b>Weight:</b> @item.Weight</p>
 													<p><b>Repetition:</b> @item.Repetition</p>
 													<p><b>Approach:</b> @item.ApproachCount</p>
-													<div class="modal-footer">														
+													<div class="modal-footer">
 														<form asp-action="AddExercisePost" asp-controller="Training" asp-route-id="@Model.Training.Id">
 															<input style="display: none" type="text" name="Id" clasTrs="form-control" placeholder="Enter name" value="@Model.Training.Id" />
 															<input style="display: none" type="text" name="Id" class="form-control" placeholder="Enter name" value="@item.Id" />
@@ -67,10 +67,10 @@
 															<input style="display: none" type="number" name="Repetition" class="form-control" placeholder="Enter repetition" value="@item.Repetition" required />
 															<input style="display: none" type="number" name="ApproachCount" class="form-control" value="@item.ApproachCount" required />
 															<input style="display: none" type="text" name="ImageUrl" class="form-control" laceholder="Enter count of approach" value="@item.ImageUrl" />
-															<button  style='width: 140px;' type="submit" class="btn btn-dark">
+															<button style='width: 140px;' type="submit" class="btn btn-dark">
 																Add
 															</button>
-															<a asp-action="EditExercisePoForTraining" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-dark">
+															<a asp-action="EditExerciseForTraining" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-dark">
 																Edit
 															</a>
 														</form>
@@ -84,9 +84,7 @@
 						}
 					</div>
 				</div>
-				<div class="col-lg-4">
-
-
+				<div class="col-md-4">
 					<form method="get">
 						<div class="form-inline form-group">
 							<label class="control-label">Name: </label>
@@ -108,4 +106,3 @@
 	</section>
 </body>
 </html>
-

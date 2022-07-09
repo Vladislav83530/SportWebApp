@@ -78,94 +78,60 @@
 													</button>
 												</div>
 												<div class="modal-body">
-													<div class="row">
-														<div class="col-sm-3">
-															<p class="mb-0">Name</p>
-														</div>
-														<div class="col-sm-9">
-															<input type="text" value="@Model.UserProfile.Name" name="Name" class="form-control" required />
-														</div>
-													</div>
-													<hr>
-													<div class="row">
-														<div class="col-sm-3">
-															<p class="mb-0">Surname</p>
-														</div>
-														<div class="col-sm-9">
-															<input type="text" value="@Model.UserProfile.UserSurname" name="UserSurname" class="form-control" required />
-														</div>
-													</div>
-													<hr>
-													<div class="row">
-														<div class="col-sm-3">
-															<p class="mb-0">Gender</p>
-														</div>
-														<div class="col-sm-9">
-															<div class="form-check">
-																<input class="form-check-input" name="Gender" value="Male" type="radio" id="flexCheckDefault">
-																<label class="form-check-label">
-																	Male
-																</label>
+													@foreach (var item_ in Model.UserProfile.GetType().GetProperties())
+													{
+														@if (item_.Name == "Id" || item_.Name == "ApplicationUserId" || item_.Name == "ApplicationUser")
+															continue;
+														@if (item_.Name == "UserSurname")
+														{
+															<div class="row">
+																<div class="col-sm-3">
+																	<p class="mb-0">Surname</p>
+																</div>
+																<div class="col-sm-9">
+																	@Html.TextBox(item_.Name, Model.UserProfile.UserSurname, new { @type="text", @Placeholder = $"Enter Surname", @class = "form-control", @required = "true"})
+																</div>
 															</div>
-															<div class="form-check">
-																<input class="form-check-input" name="Gender" type="radio" value="Female" id="flexCheckDefault">
-																<label class="form-check-label">
-																	Female
-																</label>
+															<hr>
+															continue;
+														}
+														<div class="row">
+															<div class="col-sm-3">
+																<p class="mb-0">@item_.Name</p>
 															</div>
-															<div class="form-check">
-																<input class="form-check-input" name="Gender" type="radio" value="Other" id="flexCheckDefault">
-																<label class="form-check-label">
-																	Other
-																</label>
+															<div class="col-sm-9">
+																@if (item_.Name == "Gender")
+																{
+																	<div class="form-check">
+																		<input class="form-check-input" name="Gender" value="Male" type="radio" id="flexCheckDefault">
+																		<label class="form-check-label">
+																			Male
+																		</label>
+																	</div>
+																	<div class="form-check">
+																		<input class="form-check-input" name="Gender" type="radio" value="Female" id="flexCheckDefault">
+																		<label class="form-check-label">
+																			Female
+																		</label>
+																	</div>
+																	<div class="form-check">
+																		<input class="form-check-input" name="Gender" type="radio" value="Other" id="flexCheckDefault">
+																		<label class="form-check-label">
+																			Other
+																		</label>
+																	</div>
+																}
+																else if (item_.Name == "Birthday")
+																	@Html.TextBox(item_.Name, Model.UserProfile.Birthday.ToString("d"), new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+																else if (item_.Name == "Age" || item_.Name == "Weight" || item_.Name == "Height")
+																	@Html.TextBox(item_.Name, $"{item_.GetValue(Model.UserProfile)}", new { @type="number", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+																else
+																	@Html.TextBox(item_.Name, $"{item_.GetValue(Model.UserProfile)}", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+
+																</div>
 															</div>
-														</div>
-													</div>
-													<hr>
-													<div class="row">
-														<div class="col-sm-3">
-															<p class="mb-0">Country</p>
-														</div>
-														<div class="col-sm-9">
-															<input type="text" value="@Model.UserProfile.Country" name="Country" class="form-control" required />
-														</div>
-													</div>
-													<hr>
-													<div class="row">
-														<div class="col-sm-3">
-															<p class="mb-0">Birthday</p>
-														</div>
-														<div class="col-sm-9">
-															<input type="text" value="@Model.UserProfile.Birthday.ToString("d")" name="Birthday" class="form-control" required />
-														</div>
-													</div>
-													<hr>
-													<div class="row">
-														<div class="col-sm-3">
-															<p class="mb-0">Age</p>
-														</div>
-														<div class="col-sm-9">
-															<input type="text" value="@Model.UserProfile.Age" name="Age" class="form-control" required />
-														</div>
-													</div>
-													<hr>
-													<div class="row">
-														<div class="col-sm-3">
-															<p class="mb-0">Weight</p>
-														</div>
-														<div class="col-sm-9">
-															<input type="text" value="@Model.UserProfile.Weight" name="Weight" class="form-control" required />
-														</div>
-													</div>
-													<hr>
-													<div class="row">
-														<div class="col-sm-3">
-															<p class="mb-0">Height</p>
-														</div>
-														<div class="col-sm-9">
-															<input type="text" value="@Model.UserProfile.Height" name="Height" class="form-control" required />
-														</div>
-													</div>
+														<hr>
+													}
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -182,68 +148,40 @@
 				<div class="col-lg-8">
 					<div class="card mb-4 card_profile">
 						<div class="card-body">
-							<div class="row">
-								<div class="col-sm-3">
-									<p class="mb-0">Full name</p>
+							@foreach (var item in Model.UserProfile.GetType().GetProperties())
+							{
+								@if (item.Name == "Id" || item.Name == "ApplicationUserId" || item.Name == "ApplicationUser")
+									continue;
+								@if (item.Name == "UserSurname")
+								{
+									<div class="row">
+										<div class="col-sm-3">
+											<p class="mb-0">Surname</p>
+										</div>
+										<div class="col-sm-9">
+											<p class="text-muted mb-0">@item.GetValue(Model.UserProfile)</p>
+										</div>
+									</div>
+									<hr>
+									continue;
+								}
+								<div class="row">
+									<div class="col-sm-3">
+										<p class="mb-0">@item.Name</p>
+									</div>
+									<div class="col-sm-9">
+										@if (item.Name == "Birthday")
+										{
+											<p class="text-muted mb-0">@Model.UserProfile.Birthday.ToString("D")</p>
+										}
+										else
+										{
+											<p class="text-muted mb-0">@item.GetValue(Model.UserProfile)</p>
+										}
+									</div>
 								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">@Model.UserProfile.Name @Model.UserProfile.UserSurname</p>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-sm-3">
-									<p class="mb-0">Gender</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">@Model.UserProfile.Gender</p>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-sm-3">
-									<p class="mb-0">Country</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">@Model.UserProfile.Country</p>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-sm-3">
-									<p class="mb-0">Birthday</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">@Model.UserProfile.Birthday.ToString("D")</p>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-sm-3">
-									<p class="mb-0">Age</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">@Model.UserProfile.Age</p>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-sm-3">
-									<p class="mb-0">Weight</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">@Model.UserProfile.Weight</p>
-								</div>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-sm-3">
-									<p class="mb-0">Height</p>
-								</div>
-								<div class="col-sm-9">
-									<p class="text-muted mb-0">@Model.UserProfile.Height</p>
-								</div>
-							</div>
+								<hr>
+							}
 						</div>
 					</div>
 				</div>
@@ -252,5 +190,3 @@
 	</section>
 </body>
 </html>
-
-

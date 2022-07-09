@@ -9,12 +9,12 @@ namespace SportWebApp.Models
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public string? Equipment { get; set; }
-        public string? ImageUrl { get; set; } 
-        public int Repetition { get; set; } 
-        public double Weight { get; set; }
-        public int ApproachCount { get; set; }
         public string? MuscleGroup { get; set; }
+        public string? Equipment { get; set; }
+        public double Weight { get; set; }
+        public int Repetition { get; set; } 
+        public int ApproachCount { get; set; }
+        public string? ImageUrl { get; set; }
 
 
         [ForeignKey("ApplicationUser")]

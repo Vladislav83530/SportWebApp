@@ -2,78 +2,49 @@
 <h3> Edit  exercise</h3>
 <form asp-action="EditExercisePost" asp-controller="Exercise" method="post" asp-route-id="@Model.Id">
 	<div>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Name</p>
+		@foreach (var item in Model.GetType().GetProperties())
+		{
+			@if(item.Name=="Id" || item.Name=="ApplicationUserId" || item.Name == "ApplicationUser")		
+				continue;			
+			@if(item.Name=="MuscleGroup")
+			{				
+				<div class="row">
+					<div class="col-sm-3">
+						<p class="mb-0">Mucle Group</p>
+					</div>
+					<div class="col-sm-9">
+						@Html.TextBox(item.Name, $"{item.GetValue(Model)}", new { @type="text", @Placeholder = $"Enter Muscle group", @class = "form-control", @required = "true"})
+					</div>
+				</div>
+				<hr>
+				continue;
+			}
+			@if(item.Name=="ApproachCount")
+			{
+				<div class="row">
+					<div class="col-sm-3">
+						<p class="mb-0">Approach</p>
+					</div>
+					<div class="col-sm-9">
+						@Html.TextBox(item.Name, $"{item.GetValue(Model)}", new { @type="number", @Placeholder = $"Enter Approach", @class = "form-control", @required = "true"})
+					</div>
+				</div>
+				<hr>
+				continue;
+			}
+			<div class="row">
+				<div class="col-sm-3">
+					<p class="mb-0">@item.Name</p>
+				</div>
+				<div class="col-sm-9">
+					@if (item.Name == "Repetition" || item.Name == "Weight")
+						@Html.TextBox(item.Name,$"{item.GetValue(Model)}", new { @type="number", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true"})
+					else
+						@Html.TextBox(item.Name,$"{item.GetValue(Model)}", new { @type="text", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true" })
+				</div>
 			</div>
-			<div class="col-sm-9">
-				<input type="text" name="Name" class="form-control" placeholder="Enter name" value="@Model.Name" required />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Description</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" name="Description" class="form-control" placeholder="Enter description" value="@Model.Description" required />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Muscle group</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" name="MuscleGroup" class="form-control" placeholder="Enter muscle group" value="@Model.MuscleGroup" required />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Equipment</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" name="Equipment" class="form-control" placeholder="Enter equipment" value="@Model.Equipment" required />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Weight of equipment</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="number" name="Weight" class="form-control" placeholder="Enter weight of equipment" value="@Model.Weight" required />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Repetition</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="number" name="Repetition" class="form-control" placeholder="Enter repetition" value="@Model.Repetition" required />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Approach</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="number" name="ApproachCount" class="form-control" value="@Model.ApproachCount" required />
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-sm-3">
-				<p class="mb-0">Image</p>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" name="ImageUrl" class="form-control" laceholder="Enter count of approach" value="@Model.ImageUrl"/>
-			</div>
-		</div>
-		<br>
-			<button type="submit" class="btn btn-primary">Save</button>			
+			<hr>
+		}		
+		<button type="submit" class="btn btn-primary">Save</button>
 	</div>
 </form>
