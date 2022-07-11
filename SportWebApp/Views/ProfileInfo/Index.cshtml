@@ -1,5 +1,4 @@
 ﻿@model SportWebApp.ViewModels.ProfileInfoViewModel
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,9 +28,7 @@
 								{
 									<img src="@Model.UserAvatar.Path" alt="avatar" class="rounded-circle img-fluid avatar_img" style='width: 150px; height: 160px;' />
 									<!-- Button trigger modal avatar-->
-									<button type="button" class="btn btn-primary avatar_btn" data-toggle="modal" data-target="#EditAvatarModal">
-										✎
-									</button>
+									<button type="button" class="btn btn-primary avatar_btn" data-toggle="modal" data-target="#EditAvatarModal">✎</button>
 								}
 							</div>
 
@@ -39,10 +36,7 @@
 							<p class="text-muted mb-4">@Model.UserProfile.Country</p>
 							<div class="d-flex justify-content-center mb-2">
 								<!-- Button trigger modal info-->
-								<button type="button" class="btn btn-dark edit_btn" data-toggle="modal" data-target="#EditModal">
-									Edit
-								</button>
-
+								<button type="button" class="btn btn-dark edit_btn" data-toggle="modal" data-target="#EditModal">Edit</button>
 								<!-- Modal edit avatar -->
 								<div class="modal fade" id="EditAvatarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
@@ -104,21 +98,15 @@
 																{
 																	<div class="form-check">
 																		<input class="form-check-input" name="Gender" value="Male" type="radio" id="flexCheckDefault">
-																		<label class="form-check-label">
-																			Male
-																		</label>
+																		<label class="form-check-label">Male</label>
 																	</div>
 																	<div class="form-check">
 																		<input class="form-check-input" name="Gender" type="radio" value="Female" id="flexCheckDefault">
-																		<label class="form-check-label">
-																			Female
-																		</label>
+																		<label class="form-check-label">Female</label>
 																	</div>
 																	<div class="form-check">
 																		<input class="form-check-input" name="Gender" type="radio" value="Other" id="flexCheckDefault">
-																		<label class="form-check-label">
-																			Other
-																		</label>
+																		<label class="form-check-label">Other</label>
 																	</div>
 																}
 																else if (item_.Name == "Birthday")
@@ -127,7 +115,6 @@
 																	@Html.TextBox(item_.Name, $"{item_.GetValue(Model.UserProfile)}", new { @type="number", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
 																else
 																	@Html.TextBox(item_.Name, $"{item_.GetValue(Model.UserProfile)}", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
-
 																</div>
 															</div>
 														<hr>

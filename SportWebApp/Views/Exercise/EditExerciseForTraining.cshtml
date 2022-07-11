@@ -41,8 +41,8 @@
 						@Html.TextBox(item.Name,$"{item.GetValue(Model)}", new { @type="number", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true"})
 					else
 						@Html.TextBox(item.Name,$"{item.GetValue(Model)}", new { @type="text", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true" })
+					</div>
 				</div>
-			</div>
 			<hr>
 		}
 		<button type="submit" class="btn btn-primary">Save</button>

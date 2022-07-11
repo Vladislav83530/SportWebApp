@@ -5,7 +5,6 @@ D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\SportWebApp.exe
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\SportWebApp.deps.json
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\SportWebApp.runtimeconfig.json
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\SportWebApp.dll
-D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\ref\SportWebApp.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\SportWebApp.pdb
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -65,3 +64,4 @@ D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\SportWebApp.csproj.AssemblyRe
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\MailKit.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\MimeKit.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\refint\SportWebApp.dll

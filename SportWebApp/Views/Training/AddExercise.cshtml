@@ -1,5 +1,4 @@
 ﻿@model SportWebApp.ViewModels.TrainingViewModel
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,12 +66,8 @@
 															<input style="display: none" type="number" name="Repetition" class="form-control" placeholder="Enter repetition" value="@item.Repetition" required />
 															<input style="display: none" type="number" name="ApproachCount" class="form-control" value="@item.ApproachCount" required />
 															<input style="display: none" type="text" name="ImageUrl" class="form-control" laceholder="Enter count of approach" value="@item.ImageUrl" />
-															<button style='width: 140px;' type="submit" class="btn btn-dark">
-																Add
-															</button>
-															<a asp-action="EditExerciseForTraining" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-dark">
-																Edit
-															</a>
+															<button style='width: 140px;' type="submit" class="btn btn-dark">Add</button>
+															<a asp-action="EditExerciseForTraining" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-dark">Edit</a>
 														</form>
 													</div>
 												</div>
@@ -95,9 +90,7 @@
 
 							<label>Equipment: </label>
 							<input name="Equipment" value="@Model.FilterViewModel.SelectedEquipment" class="form-control" />
-							<button type="submit" class="btn btn-primary btn_filter btn-lg">
-								Filter
-							</button>
+							<button type="submit" class="btn btn-primary btn_filter btn-lg">Filter</button>
 						</div>
 					</form>
 				</div>

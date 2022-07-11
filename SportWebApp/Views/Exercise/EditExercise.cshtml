@@ -4,10 +4,10 @@
 	<div>
 		@foreach (var item in Model.GetType().GetProperties())
 		{
-			@if(item.Name=="Id" || item.Name=="ApplicationUserId" || item.Name == "ApplicationUser")		
-				continue;			
-			@if(item.Name=="MuscleGroup")
-			{				
+			@if (item.Name == "Id" || item.Name == "ApplicationUserId" || item.Name == "ApplicationUser")
+				continue;
+			@if (item.Name == "MuscleGroup")
+			{
 				<div class="row">
 					<div class="col-sm-3">
 						<p class="mb-0">Mucle Group</p>
@@ -19,7 +19,7 @@
 				<hr>
 				continue;
 			}
-			@if(item.Name=="ApproachCount")
+			@if (item.Name == "ApproachCount")
 			{
 				<div class="row">
 					<div class="col-sm-3">
@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<hr>
-		}		
+		}
 		<button type="submit" class="btn btn-primary">Save</button>
 	</div>
 </form>

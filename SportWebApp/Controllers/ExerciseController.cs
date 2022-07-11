@@ -79,7 +79,6 @@ namespace SportWebApp.Controllers
             string? currentUserId = GetCurUserId();
             if (currentUserId != null)
             {
-
                 Exercise exercise = new Exercise()
                 {
                     Name = _exercise.Name,

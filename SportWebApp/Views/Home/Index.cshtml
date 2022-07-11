@@ -1,21 +1,20 @@
 ﻿@{
 	ViewData["Title"] = "Home Page";
 }
-	<br>
-	@if (TempData["AlertMessage"] != null)
-	{
-		<div class="alert alert-success d-flex align-items-center">
-			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
-			<div>
-				<strong>Success! </strong>@TempData["AlertMessage"]
-			</div>
+<br>
+@if (TempData["AlertMessage"] != null)
+{
+	<div class="alert alert-success d-flex align-items-center">
+		<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+		<div>
+			<strong>Success! </strong>@TempData["AlertMessage"]
 		</div>
-	}
+	</div>
+}
 
 @if (User.Identity.IsAuthenticated)
 {
 	<p>@User.Identity.Name</p>
-
 	<form method="post" asp-controller="Account" asp-action="Logout">
 		<input type="submit" value="Log out" />
 	</form>

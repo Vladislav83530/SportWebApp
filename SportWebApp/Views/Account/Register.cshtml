@@ -2,18 +2,18 @@
 <h2>Sign up</h2>
 <form method="post" asp-controller="Account" asp-action="Register">
     <div asp-validation-summary="ModelOnly"></div>
-    <div>,
+    <div>
         <label asp-for="Name"></label><br />
-        <input asp-for="Name" />
+        <input asp-for="Name"/>
         <span asp-validation-for="Name"></span>
     </div>
     <div>
-        <label asp-for="UserSurname"></label><br />
-        <input asp-for="UserSurname" />
+        <label asp-for="UserSurname"></label><br/>
+        <input asp-for="UserSurname"/>
         <span asp-validation-for="UserSurname"></span>
     </div>
     <div>
-        <label asp-for="Email"></label><br />
+        <label asp-for="Email"></label><br/>
         <input asp-for="Email" />
         <span asp-validation-for="Email"></span>
     </div>
@@ -28,6 +28,6 @@
         <span asp-validation-for="PasswordConfirm"></span>
     </div>
     <div>
-        <input type="submit" value="Sign up" />
+        <input type="submit" value="Sign up"/>
     </div>
 </form>

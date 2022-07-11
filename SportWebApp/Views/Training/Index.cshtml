@@ -58,15 +58,9 @@
 														<img src="@item.ImageUrl" style='width: 100%; height: 240px;'>
 													}
 													<div class="modal-footer">
-														<a asp-action="AddExercise" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">
-															Add Exercise
-														</a>
-														<a asp-action="EditTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">
-															Edit
-														</a>
-														<a asp-action="DeleteTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">
-															Delete
-														</a>
+														<a asp-action="AddExercise" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">Add Exercise</a>
+														<a asp-action="EditTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">Edit</a>
+														<a asp-action="DeleteTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">Delete</a>
 													</div>
 												</div>
 												<div class="col-md-7 exercise_info">
@@ -101,9 +95,7 @@
 																				<p><b>Name:</b> @exercise.Name</p>
 																				<p><b>Repetition:</b> @exercise.Repetition</p>
 																				<p><b>Approach:</b> @exercise.ApproachCount</p>
-																				<a asp-action="DeleteExercise" asp-controller="Training" asp-route-id="@item.Id" asp-route-idexer="@exercise.Id"  type="button" class="btn btn-primary btn-sm btn_del_exercise">
-																					Delete
-																				</a>
+																				<a asp-action="DeleteExercise" asp-controller="Training" asp-route-id="@item.Id" asp-route-idexer="@exercise.Id" type="button" class="btn btn-primary btn-sm btn_del_exercise">Delete</a>
 																				<br>
 																			</div>
 																		</div>
@@ -121,17 +113,15 @@
 																				<p><b>Name:</b> @exercise.Name</p>
 																				<p><b>Repetition:</b> @exercise.Repetition</p>
 																				<p><b>Approach:</b> @exercise.ApproachCount</p>
-																				<a asp-action="DeleteExercise" asp-controller="Training" asp-route-id="@item.Id" asp-route-idexer="@exercise.Id"  type="button" class="btn btn-primary btn-sm btn_del_exercise">
-																					Delete
-																				</a>
+																				<a asp-action="DeleteExercise" asp-controller="Training" asp-route-id="@item.Id" asp-route-idexer="@exercise.Id" type="button" class="btn btn-primary btn-sm btn_del_exercise">Delete</a>
 																				<br>
 																			</div>
 																		</div>
 																		<br>
 																	</div>
 																}
-															  }
-														  }
+															}
+														}
 													}
 												</div>
 											</div>
@@ -144,9 +134,7 @@
 				</div>
 				<div class="col-lg-3">
 					<!-- Button trigger modal create-->
-					<button type="button" class="btn btn-primary btn-lg btn_create" data-toggle="modal" data-target="#CreateTraining">
-						Create Training
-					</button>
+					<button type="button" class="btn btn-primary btn-lg btn_create" data-toggle="modal" data-target="#CreateTraining">Create Training</button>
 
 					<form method="get">
 						<div class="form-inline form-group">
@@ -208,33 +196,23 @@
 													{
 														<div class="form-check">
 															<input class="form-check-input" name="Feeling" value="Badly" type="radio" id="flexCheckDefault">
-															<label class="form-check-label">
-																Badly
-															</label>
+															<label class="form-check-label">Badly</label>
 														</div>
 														<div class="form-check">
 															<input class="form-check-input" name="Feeling" type="radio" value="Normally" id="flexCheckDefault">
-															<label class="form-check-label">
-																Normally
-															</label>
+															<label class="form-check-label">Normally</label>
 														</div>
 														<div class="form-check">
 															<input class="form-check-input" name="Feeling" type="radio" value="Soso" id="flexCheckDefault">
-															<label class="form-check-label">
-																So-so
-															</label>
+															<label class="form-check-label">So-so</label>
 														</div>
 														<div class="form-check">
 															<input class="form-check-input" name="Feeling" type="radio" value="Perfectly" id="flexCheckDefault">
-															<label class="form-check-label">
-																Perfectly
-															</label>
+															<label class="form-check-label">Perfectly</label>
 														</div>
 													}
 													else
 														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
-
-
 													</div>
 												</div>
 											<hr>
