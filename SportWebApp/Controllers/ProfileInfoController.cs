@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SportWebApp.Data;
+using SportWebApp.Data.Interfaces;
 using SportWebApp.Models;
 using SportWebApp.ViewModels;
 using System.Security.Claims;
@@ -12,11 +11,13 @@ namespace SportWebApp.Controllers
     /// </summary>
     public class ProfileInfoController : Controller
     {
-        private readonly ApplicationDbContext db;
         IWebHostEnvironment _appEnvironment;
-        public ProfileInfoController(ApplicationDbContext context, IWebHostEnvironment appEnvironment)
+        private readonly IUserProfileRepository _userProfile;
+        private readonly IUserAvatarRepository _userAvatar;
+        public ProfileInfoController(IUserProfileRepository userProfile, IUserAvatarRepository userAvatar, IWebHostEnvironment appEnvironment)
         {
-            db = context;
+            _userProfile = userProfile;
+            _userAvatar = userAvatar;
             _appEnvironment = appEnvironment;
         }
 
@@ -28,15 +29,17 @@ namespace SportWebApp.Controllers
         public async Task<IActionResult> Index()
         {
             string? currentUserID = GetCurUserId();
-            UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
-            UserAvatar? curuseravatar = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
-            ProfileInfoViewModel profileinfo = new ProfileInfoViewModel
+            if (currentUserID != null)
             {
-                UserProfile = curuser,
-                UserAvatar = curuseravatar
-            };
-            if (curuser != null)
-            {
+                var curUser = await _userProfile.GetCurrentUserAsync(currentUserID);
+                var curUserAvatar = await _userAvatar.GetCurrentUserAvatarAsync(currentUserID);
+
+                ProfileInfoViewModel profileinfo = new ProfileInfoViewModel
+                {
+                    UserProfile = curUser,
+                    UserAvatar = curUserAvatar
+                };
+
                 return View(profileinfo);
             }
             return NotFound();
@@ -51,21 +54,15 @@ namespace SportWebApp.Controllers
         public async Task<IActionResult> Edit(UserProfile profile)
         {
             string? currentUserID = GetCurUserId();
-            UserProfile? curuser = await db.UserProfiles.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
-            if (curuser != null)
+            if (currentUserID != null)
             {
-                curuser.Name = profile.Name;
-                curuser.UserSurname = profile.UserSurname;
-                curuser.Gender = profile.Gender;
-                curuser.Country = profile.Country;
-                curuser.Birthday = profile.Birthday;
-                curuser.Age = profile.Age;
-                curuser.Weight = profile.Weight;
-                curuser.Height = profile.Height;
+                await _userProfile.EditUserProfileAsync(profile, currentUserID);
+                TempData["AlertMessage"] = "Your profile info edited successfully!";
+
+                return RedirectToAction("Index");
             }
-            await db.SaveChangesAsync();
-            TempData["AlertMessage"] = "Your profile info edited successfully!";
-            return RedirectToAction("Index");
+
+            return BadRequest();
         }
 
         /// <summary>
@@ -77,22 +74,15 @@ namespace SportWebApp.Controllers
         public async Task<IActionResult> EditAvatar(IFormFile uploadedFile)
         {
             string? currentUserID = GetCurUserId();
-            UserAvatar? curuser = await db.UserAvatars.FirstOrDefaultAsync(user => user.ApplicationUserId == currentUserID);
-            if (uploadedFile != null && curuser != null)
+            if (currentUserID != null)
             {
-                string path = "/Files/" + currentUserID + ".jpg";
+                var curUserAvatar = await _userAvatar.GetCurrentUserAvatarAsync(currentUserID);
+                await _userAvatar.EditUserProfileAsync(uploadedFile, curUserAvatar, currentUserID, _appEnvironment);
 
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    await uploadedFile.CopyToAsync(fileStream);
-                }
-                UserAvatar file = new UserAvatar { Name = currentUserID, Path = path, ApplicationUserId = currentUserID };
-                db.UserAvatars.Remove(curuser);
-                db.UserAvatars.Add(file);
-
-                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+
+            return BadRequest();
         }
 
         /// <summary>

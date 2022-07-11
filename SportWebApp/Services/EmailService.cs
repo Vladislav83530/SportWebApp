@@ -3,8 +3,16 @@ using MimeKit;
 
 namespace SportWebApp.Services
 {
+    /// <summary>
+    /// Service for sand messages after registration
+    /// </summary>
     public class EmailService
     {
+        /// <summary>
+        /// Send Email after registartion
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public async Task SendEmailAsync(string? email)
         {
             MimeMessage message = new MimeMessage();
