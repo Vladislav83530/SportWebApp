@@ -14,17 +14,20 @@ namespace SportWebApp.Data.Repositories
         /// <param name="user"></param>
         /// <param name="currentUserId"></param>
         /// <returns></returns>
-        public async Task EditUserProfileAsync(UserProfile user, string? currentUserId )
+        public async Task EditUserProfileAsync(UserProfile user, string currentUserId )
         {
             UserProfile? currentUser = await GetCurrentUserAsync(currentUserId);
-            currentUser.Name = user.Name;
-            currentUser.UserSurname = user.UserSurname;
-            currentUser.Gender = user.Gender;
-            currentUser.Country = user.Country;
-            currentUser.Birthday = user.Birthday;
-            currentUser.Age = user.Age;
-            currentUser.Weight = user.Weight;
-            currentUser.Height = user.Height;
+            if (currentUser != null)
+            {
+                currentUser.Name = user.Name;
+                currentUser.UserSurname = user.UserSurname;
+                currentUser.Gender = user.Gender;
+                currentUser.Country = user.Country;
+                currentUser.Birthday = user.Birthday;
+                currentUser.Age = user.Age;
+                currentUser.Weight = user.Weight;
+                currentUser.Height = user.Height;
+            }
             await db.SaveChangesAsync();
         }
 

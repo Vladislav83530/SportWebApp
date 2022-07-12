@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SportWebApp.Data;
+using SportWebApp.Data.Interfaces;
 using SportWebApp.Models;
 using SportWebApp.ViewModels;
 using System.Security.Claims;
@@ -14,10 +15,10 @@ namespace SportWebApp.Controllers
     [Authorize]
     public class ExerciseController : Controller
     {
-        private readonly ApplicationDbContext db;
-        public ExerciseController(ApplicationDbContext context)
+        private readonly IExerciseRepository _exercise;
+        public ExerciseController(IExerciseRepository exercise)
         {
-            db = context;
+            _exercise = exercise;
         }
 
         /// <summary>
@@ -25,47 +26,51 @@ namespace SportWebApp.Controllers
         /// </summary>
         /// <returns>View with all exercise (filtrated exercise)</returns>
         [HttpGet]
-        public IActionResult Index(string name, string muscleGroup, string equipment)
+        public async Task<IActionResult> Index(string name, string muscleGroup, string equipment)
         {
-            string? currentUserId = GetCurUserId();
-            List<Exercise> exercises = db.Exercises.Where(x => x.ApplicationUserId == currentUserId).ToList();
+            string? currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (currentUserId != null)
+            {
+                List<Exercise> exercises = (List<Exercise>)await _exercise.GetExercisesAsync(currentUserId);
 
-            if (!String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
-            {
-                exercises = exercises.Where(p => p.Name.Contains(name) && p.MuscleGroup.Contains(muscleGroup) && p.Equipment.Contains(equipment)).ToList();
-            }
-            if (!String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && String.IsNullOrEmpty(equipment))
-            {
-                exercises = exercises.Where(p => p.Name.Contains(name) && p.MuscleGroup.Contains(muscleGroup)).ToList();
-            }
-            if (!String.IsNullOrEmpty(name) && String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
-            {
-                exercises = exercises.Where(p => p.Name.Contains(name) && p.Equipment.Contains(equipment)).ToList();
-            }
-            if (String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
-            {
-                exercises = exercises.Where(p => p.MuscleGroup.Contains(muscleGroup) && p.Equipment.Contains(equipment)).ToList();
-            }
-            if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
-            {
-                exercises = exercises.Where(p => p.Equipment.Contains(equipment)).ToList();
-            }
-            if (String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && String.IsNullOrEmpty(equipment))
-            {
-                exercises = exercises.Where(p => p.MuscleGroup.Contains(muscleGroup)).ToList();
-            }
-            if (!String.IsNullOrEmpty(name) && String.IsNullOrEmpty(muscleGroup) && String.IsNullOrEmpty(equipment))
-            {
-                exercises = exercises.Where(p => p.Name.Contains(name)).ToList();
-            }
+                if (!String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
+                {
+                    exercises = exercises.Where(p => p.Name.Contains(name) && p.MuscleGroup.Contains(muscleGroup) && p.Equipment.Contains(equipment)).ToList();
+                }
+                if (!String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && String.IsNullOrEmpty(equipment))
+                {
+                    exercises = exercises.Where(p => p.Name.Contains(name) && p.MuscleGroup.Contains(muscleGroup)).ToList();
+                }
+                if (!String.IsNullOrEmpty(name) && String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
+                {
+                    exercises = exercises.Where(p => p.Name.Contains(name) && p.Equipment.Contains(equipment)).ToList();
+                }
+                if (String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
+                {
+                    exercises = exercises.Where(p => p.MuscleGroup.Contains(muscleGroup) && p.Equipment.Contains(equipment)).ToList();
+                }
+                if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
+                {
+                    exercises = exercises.Where(p => p.Equipment.Contains(equipment)).ToList();
+                }
+                if (String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && String.IsNullOrEmpty(equipment))
+                {
+                    exercises = exercises.Where(p => p.MuscleGroup.Contains(muscleGroup)).ToList();
+                }
+                if (!String.IsNullOrEmpty(name) && String.IsNullOrEmpty(muscleGroup) && String.IsNullOrEmpty(equipment))
+                {
+                    exercises = exercises.Where(p => p.Name.Contains(name)).ToList();
+                }
 
-            ExerciseViewModel exerciseViewModel = new ExerciseViewModel
-            {
-                Exercise = new Exercise(),
-                Exercises = exercises,
-                FilterViewModel = new FilterViewModel(name, muscleGroup, equipment)
-            };
-            return View(exerciseViewModel);
+                ExerciseViewModel exerciseViewModel = new ExerciseViewModel
+                {
+                    Exercise = new Exercise(),
+                    Exercises = exercises,
+                    FilterViewModel = new FilterViewModel(name, muscleGroup, equipment)
+                };
+                return View(exerciseViewModel);
+            }
+            return BadRequest();
         }
 
         /// <summary>
@@ -74,28 +79,16 @@ namespace SportWebApp.Controllers
         /// <param name="_exercise"></param>
         /// <returns>View with created exercise</returns>
         [HttpPost]
-        public async Task<IActionResult> CreateExercise(Exercise _exercise)
+        public async Task<IActionResult> CreateExercise(Exercise exer)
         {
-            string? currentUserId = GetCurUserId();
+            string? currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (currentUserId != null)
             {
-                Exercise exercise = new Exercise()
-                {
-                    Name = _exercise.Name,
-                    Description = _exercise.Description,
-                    Equipment = _exercise.Equipment,
-                    ImageUrl = _exercise.ImageUrl,
-                    Repetition = _exercise.Repetition,
-                    MuscleGroup = _exercise.MuscleGroup,
-                    Weight = _exercise.Weight,
-                    ApproachCount = _exercise.ApproachCount,
-                    ApplicationUserId = currentUserId
-                };
-                await db.Exercises.AddRangeAsync(exercise);
-                await db.SaveChangesAsync();
+                await _exercise.CreateExerciseAsync(exer, currentUserId);
+                TempData["AlertMessage"] = "Your exercise was created successfully!";
+                return RedirectToAction("Index");
             }
-            TempData["AlertMessage"] = "Your exercise was created successfully!";
-            return RedirectToAction("Index");
+            return BadRequest();
         }
 
         /// <summary>
@@ -104,13 +97,13 @@ namespace SportWebApp.Controllers
         /// <param name="id"></param>
         /// <returns>View for editting exercise</returns>
         [HttpGet]
-        public async Task<IActionResult> EditExercise(int? id)
+        public async Task<IActionResult> EditExercise(int id)
         {
-            string? currentUserId = GetCurUserId();
+            string? currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (currentUserId != null)
             {
-                Exercise? exercise = await db.Exercises.FirstOrDefaultAsync(x => x.Id == id);
-                if (exercise!=null)
+                var exercise = await _exercise.GetExerciseAsync(id);
+                if (exercise != null)
                 {
                     return View(exercise);
                 }
@@ -124,12 +117,12 @@ namespace SportWebApp.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> EditExerciseForTraining(int? id)
+        public async Task<IActionResult> EditExerciseForTraining(int id)
         {
-            string? currentUserId = GetCurUserId();
+            string? currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (currentUserId != null)
             {
-                Exercise? exercise = await db.Exercises.FirstOrDefaultAsync(x => x.Id == id);
+                var exercise = await _exercise.GetExerciseAsync(id);
                 if (exercise != null)
                 {
                     return View(exercise);
@@ -144,23 +137,11 @@ namespace SportWebApp.Controllers
         /// <param name="_exercise"></param>
         /// <returns>View with edited exercise</returns>
         [HttpPost]
-        public async Task<IActionResult> EditExercisePost(Exercise _exercise)
+        public async Task<IActionResult> EditExercisePost(Exercise exer)
         {
-                Exercise? exercise = await db.Exercises.FirstOrDefaultAsync(x => x.Id == _exercise.Id);
-                if (exercise != null)
-                {
-                    exercise.Description = _exercise.Description;
-                    exercise.Equipment = _exercise.Equipment;
-                    exercise.Weight = _exercise.Weight;
-                    exercise.Repetition = _exercise.Repetition;
-                    exercise.MuscleGroup = _exercise.MuscleGroup;
-                    exercise.Name = _exercise.Name;
-                    exercise.ImageUrl = _exercise.ImageUrl;
-
-                }
-                await db.SaveChangesAsync();
-                TempData["AlertMessage"] = "Your exercise was edited successfully!";
-                return RedirectToAction("Index");
+            await _exercise.EditExerciseAsync(exer, exer.Id);
+            TempData["AlertMessage"] = "Your exercise was edited successfully!";
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -169,21 +150,9 @@ namespace SportWebApp.Controllers
         /// <param name="_exercise"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> EditExercisePostForTraining(Exercise _exercise)
+        public async Task<IActionResult> EditExercisePostForTraining(Exercise exer)
         {
-            Exercise? exercise = await db.Exercises.FirstOrDefaultAsync(x => x.Id == _exercise.Id);
-            if (exercise != null)
-            {
-                exercise.Description = _exercise.Description;
-                exercise.Equipment = _exercise.Equipment;
-                exercise.Weight = _exercise.Weight;
-                exercise.Repetition = _exercise.Repetition;
-                exercise.MuscleGroup = _exercise.MuscleGroup;
-                exercise.Name = _exercise.Name;
-                exercise.ImageUrl = _exercise.ImageUrl;
-
-            }
-            await db.SaveChangesAsync();
+            await _exercise.EditExerciseAsync(exer, exer.Id);
             TempData["AlertMessage"] = "Your exercise was edited successfully. Now you can add this exercise to training!";
             return RedirectToAction("Index", "Training");
         }
@@ -198,25 +167,11 @@ namespace SportWebApp.Controllers
         {
             if (id != null)
             {
-                Exercise? exercise = await db.Exercises.FirstOrDefaultAsync(x => x.Id == id);
-                if (exercise!=null)
-                    db.Exercises.Remove(exercise);
-                await db.SaveChangesAsync();
+                await _exercise.DeleteExerciseAsync(id);
                 TempData["AlertMessage"] = "Your exercise was deleted successfully!";
                 return RedirectToAction("Index");
             }
             return NotFound();
-        }
-
-        /// <summary>
-        /// Get current user id
-        /// </summary>
-        /// <returns>current user Id (string)</returns>
-        public string? GetCurUserId()
-        {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return currentUserID;
         }
     }
 }

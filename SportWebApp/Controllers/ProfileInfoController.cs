@@ -28,7 +28,7 @@ namespace SportWebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            string? currentUserID = GetCurUserId();
+            string? currentUserID = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value; ;
             if (currentUserID != null)
             {
                 var curUser = await _userProfile.GetCurrentUserAsync(currentUserID);
@@ -53,7 +53,7 @@ namespace SportWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(UserProfile profile)
         {
-            string? currentUserID = GetCurUserId();
+            string? currentUserID = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (currentUserID != null)
             {
                 await _userProfile.EditUserProfileAsync(profile, currentUserID);
@@ -73,27 +73,17 @@ namespace SportWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> EditAvatar(IFormFile uploadedFile)
         {
-            string? currentUserID = GetCurUserId();
+            string? currentUserID = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (currentUserID != null)
             {
                 var curUserAvatar = await _userAvatar.GetCurrentUserAvatarAsync(currentUserID);
-                await _userAvatar.EditUserProfileAsync(uploadedFile, curUserAvatar, currentUserID, _appEnvironment);
+                if(curUserAvatar!=null)
+                 await _userAvatar.EditUserProfileAsync(uploadedFile, curUserAvatar, currentUserID, _appEnvironment);
 
                 return RedirectToAction("Index");
             }
 
             return BadRequest();
-        }
-
-        /// <summary>
-        /// Get current user id
-        /// </summary>
-        /// <returns>current user Id (string)</returns>
-        public string? GetCurUserId()
-        {
-            ClaimsPrincipal currentUser = this.User;
-            var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return currentUserID;
         }
     }
 }
