@@ -4,7 +4,7 @@ using SportWebApp.Models;
 
 namespace SportWebApp.Data.Repositories
 {
-    public class TrainingRepository : ITrainingInterface
+    public class TrainingRepository : ITrainingRepository
     {
         ApplicationDbContext db = new ApplicationDbContext();
 

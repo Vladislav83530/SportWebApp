@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SportWebApp.Data;
 using SportWebApp.Data.Interfaces;
 using SportWebApp.Models;
 using SportWebApp.ViewModels;
 using System.Security.Claims;
-using System.Text.Json;
 
 namespace SportWebApp.Controllers
 {
@@ -16,11 +14,11 @@ namespace SportWebApp.Controllers
 	[Authorize]
 	public class TrainingController : Controller
 	{
-		private readonly ITrainingInterface _training;
+		private readonly ITrainingRepository _training;
 		private readonly IExerciseRepository _exercise;
 		private readonly ApplicationDbContext db;
 
-		public TrainingController(ITrainingInterface training, IExerciseRepository exercise, ApplicationDbContext context)
+		public TrainingController(ITrainingRepository training, IExerciseRepository exercise, ApplicationDbContext context)
 		{
 			_training = training;
 			_exercise = exercise;

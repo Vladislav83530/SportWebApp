@@ -9,5 +9,6 @@ namespace SportWebApp.Models
         public ICollection<Training>? Training { get; set; } 
         public UserAvatar? UserAvatar { get; set; }
         public ICollection<Exercise>? Exercises { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

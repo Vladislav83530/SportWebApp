@@ -2,7 +2,7 @@
 
 namespace SportWebApp.Data.Interfaces
 {
-    public interface ITrainingInterface
+    public interface ITrainingRepository
     {
         public Task<IEnumerable<Training>> GetTrainingsAsync(string currentUserId);
         public Task CreateTrainingAsync (Training training, string currentUserId);

@@ -71,5 +71,6 @@ namespace SportWebApp.Data
         public DbSet<Training> Trainings { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<UserAvatar> UserAvatars { get; set; }
+        public DbSet<Event> Events { get; set; }
     }
 }
