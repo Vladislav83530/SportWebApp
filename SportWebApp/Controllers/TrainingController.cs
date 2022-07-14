@@ -231,5 +231,21 @@ namespace SportWebApp.Controllers
 			}
 			return NotFound();
 		}
+
+        [HttpGet]
+		public async Task<IActionResult> StartTraining(int id)
+        {
+			string? currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+			if (currentUserId != null)
+			{
+				Training? training = await _training.GetTrainingAsync(id);
+                if (training != null)
+				{
+					return View(training);
+				}
+			}
+			return NotFound();
+		}
+
 	}
 }

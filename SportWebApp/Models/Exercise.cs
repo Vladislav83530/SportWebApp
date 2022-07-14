@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SportWebApp.Models
@@ -12,7 +13,7 @@ namespace SportWebApp.Models
         public string? MuscleGroup { get; set; }
         public string? Equipment { get; set; }
         public double Weight { get; set; }
-        public int Repetition { get; set; } 
+        public int Repetition { get; set; }
         public int ApproachCount { get; set; }
         public string? ImageUrl { get; set; }
 

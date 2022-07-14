@@ -63,6 +63,7 @@ namespace SportWebApp.Data.Repositories
                 _exercise.Repetition = exercise.Repetition;
                 _exercise.MuscleGroup = exercise.MuscleGroup;
                 _exercise.Name = exercise.Name;
+                _exercise.ApproachCount = exercise.ApproachCount;
                 _exercise.ImageUrl = exercise.ImageUrl;
             }
             await db.SaveChangesAsync();

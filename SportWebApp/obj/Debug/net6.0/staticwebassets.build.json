@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hlKYzPNOKcLxU9rOVBzjPuGuuXEYPw+B1pbSy9Ta4hQ=",
+  "Hash": "wssK5W5rZli8/aK/Uggu7Vv9bRl7MoCdOGurpbUUG50=",
   "Source": "SportWebApp",
   "BasePath": "_content/SportWebApp",
   "Mode": "Default",
@@ -136,6 +136,23 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
+      "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\css\\StartTraining_Training.css",
+      "SourceId": "SportWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\",
+      "BasePath": "_content/SportWebApp",
+      "RelativePath": "css/StartTraining_Training.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\StartTraining_Training.css"
+    },
+    {
       "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\favicon.ico",
       "SourceId": "SportWebApp",
       "SourceType": "Discovered",
@@ -221,23 +238,6 @@
       "OriginalItemSpec": "wwwroot\\img\\dumbbell-icon-2586494.png"
     },
     {
-      "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\js\\calendar.js",
-      "SourceId": "SportWebApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\",
-      "BasePath": "_content/SportWebApp",
-      "RelativePath": "js/calendar.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\calendar.js"
-    },
-    {
       "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\js\\site.js",
       "SourceId": "SportWebApp",
       "SourceType": "Discovered",
@@ -253,6 +253,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\js\\stopwatch.js",
+      "SourceId": "SportWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\",
+      "BasePath": "_content/SportWebApp",
+      "RelativePath": "js/stopwatch.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\stopwatch.js"
     },
     {
       "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

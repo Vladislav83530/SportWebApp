@@ -58,7 +58,8 @@
 														<img src="@item.ImageUrl" style='width: 100%; height: 240px;'>
 													}
 													<div class="modal-footer">
-														<a asp-action="AddExercise" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">Add Exercise</a>
+														<a asp-action="StartTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-success btn_training btn-md">Start training</a>
+														<a asp-action="AddExercise" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">Add exercise</a>
 														<a asp-action="EditTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">Edit</a>
 														<a asp-action="DeleteTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">Delete</a>
 													</div>
@@ -66,11 +67,7 @@
 												<div class="col-md-7 exercise_info">
 													<p><b>Name:</b> @item.Name</p>
 													<p><b>Muscle group:</b> @item.MuscleGroup</p>
-													<p><b>Date:</b> @item.Date.ToString("d")</p>
 													<p><b>Place:</b> @item.Place</p>
-													<p><b>Duration:</b> @item.Duration.ToString("HH:mm")</p>
-													<p><b>Calories:</b> @item.Calories</p>
-													<p><b>Feeling:</b> @item.Feeling</p>
 													<p><b>Notes:</b> @item.Notes</p>
 												</div>
 												<div class="row">
@@ -152,7 +149,7 @@
 						</div>
 					</form>
 
-					<!-- Modal create exrcise -->
+					<!-- Modal create training -->
 					<div class="modal fade" id="CreateTraining" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -166,7 +163,8 @@
 									<div class="modal-body">
 										@foreach (var item_ in Model.Training.GetType().GetProperties())
 										{
-											@if (item_.Name == "Id" || item_.Name == "ApplicationUserId" || item_.Name == "ApplicationUser" || item_.Name == "Equipment" || item_.Name == "Exercises")
+											@if (item_.Name == "Id" || item_.Name == "ApplicationUserId" || item_.Name == "ApplicationUser" || item_.Name == "Equipment" || item_.Name == "Exercises"
+											|| item_.Name == "Date" || item_.Name == "Duration" || item_.Name == "Feeling" || item_.Name == "Calories")
 												continue;
 											@if (item_.Name == "MuscleGroup")
 											{
@@ -186,7 +184,7 @@
 													<p class="mb-0">@item_.Name</p>
 												</div>
 												<div class="col-sm-9">
-													@if (item_.Name == "Date")
+@*													@if (item_.Name == "Date")
 														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
 													else if (item_.Name == "Duration")
 														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
@@ -210,8 +208,8 @@
 															<input class="form-check-input" name="Feeling" type="radio" value="Perfectly" id="flexCheckDefault">
 															<label class="form-check-label">Perfectly</label>
 														</div>
-													}
-													else
+													}*@
+													
 														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
 													</div>
 												</div>
