@@ -7,7 +7,7 @@ using System.Security.Claims;
 namespace SportWebApp.Controllers
 {
     /// <summary>
-    /// Edit, Delete, Add Information for User Profile
+    /// Edit, Delete, Add Information for User Profile, wathing history
     /// </summary>
     public class ProfileInfoController : Controller
     {
@@ -24,7 +24,7 @@ namespace SportWebApp.Controllers
         /// <summary>
         /// User Profile Page
         /// </summary>
-        /// <returns>View with information about user</returns>
+        /// <returns>View with information about user and history</returns>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -77,8 +77,8 @@ namespace SportWebApp.Controllers
             if (currentUserID != null)
             {
                 var curUserAvatar = await _userAvatar.GetCurrentUserAvatarAsync(currentUserID);
-                if(curUserAvatar!=null)
-                 await _userAvatar.EditUserProfileAsync(uploadedFile, curUserAvatar, currentUserID, _appEnvironment);
+                if (curUserAvatar != null)
+                    await _userAvatar.EditUserProfileAsync(uploadedFile, curUserAvatar, currentUserID, _appEnvironment);
 
                 return RedirectToAction("Index");
             }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wssK5W5rZli8/aK/Uggu7Vv9bRl7MoCdOGurpbUUG50=",
+  "Hash": "6WSBmyvvtBs2jkiwOesH9oODe4oOCm/p75T6w4EzXcw=",
   "Source": "SportWebApp",
   "BasePath": "_content/SportWebApp",
   "Mode": "Default",
@@ -153,6 +153,23 @@
       "OriginalItemSpec": "wwwroot\\css\\StartTraining_Training.css"
     },
     {
+      "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\css\\Timeline_TrainingHistory.css",
+      "SourceId": "SportWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\",
+      "BasePath": "_content/SportWebApp",
+      "RelativePath": "css/Timeline_TrainingHistory.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Timeline_TrainingHistory.css"
+    },
+    {
       "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\favicon.ico",
       "SourceId": "SportWebApp",
       "SourceType": "Discovered",
@@ -168,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\Files\\19b148ae-9c2a-4064-8c86-16c03a2d50e9.jpg",
+      "SourceId": "SportWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\",
+      "BasePath": "_content/SportWebApp",
+      "RelativePath": "Files/19b148ae-9c2a-4064-8c86-16c03a2d50e9.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Files\\19b148ae-9c2a-4064-8c86-16c03a2d50e9.jpg"
     },
     {
       "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\Files\\2709_R0lVIE5JQyA2MDctNDM.jpg",
@@ -236,6 +270,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\dumbbell-icon-2586494.png"
+    },
+    {
+      "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\img\\stopwatch.png",
+      "SourceId": "SportWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\",
+      "BasePath": "_content/SportWebApp",
+      "RelativePath": "img/stopwatch.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\stopwatch.png"
     },
     {
       "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\js\\site.js",

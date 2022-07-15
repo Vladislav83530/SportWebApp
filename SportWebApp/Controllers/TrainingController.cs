@@ -16,13 +16,11 @@ namespace SportWebApp.Controllers
 	{
 		private readonly ITrainingRepository _training;
 		private readonly IExerciseRepository _exercise;
-		private readonly ApplicationDbContext db;
 
-		public TrainingController(ITrainingRepository training, IExerciseRepository exercise, ApplicationDbContext context)
+		public TrainingController(ITrainingRepository training, IExerciseRepository exercise)
 		{
 			_training = training;
 			_exercise = exercise;
-			db= context;
 		}
 
 		/// <summary>
@@ -39,7 +37,7 @@ namespace SportWebApp.Controllers
 
 				if (!String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
 				{
-					trainings = trainings.Where(p => p.Name.Contains(name) && p.MuscleGroup.Contains(muscleGroup) && p.Equipment.Contains(equipment)).ToList();
+					trainings = trainings.Where(p => p.Name.Contains(name) && p.MuscleGroup.Contains(muscleGroup) && p.Place.Contains(equipment)).ToList();
 				}
 				if (!String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && String.IsNullOrEmpty(equipment))
 				{
@@ -47,15 +45,15 @@ namespace SportWebApp.Controllers
 				}
 				if (!String.IsNullOrEmpty(name) && String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
 				{
-					trainings = trainings.Where(p => p.Name.Contains(name) && p.Equipment.Contains(equipment)).ToList();
+					trainings = trainings.Where(p => p.Name.Contains(name) && p.Place.Contains(equipment)).ToList();
 				}
 				if (String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
 				{
-					trainings = trainings.Where(p => p.MuscleGroup.Contains(muscleGroup) && p.Equipment.Contains(equipment)).ToList();
+					trainings = trainings.Where(p => p.MuscleGroup.Contains(muscleGroup) && p.Place.Contains(equipment)).ToList();
 				}
 				if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(muscleGroup) && !String.IsNullOrEmpty(equipment))
 				{
-					trainings = trainings.Where(p => p.Equipment.Contains(equipment)).ToList();
+					trainings = trainings.Where(p => p.Place.Contains(equipment)).ToList();
 				}
 				if (String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(muscleGroup) && String.IsNullOrEmpty(equipment))
 				{
@@ -241,7 +239,12 @@ namespace SportWebApp.Controllers
 				Training? training = await _training.GetTrainingAsync(id);
                 if (training != null)
 				{
-					return View(training);
+					TrainingHistoryViewModel vm = new TrainingHistoryViewModel()
+					{
+						Training = training,
+						TrainingHistory = new TrainingHistory()
+					};
+					return View(vm);
 				}
 			}
 			return NotFound();

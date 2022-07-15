@@ -20,6 +20,7 @@ builder.Services.AddScoped<IUserAvatarRepository, UserAvatarRepository>();
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddScoped<ITrainingRepository, TrainingRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<ITrainingHistoryRepository, TrainingHistoryRepository>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opts => {
     opts.Password.RequiredLength = 5;

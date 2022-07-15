@@ -6,6 +6,7 @@ D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\SportWebApp.deps.json
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\SportWebApp.runtimeconfig.json
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\SportWebApp.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\SportWebApp.pdb
+D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\MailKit.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -24,6 +25,8 @@ D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\Microsoft.IdentityModel.Proto
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\MimeKit.dll
+D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\System.Drawing.Common.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
@@ -43,6 +46,7 @@ D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\SportWebApp.csproj.AssemblyReference.cache
 D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\SportWebApp.GeneratedMSBuildEditorConfig.editorconfig
 D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\SportWebApp.AssemblyInfoInputs.cache
 D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\SportWebApp.AssemblyInfo.cs
@@ -57,11 +61,7 @@ D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\scopedcss\bundle\SportWebApp.
 D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\scopedcss\projectbundle\SportWebApp.bundle.scp.css
 D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\SportWebApp.csproj.CopyComplete
 D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\SportWebApp.dll
-D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\ref\SportWebApp.dll
+D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\refint\SportWebApp.dll
 D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\SportWebApp.pdb
 D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\SportWebApp.genruntimeconfig.cache
-D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\SportWebApp.csproj.AssemblyReference.cache
-D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\MailKit.dll
-D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\MimeKit.dll
-D:\GitHub\SportWebApp\SportWebApp\bin\Debug\net6.0\BouncyCastle.Crypto.dll
-D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\refint\SportWebApp.dll
+D:\GitHub\SportWebApp\SportWebApp\obj\Debug\net6.0\ref\SportWebApp.dll

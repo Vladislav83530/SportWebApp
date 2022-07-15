@@ -1,41 +1,43 @@
-﻿let [milliseconds, second, minute,] = [0, 0, 0];
-let timerRef = document.querySelector('.mainTime');
+﻿let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+let timerRef = document.querySelector('.timerDisplay');
 let int = null;
 
-document.getElementById('start').addEventListener('click', () => {
+document.getElementById('startTimer').addEventListener('click', () => {
     if (int !== null) {
         clearInterval(int);
     }
-    int = setInterval(mainTime, 10);
+    int = setInterval(displayTimer, 10);
 });
 
-document.getElementById('stop').addEventListener('click', () => {
+document.getElementById('pauseTimer').addEventListener('click', () => {
     clearInterval(int);
 });
 
-document.getElementById('reset').addEventListener('click', () => {
+document.getElementById('resetTimer').addEventListener('click', () => {
     clearInterval(int);
-    [milliseconds, seconds, minutes, hours] = [0, 0, 0];
-    timerRef.innerHTML = '00 : 00 : 00';
+    [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+    timerRef.innerHTML = '00 : 00 : 00 : 000 ';
 });
 
-function mainTime() {
+function displayTimer() {
     milliseconds += 10;
-    if (milliseconds == 100) {
+    if (milliseconds == 1000) {
         milliseconds = 0;
-        second++;
-        if (second == 60) {
-            second = 0;
-            minute++;
-            if (minute == 60) {
-                minute = 0;
+        seconds++;
+        if (seconds == 60) {
+            seconds = 0;
+            minutes++;
+            if (minutes == 60) {
+                minutes = 0;
+                hours++;
             }
         }
     }
 
-    let m = minute < 10 ? "0" + minute : minute;
-    let s = second < 10 ? "0" + second : second;
+    let h = hours < 10 ? "0" + hours : hours;
+    let m = minutes < 10 ? "0" + minutes : minutes;
+    let s = seconds < 10 ? "0" + seconds : seconds;
     let ms = milliseconds < 10 ? "00" + milliseconds : milliseconds < 100 ? "0" + milliseconds : milliseconds;
 
-    timerRef.innerHTML = ` ${m} : ${s} : ${ms}`;
+    timerRef.innerHTML = ` ${h} : ${m} : ${s} : ${ms}`;
 }

@@ -20,7 +20,7 @@
 	<section style="background-color: #eee;">
 		<div class="container py-5">
 			<div class="row">
-				<div class="col-lg-4">
+				<div class="col-lg-5">
 					<div class="card mb-4 card_profile">
 						<div class="card-body text-center">
 							<div class="container_avatar">
@@ -115,6 +115,7 @@
 																	@Html.TextBox(item_.Name, $"{item_.GetValue(Model.UserProfile)}", new { @type="number", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
 																else
 																	@Html.TextBox(item_.Name, $"{item_.GetValue(Model.UserProfile)}", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+
 																</div>
 															</div>
 														<hr>
@@ -131,8 +132,11 @@
 							</div>
 						</div>
 					</div>
+					<div class="row">
+						<a asp-action="Timeline" asp-controller="TrainingHistory" class="btn btn-lg btn-info btn_history">Show history</a>
+					</div>
 				</div>
-				<div class="col-lg-8">
+				<div class="col-lg-7">
 					<div class="card mb-4 card_profile">
 						<div class="card-body">
 							@foreach (var item in Model.UserProfile.GetType().GetProperties())

@@ -32,6 +32,11 @@
     font-size: 16px;
 }
 
-.card_profile{
+.card_profile {
     border-radius: 17px;
+}
+
+.btn_history {
+    width: 100%;
+    margin-left: 5px;
 }

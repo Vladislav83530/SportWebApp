@@ -1,0 +1,120 @@
+﻿@model IEnumerable<SportWebApp.Models.TrainingHistory>
+@using System.Text.Json;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="~/css/Timeline_TrainingHistory.css" />
+</head>
+<body>
+	<section style="background-color: #F0F2F5;" class="cont_scroll">
+		<div class="row block_title">
+			<h1>Training history</h1>
+		</div>
+		<div class="container py-5">
+			<div class="main-timeline-2">
+				<a asp-action="DeleteHistory" asp-controller="TrainingHistory" class="btn btn-lg btn-danger" style="float:right;">Clear history</a>
+				@{
+					int index = 0;
+				}
+				@foreach (var item in Model)
+				{
+					index++;
+					@if (index % 2 == 1)
+					{
+						<div class="timeline-2 left-2">
+							<div class="card">
+								<img src="@item.ImageUrl" class="card-img-top" alt="Training image">
+								<div class="card-body p-4">
+									<h4 class="fw-bold mb-4">@item.Name</h4>
+									<p class="text-muted mb-4"><i class="far fa-clock" aria-hidden="true"></i> @item.Date.ToString("dddd, dd MMMM yyyy")</p>
+									<p class="mb-2"><b>Place: </b> @item.Place</p>
+									<p class="mb-2"><b>Muscle group: </b> @item.MuscleGroup</p>
+									<p class="mb-2"><b>Feeling: </b> @item.Feeling</p>
+									<p class="mb-2"><b>Duration: </b>@item.Duration.ToString("HH:mm")</p>
+									<p class="mb-4"><b>Calories: </b>@item.Calories</p>
+									<button class="btn btn-md btn-success btn_detail" data-toggle="modal" data-target="#InfoTraining">Details</button>
+								</div>
+							</div>
+						</div>
+					}
+					else
+					{
+						<div class="timeline-2 right-2">
+							<div class="card">
+								<img src="@item.ImageUrl" class="card-img-top" alt="Training image">
+								<div class="card-body p-4">
+									<h4 class="fw-bold mb-4">@item.Name</h4>
+									<p class="text-muted mb-4"><i class="far fa-clock" aria-hidden="true"></i> @item.Date.ToString("dddd, dd MMMM yyyy")</p>
+									<p class="mb-2"><b>Place: </b> @item.Place</p>
+									<p class="mb-2"><b>Muscle group: </b> @item.MuscleGroup</p>
+									<p class="mb-2"><b>Feeling: </b> @item.Feeling</p>
+									<p class="mb-2"><b>Duration: </b>@item.Duration.ToString("HH:mm")</p>
+									<p class="mb-4"><b>Calories: </b>@item.Calories</p>
+									<button class="btn btn-md btn-success btn_detail" data-toggle="modal" data-target="#InfoTraining">Details</button>
+								</div>
+							</div>
+						</div>
+					}
+
+					<div class="modal fade" id="InfoTraining" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<form asp-action="AddToHistory" asp-controller="TrainingHistory" method="post">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Training information</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<img src="@item.ImageUrl" class="card-img-top img_info_exercise" alt="Training image">
+										<div class="card-body p-2">
+											<h4 class="fw-bold mb-2">@item.Name</h4>
+											<p class="text-muted mb-4"><i class="far fa-clock" aria-hidden="true"></i> @item.Date.ToString("dddd, dd MMMM yyyy")</p>
+											<p class="mb-2"><b>Place: </b> @item.Place</p>
+											<p class="mb-2"><b>Muscle group: </b> @item.MuscleGroup</p>
+											<p class="mb-2"><b>Feeling: </b> @item.Feeling</p>
+											<p class="mb-2"><b>Duration: </b>@item.Duration.ToString("HH:mm")</p>
+											<p class="mb-2"><b>Calories: </b>@item.Calories</p>
+											<p class="mb-2"><b>Notes: </b> @item.Notes</p>
+											<p class="mb-2"><b>Exercise: </b></p>
+											@{
+												if (item.Exercises != null)
+												{
+													List<Exercise>? exercises = new List<Exercise>();
+													exercises = JsonSerializer.Deserialize<List<Exercise>>(item.Exercises);
+													if (exercises != null)
+													{
+														@foreach (var exercise in exercises)
+														{
+															<div class="row mb-2">
+																<div class="col-md-5">
+																	<img src="@exercise.ImageUrl" class="img_exrcise">
+																</div>
+																<div class="col-md-7">
+																	<p><b>Name:</b> @exercise.Name</p>
+																	<p class="p_info"><b>Repetition:</b> @exercise.Repetition</p>
+																	<p class="p_info"><b>Approach:</b> @exercise.ApproachCount</p>
+																</div>
+															</div>
+														}
+													}
+												}
+											}
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</section>
+</body>
+</html>

@@ -48,10 +48,10 @@ namespace SportWebApp.Controllers
                 UserProfile profile = new UserProfile { Name = model.Name, UserSurname = model.UserSurname, ApplicationUser = user };
                 db.UserProfiles.AddRange(profile);
 
-                Training training = new Training { ApplicationUser = user, Name = "Default", Equipment = "Default", MuscleGroup = "Default", Exercises ="[]"};
+                Training training = new Training { ApplicationUser = user, Name = "Default", Place="Default", MuscleGroup = "Default", Exercises ="[]"};
                 db.Trainings.AddRange(training);
 
-                Exercise exercise = new Exercise { ApplicationUser = user, Name = "Default", Equipment = "Default", MuscleGroup = "Default" };
+                Exercise exercise = new Exercise { ApplicationUser = user, Name = "Default", Equipment = "Default", MuscleGroup = "Default", Description="Default"};
                 db.Exercises.AddRange(exercise);
 
                 UserAvatar avatar = new UserAvatar { ApplicationUser = user, Name = "download", Path = "/Files/2709_R0lVIE5JQyA2MDctNDM.jpg" };

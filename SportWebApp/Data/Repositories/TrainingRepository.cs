@@ -19,12 +19,8 @@ namespace SportWebApp.Data.Repositories
             Training training = new Training()
             {
                 Name = _training.Name,
-                Date = _training.Date,
-                Duration = _training.Duration,
                 Place = _training.Place,
-                Calories = _training.Calories,
                 Notes = _training.Notes,
-                Feeling = _training.Feeling,
                 MuscleGroup = _training.MuscleGroup,
                 ImageUrl = _training.ImageUrl,
                 Exercises = "[]",
@@ -59,13 +55,9 @@ namespace SportWebApp.Data.Repositories
             if (training != null)
             {
                 training.Name = _training.Name;
-                training.Date = _training.Date;
-                training.Duration = _training.Duration;
                 training.MuscleGroup = _training.MuscleGroup;
                 training.Place = _training.Place;
-                training.Calories = _training.Calories;
                 training.Notes = _training.Notes;
-                training.Feeling = _training.Feeling;
                 training.ImageUrl = _training.ImageUrl;
             }
             await db.SaveChangesAsync();

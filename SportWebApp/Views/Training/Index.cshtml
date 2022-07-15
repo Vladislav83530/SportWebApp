@@ -141,7 +141,7 @@
 							<label>Muscle Group: </label>
 							<input name="MuscleGroup" value="@Model.FilterViewModel.SelectedMuscleGroup" class="form-control" />
 
-							<label>Equipment: </label>
+							<label>Place: </label>
 							<input name="Equipment" value="@Model.FilterViewModel.SelectedEquipment" class="form-control" />
 							<button type="submit" class="btn btn-primary btn_filter btn-lg">
 								Filter
@@ -163,8 +163,7 @@
 									<div class="modal-body">
 										@foreach (var item_ in Model.Training.GetType().GetProperties())
 										{
-											@if (item_.Name == "Id" || item_.Name == "ApplicationUserId" || item_.Name == "ApplicationUser" || item_.Name == "Equipment" || item_.Name == "Exercises"
-											|| item_.Name == "Date" || item_.Name == "Duration" || item_.Name == "Feeling" || item_.Name == "Calories")
+											@if (item_.Name == "Id" || item_.Name == "ApplicationUserId" || item_.Name == "ApplicationUser" || item_.Name == "Exercises")
 												continue;
 											@if (item_.Name == "MuscleGroup")
 											{
@@ -184,33 +183,11 @@
 													<p class="mb-0">@item_.Name</p>
 												</div>
 												<div class="col-sm-9">
-@*													@if (item_.Name == "Date")
+													@if (item_.Name == "Notes" || item_.Name == "ImageUrl")
+														@Html.TextArea(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+													else
 														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
-													else if (item_.Name == "Duration")
-														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
-													else if (item_.Name == "Calories")
-														@Html.TextBox(item_.Name, "", new { @type="number", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
-													else if (item_.Name == "Feeling")
-													{
-														<div class="form-check">
-															<input class="form-check-input" name="Feeling" value="Badly" type="radio" id="flexCheckDefault">
-															<label class="form-check-label">Badly</label>
-														</div>
-														<div class="form-check">
-															<input class="form-check-input" name="Feeling" type="radio" value="Normally" id="flexCheckDefault">
-															<label class="form-check-label">Normally</label>
-														</div>
-														<div class="form-check">
-															<input class="form-check-input" name="Feeling" type="radio" value="Soso" id="flexCheckDefault">
-															<label class="form-check-label">So-so</label>
-														</div>
-														<div class="form-check">
-															<input class="form-check-input" name="Feeling" type="radio" value="Perfectly" id="flexCheckDefault">
-															<label class="form-check-label">Perfectly</label>
-														</div>
-													}*@
-													
-														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+
 													</div>
 												</div>
 											<hr>
