@@ -1,26 +1,133 @@
-﻿@{
-	ViewData["Title"] = "Home Page";
-}
-<br>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - SportWebApp</title>
+	<link rel="stylesheet" href="~/css/Index_Home.css" />
+</head>
 @if (TempData["AlertMessage"] != null)
 {
-	<div class="alert alert-success d-flex align-items-center">
+	<div class="alert alert-success d-flex align-items-center alert_success">
 		<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
 		<div>
 			<strong>Success! </strong>@TempData["AlertMessage"]
 		</div>
 	</div>
 }
+<!-- Slider -->
+<div id="carouselExampleIndicators" class="carousel slide carouselExampleIndicators" data-bs-ride="carousel">
+	<div class="carousel-indicators">
+		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+	</div>
+	<div class="carousel-inner">
+		<div class="carousel-item active img_slider1">
+			<div class="hero-text">
+				<h2>Join Us Now</h2>
+				<h1>FITNESS & SPORT</h1>
+				<a asp-action="Index" asp-controller="Training" class="primary-btn">Read More</a>
+			</div>
+		</div>
+		<div class="carousel-item img_slider2">
+			<div class="hero-text">
+				<h2>Join Us Now</h2>
+				<h1>FITNESS & SPORT</h1>
+				<a asp-action="Index" asp-controller="Training" class="primary-btn">Read More</a>
+			</div>
+		</div>
+		<div class="carousel-item img_slider3">
+			<div class="hero-text">
+				<h2>Join Us Now</h2>
+				<h1>FITNESS & SPORT</h1>
+				<a asp-action="Index" asp-controller="Training" class="primary-btn">Read More</a>
+			</div>
+		</div>
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span>
+	</button>
+</div>
 
-@if (User.Identity.IsAuthenticated)
-{
-	<p>@User.Identity.Name</p>
-	<form method="post" asp-controller="Account" asp-action="Logout">
-		<input type="submit" value="Log out" />
-	</form>
-}
-else
-{
-	<a asp-controller="Account" asp-action="Login">Sign in</a>
-	<a asp-controller="Account" asp-action="Register">Sign up</a>
-}
+<!-- Features section-->
+<section class="feature-section">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="feature-item bgfeatures_item1">
+				<h3>EXERCISE</h3>
+				<p>You can create, edit or delete exercises.<br /> Also add to your training</p>
+				<a asp-action="Index" asp-controller="Exercise" class="primary-btn">Go</a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="feature-item bgfeatures_item2">
+				<h3>TRAINING</h3>
+				<p>You can create, edit or delete trainings.<br /> If you finish training you can add it to history</p>
+				<a asp-action="Index" asp-controller="Training" class="primary-btn">Go</a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="feature-item bgfeatures_item3">
+				<h3>Nutrition</h3>
+				<p>Нou can monitor your nutritio<br /> and be healthier</p>
+				<a href="#" class="primary-btn">Go</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--About section-->
+<section class="about_section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="about-text">
+					<h2>WELCOME TO YOURWAY</h2>
+					<p class="short-details">
+						A site that will make your life better, more convenient and healthier
+					</p>
+					<p class="long-details">
+						You can create exercises, edit and add to your own workouts. You also create training yourself and track your progress. 
+						This is really what will make your workouts better. Try it!
+					</p>
+					<a asp-action="Index" asp-controller="Training" class="primary-btn about-btn">Learn More</a>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="about-img">
+					<img src="/img/about_photo.jpg" alt="" width="100%">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--Calendar section-->
+<section>
+        <div class="class-title" style="background-image: url(/img/classes-title-bg.jpg);">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7  text-center">
+                        <div class="section-title pl-lg-4 pr-lg-4 pl-0 pr-0">
+                            <h2>Use Your Calendar</h2>
+                            <p>You can record workouts or your health activities in your own calendar.<br>
+								You can create an event, edit or delete it. 
+							</p>
+							<a asp-action="MyCalendar" asp-controller="Calendar" style="width: 30%;" class="btn btn-dark about-btn mt-10 btn_try">Try it</a>
+                        </div>
+                    </div>
+					<div class="col-lg-5  text-center">
+                        <div class="section-title calendar_block pl-lg-4 pr-lg-4 pl-0 pr-0">
+							<img src="/img/calendar.png" width="150" height="150"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

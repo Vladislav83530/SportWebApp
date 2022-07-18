@@ -1,0 +1,213 @@
+﻿
+
+.carouselExampleIndicators {
+    margin-top: -72px;
+    z-index: 1;
+}
+
+.alert_success {
+    z-index: 3;
+    margin: 15px 25px auto;
+}
+
+.img_slider1 {
+    width: 100%;
+    height: 900px;
+    background: linear-gradient(rgba(110, 4, 4, 0.75), rgba(110, 4, 4, 0.75)), url(/img/Slider_home/slider1.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.img_slider2 {
+    width: 100%;
+    height: 900px;
+    background: linear-gradient(rgba(110, 4, 4, 0.6), rgba(110, 4, 4, 0.6)), url(/img/Slider_home/slider2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.img_slider3 {
+    width: 100%;
+    height: 900px;
+    background: linear-gradient(rgba(110, 4, 4, 0.75), rgba(110, 4, 4, 0.75)), url(/img/Slider_home/slider3.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+
+.hero-text {
+    text-align: center;
+}
+
+    .hero-text h2 {
+        color: #ffffff;
+        font-family: "Nunito Sans", sans-serif;
+        text-transform: uppercase;
+        font-size: 60px;
+        margin-bottom: 4px;
+        position: relative;
+        top: 250px;
+        opacity: 1;
+    }
+
+    .hero-text h1 {
+        color: #ffffff;
+        font-size: 90px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 46px;
+        position: relative;
+        top: 250px;
+        opacity: 1;
+    }
+
+    .hero-text .primary-btn {
+        position: relative;
+        top: 250px;
+        opacity: 1;
+    }
+
+        .hero-text .primary-btn:hover:after {
+            opacity: 1;
+        }
+
+
+.feature-item {
+    text-align: center;
+    height: 380px;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 100px 15px 15px;
+    position: relative;
+}
+
+    .feature-item:hover:before {
+        opacity: 1;
+    }
+
+    .feature-item:before {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 5px;
+        background: #e4381C;
+        content: "";
+        opacity: 0;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+
+    .feature-item h3 {
+        color: #ffffff;
+        font-family: "Nunito Sans", sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+    }
+
+    .feature-item p {
+        font-family: "Nunito Sans", sans-serif;
+        color: #ffffff;
+        margin-bottom: 22px;
+    }
+
+    .feature-item .primary-btn.f-btn:hover:after {
+        opacity: 1;
+    }
+
+.bgfeatures_item1 {
+    background-image: url(/img/feature/feature-1.jpg);
+    height: 380px;
+    background-size: cover;
+    background-position: center;
+}
+
+.bgfeatures_item2 {
+    background-image: url(/img/feature/feature-2.jpg);
+    height: 380px;
+    background-size: cover;
+    background-position: center;
+}
+
+.bgfeatures_item3 {
+    background-image: url(/img/feature/feature-3.jpg);
+    height: 380px;
+    background-size: cover;
+    background-position: center;
+}
+
+/*About*/
+.about_section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.about-text {
+    padding-top: 18px;
+}
+
+    .about-text h2 {
+        font-size: 48px;
+        font-weight: 900;
+        color: #ffffff;
+        text-transform: uppercase;
+        margin-bottom: 36px;
+    }
+
+    .about-text p.short-details {
+        font-size: 20px;
+        font-weight: 600;
+        color: #ffffff;
+        line-height: 28px;
+        margin-bottom: 20px;
+    }
+
+    .about-text p.long-details {
+        color: #ffffff;
+        margin-bottom: 40px;
+    }
+
+    .about-text .primary-btn.about-btn:after {
+        opacity: 1;
+    }
+
+.about-img img {
+    min-width: 100%;
+}
+
+/*Bg-line*/
+.class-title {
+    color: white;
+}
+
+.section-title {
+    margin-bottom: 65px;
+    padding-top: 55px;
+}
+
+    .section-title h2 {
+        font-weight: 900;
+        font-size: 48px;
+    }
+
+@media only screen and (max-width: 990px) {
+    .about-btn {
+        margin-bottom: 15px;
+    }
+    .calendar_block{
+        margin-top: -100px;
+        padding-bottom: 0px;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    .hero-text h2 {
+        font-size: 40px;
+    }
+
+    .hero-text h1 {
+        font-size: 60px;
+    }
+}
