@@ -8,136 +8,140 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="~/css/StartTraining_Training.css" />
 </head>
-<body>
-	<h1>Start @Model.Training.Name</h1>
-	<div class="row">
-		<div class="col-md-5">
-			<h3>Information:</h3>
-			<img src="@Model.Training.ImageUrl" class="training_img" />
-		</div>
-		<div class="col-md-4 info_container">
-			<p><b>Name:</b> @Model.Training.Name</p>
-			<p><b>Muscle group:</b> @Model.Training.MuscleGroup</p>
-			<p><b>Place:</b> @Model.Training.Place</p>
-			<p><b>Notes:</b> @Model.Training.Notes</p>
-		</div>
-		<div class="col-md-3" id="mainstopwatch">
-			<h4><img src="/img/stopwatch.png" class="timer_img" /> Stopwatch </h4>
-			<div class="timerDisplay">
-				00 : 00 : 00 : 000
+<body style='overflow-x:hidden;'>
+	<div class="container main_container">
+		<h1>Start @Model.Training.Name</h1>
+		<div class="row">
+			<div class="col-md-5 col-lg-5 col-sm-12 col-12 ">
+				<h3>Information:</h3>
+				<img src="@Model.Training.ImageUrl" class="training_img" />
 			</div>
-			<div class="buttons">
-				<button class="btn btn-primary btn-md" id="pauseTimer">Pause</button>
-				<button class="btn btn-danger btn-md" id="startTimer">Start</button>
-				<button class="btn btn-success btn-md" id="resetTimer">Reset</button>
+			<div class="col-md-3 col-lg-3 col-sm-12 col-12  info_container">
+				<p><b>Name:</b> @Model.Training.Name</p>
+				<p><b>Muscle group:</b> @Model.Training.MuscleGroup</p>
+				<p><b>Place:</b> @Model.Training.Place</p>
+				<p><b>Notes:</b> @Model.Training.Notes</p>
 			</div>
-		</div><hr>
-		@{
-			if (Model.Training.Exercises != null)
-			{
-				List<Exercise>? exercises = new List<Exercise>();
-				exercises = JsonSerializer.Deserialize<List<Exercise>>(Model.Training.Exercises);
-				int index = 0;
-				@foreach (var exercise in exercises)
+			<div class="col-md-4 col-lg-4 col-sm-12 col-12" id="mainstopwatch">
+				<h4><img src="/img/stopwatch.png" class="timer_img"/> Stopwatch </h4>
+				<div class="timerDisplay">
+					00 : 00 : 00 : 000
+				</div>
+				<div class="buttons">
+					<button class="btn btn-dark btn-md btn-sm" id="pauseTimer">Pause</button>
+					<button class="btn btn-primary btn-md btn-sm" id="startTimer">Start</button>
+					<button class="btn btn-success btn-md btn-sm" id="resetTimer">Reset</button>
+				</div>
+			</div><hr style="color: white;">
+			@{
+				if (Model.Training.Exercises != null)
 				{
-					index++;
-					<div class="row">
-						<div class="col-md-8 exercise_info">
-							<div class="row exercise_block ">
-								<div class="col-md-5">
-									<img src="@exercise.ImageUrl" class="img_exrcise">
+					List<Exercise>? exercises = new List<Exercise>();
+					exercises = JsonSerializer.Deserialize<List<Exercise>>(Model.Training.Exercises);
+					int index = 0;
+					@foreach (var exercise in exercises)
+					{
+						index++;
+						<div class="row">
+							<div class="col-md-8 col-sm-12 col-12 col-lg-8 exercise_info">
+								<div class="row exercise_block ">
+									<div class="col-md-5 col-sm-12 col-12 col-lg-5">
+										<img src="@exercise.ImageUrl" class="img_exrcise">
+									</div>
+									<div class="col-md-7 col-sm-12 col-12 col-lg-7 exercise_info">
+										<p class="title_ex"><b class="number">@index</b> <b>Name:</b> @exercise.Name</p>
+										<p><b>Description:</b> @exercise.Description</p>
+										<p><b>Equipment:</b> @exercise.Equipment</p>
+										<p><b>Weight of equipment:</b> @exercise.Weight</p>
+										<br>
+									</div>
 								</div>
-								<div class="col-md-7 exercise_info">
-									<p><b class="number">@index</b> <b>Name:</b> @exercise.Name</p>
-									<p><b>Description:</b> @exercise.Description</p>
-									<p><b>Equipment:</b> @exercise.Equipment</p>
-									<p><b>Weifht of equipment:</b> @exercise.Weight</p>
-									<br>
-								</div>
+								<br>
 							</div>
-							<br>
+							<div class="col-md-4 col-sm-12 col-12  col-lg-4 block_rep">
+								@for (int i = 1; i <= exercise.ApproachCount; i++)
+								{
+									<div>
+										<b>Ap @i </b> | Repetition: @exercise.Repetition
+										<input class="form-check-input" type="checkbox" />
+									</div>
+								}
+							</div>
+							<hr style="color: white;">
 						</div>
-						<div class="col-md-4">
-							@for (int i = 1; i <= exercise.ApproachCount; i++)
-							{
-								<div>
-									<b>Ap @i </b> | Repetition: @exercise.Repetition
-									<input class="form-check-input" type="checkbox" />
-								</div>
-							}
-						</div>
-						<hr>
-					</div>
+					}
 				}
 			}
-		}
-	</div>
-	<div class="row">
-		<button class="btn btn-lg btn-success" data-toggle="modal" data-target="#FinishTraining">Finish training</button>
-		<div class="modal fade" id="FinishTraining" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form asp-action="AddToHistory" asp-controller="TrainingHistory" method="post">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Finish training</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							@foreach (var item_ in Model.TrainingHistory.GetType().GetProperties())
-							{
-								@if (item_.Name == "Id" || item_.Name == "ApplicationUserId" || item_.Name == "ApplicationUser" || item_.Name == "MuscleGroup" || item_.Name == "Name"
-										|| item_.Name == "Place" || item_.Name == "ImageUrl" || item_.Name == "Exercises")
-									continue;
-								<div class="row">
-									<div class="col-sm-3">
-										<p class="mb-0">@item_.Name</p>
-									</div>
-									<div class="col-sm-9">
-										@if (item_.Name == "Date")
-											@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name} (mm/dd/yyyy)", @class = "form-control", @required = "true"})
-										else if (item_.Name == "Duration")
-											@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name} (mm:ss)", @class = "form-control", @required = "true"})
-										else if (item_.Name == "Calories")
-											@Html.TextBox(item_.Name, "", new { @type="number", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
-										else if (item_.Name == "Feeling")
-										{
-											<div class="form-check">
-												<input class="form-check-input" name="Feeling" value="Badly" type="radio" id="flexCheckDefault">
-												<label class="form-check-label">Badly</label>
-											</div>
-											<div class="form-check">
-												<input class="form-check-input" name="Feeling" type="radio" value="Normally" id="flexCheckDefault">
-												<label class="form-check-label">Normally</label>
-											</div>
-											<div class="form-check">
-												<input class="form-check-input" name="Feeling" type="radio" value="Soso" id="flexCheckDefault">
-												<label class="form-check-label">So-so</label>
-											</div>
-											<div class="form-check">
-												<input class="form-check-input" name="Feeling" type="radio" value="Perfectly" id="flexCheckDefault">
-												<label class="form-check-label">Perfectly</label>
-											</div>
-										}
-										else if (item_.Name == "Notes")
-											@Html.TextArea(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
-										else
-											@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+		</div>
+		<div class="row">
+			<button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#FinishTraining">Finish training</button>
+			<div class="modal fade modal_finish" id="FinishTraining" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<form asp-action="AddToHistory" asp-controller="TrainingHistory" method="post">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Finish training</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								@foreach (var item_ in Model.TrainingHistory.GetType().GetProperties())
+								{
+									@if (item_.Name == "Id" || item_.Name == "ApplicationUserId" || item_.Name == "ApplicationUser" || item_.Name == "MuscleGroup" || item_.Name == "Name"
+											|| item_.Name == "Place" || item_.Name == "ImageUrl" || item_.Name == "Exercises")
+										continue;
+									<div class="row">
+										<div class="col-sm-3">
+											<p class="mb-0">@item_.Name</p>
 										</div>
-									</div><br />
-							}
-							<input style="display: none;" type="text" name="MuscleGroup" class="form-control" value="@Model.Training.MuscleGroup" />
-							<input style="display: none;" type="text" name="Name" class="form-control" value="@Model.Training.Name" />
-							<input style="display: none;" type="text" name="Place" class="form-control" value="@Model.Training.Place" />
-							<input style="display: none;" type="text" name="ImageUrl" class="form-control" value="@Model.Training.ImageUrl" />
-							<input style="display: none;" type="text" name="Exercises" class="form-control" value="@Model.Training.Exercises" />
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Save</button>
-						</div>
-					</form>
+										<div class="col-sm-9">
+											@if (item_.Name == "Date")
+												@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name} (mm/dd/yyyy)", @class = "form-control", @required = "true"})
+											else if (item_.Name == "Duration")
+												@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name} (mm:ss)", @class = "form-control", @required = "true"})
+											else if (item_.Name == "Calories")
+												@Html.TextBox(item_.Name, "", new { @type="number", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+											else if (item_.Name == "Feeling")
+											{
+												<div class="form-check">
+													<input class="form-check-input" name="Feeling" value="Badly" type="radio" id="flexCheckDefault">
+													<label class="form-check-label">Badly</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" name="Feeling" type="radio" value="Normally" id="flexCheckDefault">
+													<label class="form-check-label">Normally</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" name="Feeling" type="radio" value="Soso" id="flexCheckDefault">
+													<label class="form-check-label">So-so</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" name="Feeling" type="radio" value="Perfectly" id="flexCheckDefault">
+													<label class="form-check-label">Perfectly</label>
+												</div>
+											}
+											else if (item_.Name == "Notes")
+												@Html.TextArea(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+											else
+												@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+
+											</div>
+										</div>
+									<br />
+								}
+								<input style="display: none;" type="text" name="MuscleGroup" class="form-control" value="@Model.Training.MuscleGroup" />
+								<input style="display: none;" type="text" name="Name" class="form-control" value="@Model.Training.Name" />
+								<input style="display: none;" type="text" name="Place" class="form-control" value="@Model.Training.Place" />
+								<input style="display: none;" type="text" name="ImageUrl" class="form-control" value="@Model.Training.ImageUrl" />
+								<input style="display: none;" type="text" name="Exercises" class="form-control" value="@Model.Training.Exercises" />
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">Save</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>

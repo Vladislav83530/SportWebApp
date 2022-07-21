@@ -12,7 +12,7 @@
 	<br>
 	@if (TempData["AlertMessage"] != null)
 	{
-		<div class="alert alert-success d-flex align-items-center">
+		<div class="alert alert-success d-flex align-items-center alert_succ">
 			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
 			<div>
 				<strong>Success! </strong>@TempData["AlertMessage"]
@@ -22,8 +22,8 @@
 	<section>
 		<div class="container py-5">
 			<div class="row">
-				<h2>Your training</h2>
-				<div class="col-lg-9">
+				<h2 class="header_page">Your training</h2>
+				<div class="col-sm-12 col-lg-9 order-2 order-sm-2 order-lg-1">
 					<div class="accordion" id="accordionExample">
 						@{
 							int i = 0;
@@ -45,7 +45,7 @@
 											@item.Name
 										</button>
 									</h2>
-									<div id="@collapsecontrols" class="accordion-collapse collapse" aria-labelledby="@heading" data-bs-parent="#accordionExample" style="">
+									<div id="@collapsecontrols" class="accordion-collapse collapse collapse_trining" aria-labelledby="@heading" data-bs-parent="#accordionExample">
 										<div class="accordion-body">
 											<div class="row">
 												<div class="col-md-5">
@@ -55,13 +55,13 @@
 													}
 													else
 													{
-														<img src="@item.ImageUrl" style='width: 100%; height: 240px;'>
+														<img src="@item.ImageUrl" class="exercise_img">
 													}
 													<div class="modal-footer">
-														<a asp-action="StartTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-success btn_training btn-md">Start training</a>
+														<a asp-action="StartTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="primary-btn btn_training">Start training</a>
 														<a asp-action="AddExercise" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">Add exercise</a>
-														<a asp-action="EditTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">Edit</a>
-														<a asp-action="DeleteTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-primary btn_training btn-md">Delete</a>
+														<a asp-action="EditTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-light btn_training btn-md">Edit</a>
+														<a asp-action="DeleteTraining" asp-controller="Training" asp-route-id="@item.Id" type="button" class="btn btn-light btn_training btn-md">Delete</a>
 													</div>
 												</div>
 												<div class="col-md-7 exercise_info">
@@ -85,10 +85,10 @@
 																{
 																	<div class="col-md-6 exercise_info exercise_right">
 																		<div class="row exercise_block ">
-																			<div class="col-md-5">
+																			<div class="col-md-5 col-sm-5 col-push-5 col-lg-5">
 																				<img src="@exercise.ImageUrl" class="img_exrcise">
 																			</div>
-																			<div class="col-md-7 exercise_info">
+																			<div class="col-md-7 col-sm-7 col-pull-7 col-lg-7 exercise_info">
 																				<p><b>Name:</b> @exercise.Name</p>
 																				<p><b>Repetition:</b> @exercise.Repetition</p>
 																				<p><b>Approach:</b> @exercise.ApproachCount</p>
@@ -103,10 +103,10 @@
 																{
 																	<div class="col-md-6 exercise_info">
 																		<div class="row exercise_block">
-																			<div class="col-md-5">
+																			<div class="col-md-5 col-sm-5 col-push-5 col-lg-5">
 																				<img src="@exercise.ImageUrl" class="img_exrcise">
 																			</div>
-																			<div class="col-md-7 exercise_info">
+																			<div class="col-md-7 col-sm-7 col-pull-7 col-lg-7 exercise_info">
 																				<p><b>Name:</b> @exercise.Name</p>
 																				<p><b>Repetition:</b> @exercise.Repetition</p>
 																				<p><b>Approach:</b> @exercise.ApproachCount</p>
@@ -129,11 +129,11 @@
 						}
 					</div>
 				</div>
-				<div class="col-lg-3">
+				<div class="col-sm-12 col-lg-3 order-1 order-sm-1 order-lg-2">
 					<!-- Button trigger modal create-->
-					<button type="button" class="btn btn-primary btn-lg btn_create" data-toggle="modal" data-target="#CreateTraining">Create Training</button>
+					<a class=" primary-btn btn_create" data-toggle="modal" data-target="#CreateTraining">Create Training</a>
 
-					<form method="get">
+					<form method="get" class="filter_form">
 						<div class="form-inline form-group">
 							<label class="control-label">Name: </label>
 							<input name="Name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
@@ -143,7 +143,7 @@
 
 							<label>Place: </label>
 							<input name="Equipment" value="@Model.FilterViewModel.SelectedEquipment" class="form-control" />
-							<button type="submit" class="btn btn-primary btn_filter btn-lg">
+							<button type="submit" class=" btn btn-primary btn-lg btn_filter">
 								Filter
 							</button>
 						</div>
@@ -187,13 +187,12 @@
 														@Html.TextArea(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
 													else
 														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
-
 													</div>
 												</div>
 											<hr>
 										}
 										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
 											<button type="submit" class="btn btn-primary">Save</button>
 										</div>
 									</div>

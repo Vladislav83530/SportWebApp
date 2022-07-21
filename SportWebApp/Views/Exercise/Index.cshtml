@@ -5,163 +5,170 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="~/css/Index_Exercise.css" />
+	<link rel="stylesheet" href="~/css/Index_Training.css" />
 </head>
 <body>
-	<br>
-	@if (TempData["AlertMessage"] != null)
-	{
-		<div class="alert alert-success d-flex align-items-center">
-			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
-			<div>
-				<strong>Success!</strong>@TempData["AlertMessage"]
+	<div class="container">
+		<br>
+		@if (TempData["AlertMessage"] != null)
+		{
+			<div class="alert alert-success d-flex align-items-center">
+				<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+				<div>
+					<strong>Success!</strong>@TempData["AlertMessage"]
+				</div>
 			</div>
-		</div>
-	}
-	<section>
-		<div class="container py-5">
-			<div class="row">
-				<h2>Your exercise</h2>
-				<div class="col-lg-8">
-					<div class="accordion" id="accordionExample">
-						@{
-							int i = 0;
-						}
-						@if (Model.Exercises != null)
-						{
-							@foreach (var item in Model.Exercises)
+		}
+		<section>
+			<div class="container py-5">
+				<div class="row">
+					<h2 class="header_page">Your exercise</h2>
+					<div class="col-lg-8">
+						<div class="accordion" id="accordionExample">
+							@{
+								int i = 0;
+							}
+							@if (Model.Exercises != null)
 							{
-								<div style='margin-bottom: 25px; border-top: 1px solid #E0E0E0' class="accordion-item according_item">
-									@{
-										i++;
-										string heading = "heading" + i;
-										string collapsetarget = "#collapse" + i;
-										string collapsecontrols = "collapse" + i;
-									}
-									<h2 class="accordion-header" id="@heading">
-										<button class="accordion-button collapsed btn_exercise_text" type="button" data-bs-toggle="collapse" data-bs-target="@collapsetarget" aria-expanded="false" aria-controls="@collapsecontrols">
-											<img class="btn_exercise_img" src="img\dumbbell-icon-2586494.png">
-											@item.Name
-										</button>
-									</h2>
-									<div id="@collapsecontrols" class="accordion-collapse collapse" aria-labelledby="@heading" data-bs-parent="#accordionExample" style="">
-										<div class="accordion-body">
-											<div class="row">
-												<div class="col-md-6">
-													@if (item.ImageUrl == null)
-													{
-														<img src="https://via.placeholder.com/300">
-													}
-													else
-													{
-														<img src="@item.ImageUrl" style='width: 390px; height: 280px;'>
-													}
-												</div>
-												<div class="col-md-6 exercise_info">
-													<p><b>Name:</b> @item.Name</p>
-													<p><b>Muscle group:</b> @item.MuscleGroup</p>
-													<p><b>Descriptions:</b> @item.Description</p>
-													<p><b>Equipment:</b> @item.Equipment</p>
-													<p><b>Weight:</b> @item.Weight</p>
-													<p><b>Repetition:</b> @item.Repetition</p>
-													<p><b>Approach:</b> @item.ApproachCount</p>
-													<div class="modal-footer">
-														<!-- Button trigger modal edit and delete-->
-														<a asp-action="EditExercise" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-dark">Edit</a>
-														<a asp-action="DeleteExercise" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-primary">Delete</a>
+								@foreach (var item in Model.Exercises)
+								{
+									<div style='margin-bottom: 25px; border-top: 1px solid #E0E0E0' class="accordion-item according_item">
+										@{
+											i++;
+											string heading = "heading" + i;
+											string collapsetarget = "#collapse" + i;
+											string collapsecontrols = "collapse" + i;
+										}
+										<h2 class="accordion-header" id="@heading">
+											<button class="accordion-button collapsed btn_exercise_text" type="button" data-bs-toggle="collapse" data-bs-target="@collapsetarget" aria-expanded="false" aria-controls="@collapsecontrols">
+												<img class="btn_exercise_img" src="img\dumbbell-icon-2586494.png">
+												@item.Name
+											</button>
+										</h2>
+										<div id="@collapsecontrols" class="accordion-collapse collapse collapse_trining" aria-labelledby="@heading" data-bs-parent="#accordionExample" style="">
+											<div class="accordion-body">
+												<div class="row">
+													<div class="col-md-6">
+														@if (item.ImageUrl == null)
+														{
+															<img src="https://via.placeholder.com/300">
+														}
+														else
+														{
+															<img src="@item.ImageUrl" style='width: 390px; height: 280px;'>
+														}
+													</div>
+													<div class="col-md-6 exercise_info">
+														<p><b>Name:</b> @item.Name</p>
+														<p><b>Muscle group:</b> @item.MuscleGroup</p>
+														<p><b>Descriptions:</b> @item.Description</p>
+														<p><b>Equipment:</b> @item.Equipment</p>
+														<p><b>Weight:</b> @item.Weight</p>
+														<p><b>Repetition:</b> @item.Repetition</p>
+														<p><b>Approach:</b> @item.ApproachCount</p>
+														<div class="modal-footer">
+															<!-- Button trigger modal edit and delete-->
+															<a asp-action="EditExercise" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-dark">Edit</a>
+															<a asp-action="DeleteExercise" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-primary">Delete</a>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
+								}
 							}
-						}
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<!-- Button trigger modal create-->
-					<button type="button" class="btn btn-primary btn-lg btn_create" data-toggle="modal" data-target="#CreateExercise">Create Exercise</button>
-					<form method="get">
-						<div class="form-inline form-group">
-							<label class="control-label">Name: </label>
-							<input name="Name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
-
-							<label>Muscle Group: </label>
-							<input name="MuscleGroup" value="@Model.FilterViewModel.SelectedMuscleGroup" class="form-control" />
-
-							<label>Equipment: </label>
-							<input name="Equipment" value="@Model.FilterViewModel.SelectedEquipment" class="form-control" />
-							<button type="submit" class="btn btn-primary btn_filter btn-lg">Filter</button>
 						</div>
-					</form>
+					</div>
+					<div class="col-lg-4">
+						<!-- Button trigger modal create-->
+						<a type="button" class=" primary-btn btn_create" data-toggle="modal" data-target="#CreateExercise">Create Exercise</a>
+						<form method="get" class="filter_form">
+							<div class="form-inline form-group">
+								<label class="control-label">Name: </label>
+								<input name="Name" value="@Model.FilterViewModel.SelectedName" class="form-control" />
 
-					<!-- Modal create exrcise -->
-					<div class="modal fade" id="CreateExercise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<form asp-action="CreateExercise" asp-controller="Exercise" method="post">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Create exercise</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										@foreach (var item_ in Model.Exercise.GetType().GetProperties())
-										{
-											@if (item_.Name == "Id" || item_.Name == "ApplicationUserId" || item_.Name == "ApplicationUser")
-												continue;
-											@if (item_.Name == "MuscleGroup")
-											{
-												<div class="row">
-													<div class="col-sm-3">
-														<p class="mb-0">Muscle Group</p>
-													</div>
-													<div class="col-sm-9">
-														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter Muscle group", @class = "form-control", @required = "true"})
-													</div>
-												</div>
-												<hr>
-												continue;
-											}
-											@if (item_.Name == "ApproachCount")
-											{
-												<div class="row">
-													<div class="col-sm-3">
-														<p class="mb-0">Approach</p>
-													</div>
-													<div class="col-sm-9">
-														@Html.TextBox(item_.Name, "", new { @type="number", @Placeholder = $"Enter Approach", @class = "form-control", @required = "true"})
-													</div>
-												</div>
-												<hr>
-												continue;
-											}
-											<div class="row">
-												<div class="col-sm-3">
-													<p class="mb-0">@item_.Name</p>
-												</div>
-												<div class="col-sm-9">
-													@if (item_.Name == "Repetition" || item_.Name == "Weight")
-														@Html.TextBox(item_.Name, "", new { @type="number", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
-													else
-														@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true" })
-													</div>
-												</div>
-											<hr>
-										}
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											<button type="submit" class="btn btn-primary">Save</button>
+								<label>Muscle Group: </label>
+								<input name="MuscleGroup" value="@Model.FilterViewModel.SelectedMuscleGroup" class="form-control" />
+
+								<label>Equipment: </label>
+								<input name="Equipment" value="@Model.FilterViewModel.SelectedEquipment" class="form-control" />
+								<button type="submit" class="btn btn-primary btn_filter btn-lg">Filter</button>
+							</div>
+						</form>
+
+						<!-- Modal create exrcise -->
+						<div class="modal fade" id="CreateExercise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<form asp-action="CreateExercise" asp-controller="Exercise" method="post">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Create exercise</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
 										</div>
-									</div>
-								</form>
+										<div class="modal-body">
+											@foreach (var item_ in Model.Exercise.GetType().GetProperties())
+											{
+												@if (item_.Name == "Id" || item_.Name == "ApplicationUserId" || item_.Name == "ApplicationUser")
+													continue;
+												@if (item_.Name == "MuscleGroup")
+												{
+													<div class="row">
+														<div class="col-sm-3">
+															<p class="mb-0">Muscle Group</p>
+														</div>
+														<div class="col-sm-9">
+															@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter Muscle group", @class = "form-control", @required = "true"})
+														</div>
+													</div>
+													<hr>
+													continue;
+												}
+												@if (item_.Name == "ApproachCount")
+												{
+													<div class="row">
+														<div class="col-sm-3">
+															<p class="mb-0">Approach</p>
+														</div>
+														<div class="col-sm-9">
+															@Html.TextBox(item_.Name, "", new { @type="number", @Placeholder = $"Enter Approach", @class = "form-control", @required = "true"})
+														</div>
+													</div>
+													<hr>
+													continue;
+												}
+												<div class="row">
+													<div class="col-sm-3">
+														<p class="mb-0">@item_.Name</p>
+													</div>
+													<div class="col-sm-9">
+														@if (item_.Name == "Description" || item_.Name == "ImageUrl")
+															@Html.TextArea(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+														else if (item_.Name == "Repetition" || item_.Name == "Weight")
+															@Html.TextBox(item_.Name, "", new { @type="number", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true"})
+														else
+															@Html.TextBox(item_.Name, "", new { @type="text", @Placeholder = $"Enter {item_.Name}", @class = "form-control", @required = "true" })
+
+
+														</div>
+													</div>
+												<hr>
+											}
+											<div class="modal-footer">
+												<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary">Save</button>
+											</div>
+										</div>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	</div>
 </body>
 </html>

@@ -1,7 +1,10 @@
 ﻿html, body {
     background-color: black;
 }
-
+h5{
+    font-size: 30px;
+    font-weight: 700;
+}
 .alert_succ{
     margin: 8px 15px;
     margin-top: -15px;

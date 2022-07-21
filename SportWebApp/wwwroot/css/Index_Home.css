@@ -1,6 +1,4 @@
-﻿
-
-.carouselExampleIndicators {
+﻿.carouselExampleIndicators {
     margin-top: -72px;
     z-index: 1;
 }
@@ -16,6 +14,7 @@
     background: linear-gradient(rgba(110, 4, 4, 0.75), rgba(110, 4, 4, 0.75)), url(/img/Slider_home/slider1.jpg);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 .img_slider2 {
@@ -24,6 +23,7 @@
     background: linear-gradient(rgba(110, 4, 4, 0.6), rgba(110, 4, 4, 0.6)), url(/img/Slider_home/slider2.jpg);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 .img_slider3 {
@@ -32,6 +32,7 @@
     background: linear-gradient(rgba(110, 4, 4, 0.75), rgba(110, 4, 4, 0.75)), url(/img/Slider_home/slider3.jpg);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 
@@ -75,7 +76,7 @@
 .feature-item {
     text-align: center;
     height: 380px;
-    margin-left: -15px;
+   margin-left: -15px;
     margin-right: -15px;
     padding: 100px 15px 15px;
     position: relative;
@@ -122,6 +123,7 @@
     height: 380px;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 .bgfeatures_item2 {
@@ -129,6 +131,7 @@
     height: 380px;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 .bgfeatures_item3 {
@@ -136,6 +139,7 @@
     height: 380px;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 /*About*/
@@ -174,7 +178,7 @@
     }
 
 .about-img img {
-    min-width: 100%;
+    width: 100%;
 }
 
 /*Bg-line*/
@@ -209,5 +213,9 @@
 
     .hero-text h1 {
         font-size: 60px;
+    }
+
+    body {
+        overflow-x:hidden;
     }
 }

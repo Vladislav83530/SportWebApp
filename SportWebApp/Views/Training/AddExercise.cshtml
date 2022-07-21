@@ -4,13 +4,14 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="~/css/Index_Training.css" />
 	<link rel="stylesheet" href="~/css/Index_Exercise.css" />
 </head>
 <body>
 	<section>
 		<div class="container py-5">
 			<div class="row">
-				<h2>Add exercise</h2>
+				<h2 class="header_page">Add exercise</h2>
 				<div class="col-md-8">
 					<div class="accordion" id="accordionExample">
 						@{
@@ -33,7 +34,7 @@
 											@item.Name
 										</button>
 									</h2>
-									<div id="@collapsecontrols" class="accordion-collapse collapse" aria-labelledby="@heading" data-bs-parent="#accordionExample" style="">
+									<div id="@collapsecontrols" class="accordion-collapse collapse collapse_trining" aria-labelledby="@heading" data-bs-parent="#accordionExample" style="">
 										<div class="accordion-body">
 											<div class="row">
 												<div class="col-md-6">
@@ -66,8 +67,8 @@
 															<input style="display: none" type="number" name="Repetition" class="form-control" value="@item.Repetition" required />
 															<input style="display: none" type="number" name="ApproachCount" class="form-control" value="@item.ApproachCount" required />
 															<input style="display: none" type="text" name="ImageUrl" class="form-control" value="@item.ImageUrl" />
-															<button style='width: 140px;' type="submit" class="btn btn-dark">Add</button>
 															<a asp-action="EditExerciseForTraining" asp-controller="Exercise" asp-route-id="@item.Id" style='width: 140px;' type="button" class="btn btn-dark">Edit</a>
+															<button style='width: 140px;' type="submit" class="btn btn-primary">Add</button>
 														</form>
 													</div>
 												</div>
@@ -80,7 +81,7 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<form method="get">
+					<form method="get" class="filter_form">
 						<div class="form-inline form-group">
 							<label class="control-label">Name: </label>
 							<input name="Name" value="@Model.FilterViewModel.SelectedName" class="form-control" />

@@ -8,13 +8,15 @@
 	<link rel="stylesheet" href="~/css/Timeline_TrainingHistory.css" />
 </head>
 <body>
-	<section style="background-color: #F0F2F5;" class="cont_scroll">
+	<section  class="cont_scroll">
 		<div class="row block_title">
 			<h1>Training history</h1>
+			<div>
+				<a asp-action="DeleteHistory" asp-controller="TrainingHistory" class="primary-btn btn-lg" style="">Clear history</a>
+			</div>
 		</div>
 		<div class="container py-5">
 			<div class="main-timeline-2">
-				<a asp-action="DeleteHistory" asp-controller="TrainingHistory" class="btn btn-lg btn-danger" style="float:right;">Clear history</a>
 				@{
 					int index = 0;
 				}
@@ -34,7 +36,7 @@
 									<p class="mb-2"><b>Feeling: </b> @item.Feeling</p>
 									<p class="mb-2"><b>Duration: </b>@item.Duration.ToString("HH:mm")</p>
 									<p class="mb-4"><b>Calories: </b>@item.Calories</p>
-									<button class="btn btn-md btn-success btn_detail" data-toggle="modal" data-target="#InfoTraining">Details</button>
+									<button class="btn btn-md btn-primary btn_detail" data-toggle="modal" data-target="#InfoTraining">Details</button>
 								</div>
 							</div>
 						</div>
@@ -52,7 +54,7 @@
 									<p class="mb-2"><b>Feeling: </b> @item.Feeling</p>
 									<p class="mb-2"><b>Duration: </b>@item.Duration.ToString("HH:mm")</p>
 									<p class="mb-4"><b>Calories: </b>@item.Calories</p>
-									<button class="btn btn-md btn-success btn_detail" data-toggle="modal" data-target="#InfoTraining">Details</button>
+									<button class="btn btn-md btn-primary btn_detail" data-toggle="modal" data-target="#InfoTraining">Details</button>
 								</div>
 							</div>
 						</div>
@@ -63,7 +65,7 @@
 							<div class="modal-content">
 								<form asp-action="AddToHistory" asp-controller="TrainingHistory" method="post">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Training information</h5>
+										<h5 class="modal-title title_info" id="exampleModalLabel">Training information</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
@@ -78,7 +80,7 @@
 											<p class="mb-2"><b>Feeling: </b> @item.Feeling</p>
 											<p class="mb-2"><b>Duration: </b>@item.Duration.ToString("HH:mm")</p>
 											<p class="mb-2"><b>Calories: </b>@item.Calories</p>
-											<p class="mb-2"><b>Notes: </b> @item.Notes</p>
+											<p class="mb-2"><b>Notes: </b> @item.Notes</p><hr>
 											<p class="mb-2"><b>Exercise: </b></p>
 											@{
 												if (item.Exercises != null)
@@ -87,18 +89,18 @@
 													exercises = JsonSerializer.Deserialize<List<Exercise>>(item.Exercises);
 													if (exercises != null)
 													{
-														@foreach (var exercise in exercises)
+																@foreach (var exercise in exercises)
 														{
-															<div class="row mb-2">
-																<div class="col-md-5">
-																	<img src="@exercise.ImageUrl" class="img_exrcise">
-																</div>
-																<div class="col-md-7">
-																	<p><b>Name:</b> @exercise.Name</p>
-																	<p class="p_info"><b>Repetition:</b> @exercise.Repetition</p>
-																	<p class="p_info"><b>Approach:</b> @exercise.ApproachCount</p>
-																</div>
-															</div>
+																	<div class="row mb-2">
+																		<div class="col-md-5">
+																			<img src="@exercise.ImageUrl" class="img_exrcise">
+																		</div>
+																		<div class="col-md-7">
+																			<p><b>Name:</b> @exercise.Name</p>
+																			<p class="p_info"><b>Repetition:</b> @exercise.Repetition</p>
+																			<p class="p_info"><b>Approach:</b> @exercise.ApproachCount</p>
+																		</div>
+																	</div>
 														}
 													}
 												}
@@ -106,7 +108,7 @@
 										</div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
 									</div>
 								</form>
 							</div>

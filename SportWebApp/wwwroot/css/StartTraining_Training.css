@@ -1,7 +1,26 @@
-﻿.training_img {
+﻿h1 {
+    font-weight: 900;
+    font-size: 76px;
+    margin-top: 20px;
+    color: red;
+}
+
+.modal_finish {
+    color: black;
+}
+
+.main_container {
+    color: white;
+}
+
+.training_img {
     width: 100%;
-    height: 300px;
+    height: auto;
     margin-bottom: 20px;
+}
+
+.title_ex {
+    font-size: 18px;
 }
 
 .info_container {
@@ -10,15 +29,14 @@
 
 .img_exrcise {
     width: 100%;
-    height: 245px;
+    height: auto;
 }
 
 .number {
-    border: 3px solid green;
+    border: 3px solid red;
     border-radius: 100%;
-    padding: 5px;
+    padding: 4px 10px;
 }
-
 
 /*Stopwatch*/
 #mainstopwatch {
@@ -27,11 +45,10 @@
     padding: 10px 10px 10px;
     text-align: center;
     font-size: 40px;
-    background: #e0e0e0;
-    box-shadow: 15px 15px 30px #afafaf,-15px -15px 30px #ffffff;
     border-radius: 40px;
-    background: #e0e0e0;
-    box-shadow: 6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;
+    background: white;
+    box-shadow: 6px -6px 8px #9d9d9d, -6px 6px 8px red;
+    color: black;
 }
 
     #mainstopwatch span {
@@ -42,11 +59,65 @@
         background: #e0e0e0;
     }
 
-
-
 .timer_img {
     padding-bottom: 6px;
     padding-top: -6px;
     width: 25px;
     height: 28px;
+}
+
+@media only screen and (max-width: 990px) {
+    .timerDisplay {
+        font-size: 28px;
+        margin-bottom: 0px;
+    }
+
+    #mainstopwatch {
+        height: 150px;
+    }
+
+    h1 {
+        font-size: 65px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 45px;
+    }
+
+    .training_img {
+        margin-bottom: 0px;
+    }
+
+    .info_container {
+        margin-top: 10px;
+    }
+
+    #mainstopwatch {
+        margin-bottom: 25px;
+    }
+
+    .exercise_info {
+        margin-top: 25px;
+    }
+
+    .block_rep {
+        margin-bottom: 20px;
+        margin-top: -35px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .main_container {
+        padding: 30px;
+    }
+
+    .exercise_info {
+        margin-top: 0px;
+    }
+
+    .img_exrcise {
+        margin-bottom: 20px;
+    }
 }

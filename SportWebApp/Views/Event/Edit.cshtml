@@ -4,52 +4,64 @@
 	ViewData["Title"] = "Edit";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Edit</h1>
-<h4>Event</h4>
-<hr />
-<div class="row">
-	<div class="col-md-4">
-		<form asp-action="Edit">
-			@Html.HiddenFor(m => m.UserId)
-			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<input type="hidden" asp-for="Event.Id" />
-			<div class="form-group">
-				<label asp-for="Event.Name" class="control-label"></label>
-				<input asp-for="Event.Name" class="form-control" />
-				<span asp-validation-for="Event.Name" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="Event.Description" class="control-label"></label>
-				<input asp-for="Event.Description" class="form-control" />
-				<span asp-validation-for="Event.Description" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="Event.StartTime" class="control-label"></label>
-				<input asp-for="Event.StartTime" class="form-control" />
-				<span asp-validation-for="Event.StartTime" class="text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="Event.EndTime" class="control-label"></label>
-				<input asp-for="Event.EndTime" class="form-control" />
-				<span asp-validation-for="Event.EndTime" class="text-danger"></span>
-			</div>
-			<br />
-			<div class="form-group">
-				<input type="submit" value="Save" class="btn btn-success" />
-				<a type="button" class="btn btn-md btn-primary" asp-action="Index">Back to List</a>
-			</div>
-		</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - SportWebApp</title>
+	<link rel="stylesheet" href="~/css/Event.css" />
+</head>
+<body>
+		<section class="main_section">
+		<div class="container">
+	<h1>Edit</h1>
+	<hr />
+	<div class="row">
+		<div class="col-md-5 col-lg-5 col-12 col-sm-12">
+			<form asp-action="Edit" class="form_event">
+				@Html.HiddenFor(m => m.UserId)
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<input type="hidden" asp-for="Event.Id" />
+				<div class="form-group">
+					<label asp-for="Event.Name" class="control-label"></label>
+					<input class="form-control mb-3" asp-for="Event.Name" class="form-control" />
+					<span asp-validation-for="Event.Name" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Event.Description" class="control-label"></label>
+					<input class="form-control mb-3" asp-for="Event.Description" class="form-control" />
+					<span asp-validation-for="Event.Description" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Event.StartTime" class="control-label"></label>
+					<input class="form-control mb-3" asp-for="Event.StartTime" class="form-control" />
+					<span asp-validation-for="Event.StartTime" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Event.EndTime" class="control-label"></label>
+					<input class="form-control mb-3" asp-for="Event.EndTime" class="form-control" />
+					<span asp-validation-for="Event.EndTime" class="text-danger"></span>
+				</div>
+				<br />
+				<div class="form-group btn_form">
+					<input type="submit" value="Save" class="btn btn-primary btn_in" />
+					<a type="button" class="primary-btn" asp-action="Index">Back to List</a>
+				</div>
+			</form>
+		</div>
 	</div>
-</div>
-
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		SetSelectedLocation(eventlocation);
-	});
-</script>
-
+	</div>
+	</section>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			SetSelectedLocation(eventlocation);
+		});
+	</script>
+</body>
+</html>
 @section Scripts {
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}}
+	}
+	}

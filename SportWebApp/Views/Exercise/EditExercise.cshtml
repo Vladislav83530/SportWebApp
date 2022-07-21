@@ -1,50 +1,65 @@
 ﻿@model SportWebApp.Models.Exercise
-<h3> Edit  exercise</h3>
-<form asp-action="EditExercisePost" asp-controller="Exercise" method="post" asp-route-id="@Model.Id">
-	<div>
-		@foreach (var item in Model.GetType().GetProperties())
-		{
-			@if (item.Name == "Id" || item.Name == "ApplicationUserId" || item.Name == "ApplicationUser")
-				continue;
-			@if (item.Name == "MuscleGroup")
-			{
-				<div class="row">
-					<div class="col-sm-3">
-						<p class="mb-0">Mucle Group</p>
-					</div>
-					<div class="col-sm-9">
-						@Html.TextBox(item.Name, $"{item.GetValue(Model)}", new { @type="text", @Placeholder = $"Enter Muscle group", @class = "form-control", @required = "true"})
-					</div>
-				</div>
-				<hr>
-				continue;
-			}
-			@if (item.Name == "ApproachCount")
-			{
-				<div class="row">
-					<div class="col-sm-3">
-						<p class="mb-0">Approach</p>
-					</div>
-					<div class="col-sm-9">
-						@Html.TextBox(item.Name, $"{item.GetValue(Model)}", new { @type="number", @Placeholder = $"Enter Approach", @class = "form-control", @required = "true"})
-					</div>
-				</div>
-				<hr>
-				continue;
-			}
-			<div class="row">
-				<div class="col-sm-3">
-					<p class="mb-0">@item.Name</p>
-				</div>
-				<div class="col-sm-9">
-					@if (item.Name == "Repetition" || item.Name == "Weight")
-						@Html.TextBox(item.Name,$"{item.GetValue(Model)}", new { @type="number", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true"})
-					else
-						@Html.TextBox(item.Name,$"{item.GetValue(Model)}", new { @type="text", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true" })
-				</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="~/css/EditExrcise_Exercise.css" />
+</head>
+<body>
+	<div class="container main_section">
+		<h3 class="title_editex"> Edit  exercise</h3>
+		<form asp-action="EditExercisePost" asp-controller="Exercise" method="post" asp-route-id="@Model.Id">
+			<div>
+				@foreach (var item in Model.GetType().GetProperties())
+				{
+					@if (item.Name == "Id" || item.Name == "ApplicationUserId" || item.Name == "ApplicationUser")
+						continue;
+					@if (item.Name == "MuscleGroup")
+					{
+						<div class="row">
+							<div class="col-sm-3 col-12">
+								<p class="mb-0">Mucle Group</p>
+							</div>
+							<div class="col-sm-9 col12">
+								@Html.TextBox(item.Name, $"{item.GetValue(Model)}", new { @type="text", @Placeholder = $"Enter Muscle group", @class = "form-control", @required = "true"})
+							</div>
+						</div>
+						<hr>
+						continue;
+					}
+					@if (item.Name == "ApproachCount")
+					{
+						<div class="row">
+							<div class="col-sm-3 col-12">
+								<p class="mb-0">Approach</p>
+							</div>
+							<div class="col-sm-9 col-12">
+								@Html.TextBox(item.Name, $"{item.GetValue(Model)}", new { @type="number", @Placeholder = $"Enter Approach", @class = "form-control", @required = "true"})
+							</div>
+						</div>
+						<hr>
+						continue;
+					}
+					<div class="row">
+						<div class="col-sm-3 col-12">
+							<p class="mb-0">@item.Name</p>
+						</div>
+						<div class="col-sm-9 col-12">
+							@if (item.Name == "Description" || item.Name == "ImageUrl")
+								@Html.TextArea(item.Name, $"{item.GetValue(Model)}", new { @type="text", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true"})
+							else if (item.Name == "Repetition" || item.Name == "Weight")
+								@Html.TextBox(item.Name,$"{item.GetValue(Model)}", new { @type="number", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true"})
+							else
+								@Html.TextBox(item.Name,$"{item.GetValue(Model)}", new { @type="text", @Placeholder = $"Enter {item.Name}", @class = "form-control", @required = "true" })
+
+							</div>
+						</div>
+					<hr>
+				}
+				<button type="submit" class="btn btn-primary save_btn">Save</button>
 			</div>
-			<hr>
-		}
-		<button type="submit" class="btn btn-primary">Save</button>
+		</form>
 	</div>
-</form>
+</body>
+</html>
