@@ -1,0 +1,23 @@
+﻿.block_name {
+    color: white;
+    font-size: 20px;
+}
+
+.title_exercise {
+    color: #ffffff;
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    margin-top: 25px;
+}
+
+.btn_save {
+    width: 150px;
+}
+
+@media only screen and (max-width: 450px) {
+    .block_name {
+        font-size: 16px;
+    }
+}

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9aMSlPR1xEnd5CBwwiDgn+llAS+nLQE73sXeYLkXuh8=",
+  "Hash": "cszvqsScvHiX7xUYfBGXN1mTjeAuKmQ0AK7U4+3by8s=",
   "Source": "SportWebApp",
   "BasePath": "_content/SportWebApp",
   "Mode": "Default",
@@ -355,6 +355,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Files\\32a06dd4-8a30-468e-9e69-57d5b8b55b47.jpg"
+    },
+    {
+      "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\Files\\359645c4-54bd-4caf-a1c9-f13764a0751c.jpg",
+      "SourceId": "SportWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\",
+      "BasePath": "_content/SportWebApp",
+      "RelativePath": "Files/359645c4-54bd-4caf-a1c9-f13764a0751c.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Files\\359645c4-54bd-4caf-a1c9-f13764a0751c.jpg"
     },
     {
       "Identity": "D:\\GitHub\\SportWebApp\\SportWebApp\\wwwroot\\img\\about_photo.jpg",

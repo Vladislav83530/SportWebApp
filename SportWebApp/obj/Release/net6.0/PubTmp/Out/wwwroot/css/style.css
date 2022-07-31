@@ -1,0 +1,90 @@
+﻿html, body {
+    background-color: black;
+}
+h5{
+    font-size: 30px;
+    font-weight: 700;
+}
+.alert_succ{
+    margin: 8px 15px;
+    margin-top: -15px;
+}
+.primary-btn {
+    display: inline-block;
+    font-size: 14px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    padding: 0 12px;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 160px;
+    height: 46px;
+    border-left: 2px solid #e16521;
+    border-right: 2px solid #e4381C;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background-position: 0 0, 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 2px;
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(100%, #e4381C), to(#e16521)), -webkit-gradient(linear, left top, right top, from(#e4381C), color-stop(0%, #e16521));
+    background-image: -o-linear-gradient(left, #e4381C 100%, #e16521 100%), -o-linear-gradient(left, #e4381C 0%, #e16521 0%);
+    background-image: linear-gradient(to right, #e4381C 100%, #e16521 100%), linear-gradient(to right, #e4381C 0%, #e16521 0%);
+    -webkit-transition-duration: 1000ms;
+    -o-transition-duration: 1000ms;
+    transition-duration: 1000ms;
+    line-height: 45px;
+    position: relative;
+    z-index: 1;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+    .primary-btn:after {
+        color: #fff;
+        -webkit-transition-duration: 500ms;
+        -o-transition-duration: 500ms;
+        transition-duration: 500ms;
+        background: #e16521;
+        background: -webkit-gradient(linear, left top, right top, from(#e16521), to(#e4381C));
+        background: -o-linear-gradient(left, #e16521, #e4381C);
+        background: linear-gradient(to right, #e16521, #e4381C);
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        border-radius: 2px;
+        opacity: 0;
+    }
+
+/*Footer*/
+.footer-section{
+    padding-top: 25px;
+}
+.footer-section h3 {
+    color: white;
+    font-weight: 600;
+    font-size: 36px;
+}
+.footer-section p {
+    color: white;
+    font-size: 16px;
+}
+.footer-section a {
+    text-decoration: none;
+    padding-right: 20px;
+}
+.nets {
+    width: 30px;
+    height: 30px;
+}
+
+.colum_block{
+    margin-top: 35px;
+    margin-bottom: 15px;
+    padding-left: 15px;
+}

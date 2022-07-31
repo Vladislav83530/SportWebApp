@@ -1,0 +1,23 @@
+﻿.main_section {
+    width: 100%;
+    height: auto;
+    background: linear-gradient(rgba(48, 48, 48, 0.6), rgba(48, 48, 48, 0.6)), url(/img/register_bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.main_container{
+    color: white;
+    padding: 100px 20px;
+
+}
+
+.reg_title{
+    font-size: 46px;
+    font-weight: 900;
+    font-family: sans-serif;
+}
+
+.btn_sigup{
+    width: 200px;
+}

@@ -38,20 +38,18 @@
 								<a class="nav-link active" asp-action="Index" asp-controller="Home">Home<span class="visually-hidden">(current)</span></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#">Nutrition</a>
+								<a class="nav-link" asp-action="Index" asp-controller="Training">Training</a>
 							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Training</a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" asp-action="Index" asp-controller="Training">Training</a>
-									<a class="dropdown-item" asp-action="Index" asp-controller="Exercise">Exercise</a>
-									<a class="dropdown-item" asp-action="MyCalendar" asp-controller="Calendar">Calendar</a>
-								</div>
+							<li class="nav-item">
+								<a class="nav-link" asp-action="Index" asp-controller="Exercise">Exercise</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-action="MyCalendar" asp-controller="Calendar">Calendar</a>
 							</li>
 						</ul>
 						<ul class="navbar-nav">
 							<li class="nav-item">
-								<a class="nav-link" asp-action="Index" asp-controller="ProfileInfo">@User.Identity.Name</a>
+								<a class="nav-link" asp-action="Index" asp-controller="ProfileInfo">Profile</a>
 							</li>
 						</ul>
 						<form class="nav-item" asp-action="Logout" asp-controller="Account">
@@ -78,21 +76,16 @@
 					<div class="collapse navbar-collapse" id="navbarColor01">
 						<ul class="navbar-nav me-auto">
 							<li class="nav-item">
-								<a class="nav-link active" asp-action="Index" asp-controller="Home">
-									Home
-									<span class="visually-hidden">(current)</span>
-								</a>
+								<a class="nav-link active" asp-action="Index" asp-controller="Home">Home<span class="visually-hidden">(current)</span></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#">Nutrition</a>
+								<a class="nav-link" asp-action="Index" asp-controller="Training">Training</a>
 							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Training</a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" asp-action="Index" asp-controller="Training">Training</a>
-									<a class="dropdown-item" asp-action="Index" asp-controller="Exercise">Exrcise</a>
-									<a class="dropdown-item" asp-action="MyCalendar" asp-controller="Calendar">Calendar</a>
-								</div>
+							<li class="nav-item">
+								<a class="nav-link" asp-action="Index" asp-controller="Exercise">Exercise</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-action="MyCalendar" asp-controller="Calendar">Calendar</a>
 							</li>
 						</ul>
 						<form class="d-flex">

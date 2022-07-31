@@ -1,0 +1,59 @@
+﻿.btn_exercise_text {
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.btn_exercise_img {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.btn_filter {
+    margin-top: 10px;
+    width: 100%;
+    font-size: 18px;
+}
+
+
+.img_exrcise{
+    width: 180px;
+    height: 115px;
+}
+
+.exercise_p{
+    font-size: 22px;
+    font-style: italic;
+}
+
+@media only screen and (max-width: 1400px) {
+    .img_exrcise {
+        width: 100%;
+        height: auto;
+    }
+    .exercise_info{
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .exercise_info {
+        font-size: 10px;
+        line-height: 10px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .exercise_info {
+        font-size: 16px;
+        line-height: 16px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .img_exrcise {
+        margin-bottom: 15px;
+        height: auto;
+    }
+}
